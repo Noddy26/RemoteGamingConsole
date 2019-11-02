@@ -1,1 +1,0 @@
-INSERT INTO userdetails(userID, username, password, email, ipAddress) VALUES (NULL, 'Gary', 'gary123', 'gary@gmail.com', NULL);
