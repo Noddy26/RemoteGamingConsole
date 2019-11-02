@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gaming Server</title>
+    <link href="static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+<div class="padding-all">
+    <div class="header">
+        <h1><img src="static/images/5.jpg" alt=" "> Gaming Server Register <img src="static/images/5.jpg"</h1>
+    </div>
+
+    <div class="design">
+        <h1>Register</h1>
+        <div class="links">
+            <a href="{{ url_for('loginpage') }}">Login</a>
+            <a href="" class="active">Register</a>
+        </div>
+        <div class="mail-form-agile">
+            <form action="register" method="post">
+                <input type="text" name="name" placeholder="User Name" required=""/>
+                <input type="password"  name="password" class="padding" placeholder="Password" required=""/>
+                <input type="text" name="email" placeholder="Email" required=""/>
+                <input type="submit" value="submit">
+            </form>
+        </div>
+        <div class="clear"> </div>
+    </div>
+
+    <div class="footer">
+        <p>©2020 Neil Morrison Gaming Server</p>
+    </div>
+</div>
+</body>
+</html>
