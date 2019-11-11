@@ -1,7 +1,7 @@
 
 body{
 text-align: center;
-background: url("../images/1.jpg") 0px 0px no-repeat;
+background: url("../images/Top-Premium-WordPress-Themes-for-Gaming-and-eSports.jpg") 0px 0px no-repeat;
 background-size:cover;
 background-attachment: fixed;
 }
@@ -18,7 +18,7 @@ padding:10px;
 }
 .header {
 text-align: center;
-padding-bottom:40px;
+padding-bottom:10px;
 }
 .header h1 img{
 width:7%;
@@ -297,7 +297,23 @@ width:8%;
 .header h1 {
     font-size: 18px;
 }
+.btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
 
+/* On mouse-over */
+.btn:hover {background: #eee;}
+
+.success {color: green;}
+.info {color: dodgerblue;}
+.warning {color: orange;}
+.danger {color: red;}
+.default {color: black;}
 
 }
 
