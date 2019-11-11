@@ -1,8 +1,8 @@
 import mysql.connector
 from mysql.connector import Error
 
-from registerServer import Configuration
-from registerServer.Methods.StoreUserDataInFile import StoreDataInFile
+from Configuration import Configuration
+from Methods.StoreUserDataInFile import StoreDataInFile
 
 
 class Database:
@@ -11,7 +11,7 @@ class Database:
         self.username = username
         self.password = password
         self.email = email
-
+        self.connection = None
 
     def addUser(self):
         if StoreDataInFile(self.username, self.password, self.email).run() is True:
@@ -20,14 +20,14 @@ class Database:
 
 
     def checkuserReg(self):
-        global connection, cursor, tuple
+        global cursor, tuple
         try:
-            connection = mysql.connector.connect(host='localhost', database='users',
-                                                 user='root',
-                                                 password='12shroot')
+            self.connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
+                                                 user=Configuration.sqluser,
+                                                 password=Configuration.sqlpassword)
 
             Query = """select * from registeredusers where username = '%s'""" % (self.username)
-            cursor = connection.cursor()
+            cursor = self.connection.cursor()
             cursor.execute(Query)
             records = cursor.fetchall()
             if len(records) == 0:
@@ -36,7 +36,7 @@ class Database:
                 tuple = each
             if tuple[1] == self.username:
                 if tuple[3] == self.email:
-                    Configuration.Configuration.emailUserCount = True
+                    Configuration.emailUserCount = True
                     return True
                 else:
                     return True
@@ -45,21 +45,21 @@ class Database:
         except Error as e:
             print("Error reading data from MySQL table", e)
         finally:
-            if (connection.is_connected()):
-                connection.close()
+            if (self.connection.is_connected()):
+                self.connection.close()
                 cursor.close()
                 print("MySQL connection is closed")
-                return False
+                #return False
 
     def checkForUserPassword(self):
-        global connection, cursor
+        global cursor
         try:
-            connection = mysql.connector.connect(host='localhost', database='users',
-                                                 user='root',
-                                                 password='12shroot')
+            self.connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
+                                                 user=Configuration.sqluser,
+                                                 password=Configuration.sqlpassword)
 
             query = """select * from registeredusers where username = '%s' AND password = '%s'""" % (self.username, self.password)
-            cursor = connection.cursor()
+            cursor = self.connection.cursor()
             cursor.execute(query)
             records = cursor.fetchall()
             if len(records) == 0:
@@ -67,16 +67,15 @@ class Database:
             else:
                 for each in records:
                     tuple = each
-                    a, b, c, d = tuple
-                    if b == self.username and c == self.password:
+                    if tuple[1] == self.username and tuple[2] == self.password:
                         return True
                     return False
 
         except Error as e:
             print("Error reading data from MySQL table", e)
         finally:
-            if (connection.is_connected()):
-                connection.close()
+            if (self.connection.is_connected()):
+                self.connection.close()
                 cursor.close()
                 print("MySQL connection is closed")
-                return False
+                #return False
