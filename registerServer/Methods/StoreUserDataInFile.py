@@ -1,4 +1,5 @@
-from registerServer.Methods.SendEmail import SendEmail
+from Configuration import Configuration
+from Methods.SendEmail import SendEmail
 
 
 class StoreDataInFile:
@@ -10,9 +11,12 @@ class StoreDataInFile:
 
     def run(self):
         SQLcommand = "INSERT INTO userdetails(userID, username, password, email, ipAddress) VALUES (NULL, '%s', '%s', '%s', NULL);" % (self.username, self.password, self.email)
-        filename = "UserToBeAdded//" + self.username + ".txt"
+        filename = Configuration.adduserdir + self.username + ".txt"
         with open(filename, 'w') as f:
             f.write(SQLcommand)
-        if SendEmail.run(self.email) is True:
+        with open(Configuration.userfilepath, 'a') as f:
+            f.write("\nUser:" + self.username)
+            f.write("-Email:" + self.email)
+        if SendEmail(self.email, self.username).run() is True:
             return True
         return False
