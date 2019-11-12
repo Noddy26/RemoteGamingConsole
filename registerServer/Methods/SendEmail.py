@@ -1,6 +1,6 @@
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 import smtplib, ssl #ssl is secure socket layer, designed to set up secure conection between client and server # smtp = Simple Mail Transfer Protocol
+from Configuration import Configuration
+
 
 class SendEmail:
 
@@ -13,9 +13,9 @@ class SendEmail:
     def run(self):
         port = 465  # For SSL
         smtp_server = "smtp.gmail.com"
-        sender_email = "gamingserver.project@gmail.com"  # Enter your address
-        password = "GamingServer2019"
-        receiver = self.email
+        sender_email = Configuration.GamingEmailAddress
+        password = Configuration.GamingEmailPassword
+        receiver = Configuration.emailAddress
         message = """\
         Subject: Confirmation of user """ + self.user + """
         User """ + self.user + """  """ + self.email + """ Whats to register for Gaming Server tap link to grant access\n

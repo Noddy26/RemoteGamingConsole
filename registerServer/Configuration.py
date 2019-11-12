@@ -4,6 +4,10 @@ class Configuration(object):
     emailUserCount = None
     CannotConnect = None
 
+    #ip Address of Server
+    ipAddress = "192.168.0.102"
+    portNumber = 3000
+
     # paths
     adduserdir = "UserToBeAdded//"
     userfilepath = adduserdir + "users.txt"
@@ -22,3 +26,8 @@ class Configuration(object):
     sqlhost = "localhost"
     sqluser = "root"
     sqlpassword = "12shroot"
+
+    # Email of Admin
+    AdminemailAddress = "neil.morrison89@gmail.com"
+    GamingEmailAddress = "gamingserver.project@gmail.com"
+    GamingEmailPassword = "GamingServer2019"

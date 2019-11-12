@@ -1,12 +1,11 @@
 from flask import Flask, redirect, render_template, request, session, url_for
-import os
-
 from Configuration import Configuration
 from Database import Database
 from Methods.FileMethods import FileMethods
-
 from Methods.AddUser import AddUser
-#from Methods.DeleteUser import DeleteUser
+from Methods.DeleteUser import DeleteUser
+from Methods.ConfirmationEmail import ConfirmationEmail
+import os
 
 app = Flask(__name__)
 
@@ -75,10 +74,11 @@ def adminpage():
             for each in newdata:
                 count = count + 1
                 if request.form["action"] == delete + str(count):
-                    # DeleteUser(each).run()
+                    DeleteUser(each).run()
                     return render_template('UserDeleted.html')
                 elif request.form["action"] == add + str(count):
                     if AddUser(each).run() is True:
+                        ConfirmationEmail(each).add()
                         return render_template('UserAdded.html')
             count = 0
 
@@ -93,4 +93,4 @@ def logout():
 if __name__ == '__main__':
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     app.secret_key = os.urandom(12)
-    app.run(debug=True, host='192.168.0.102', port=3000)
+    app.run(debug=True, host=Configuration.ipAddress, port=Configuration.portNumber)
