@@ -1,3 +1,5 @@
+import base64
+
 from Configuration import Configuration
 from Methods.SendEmail import SendEmail
 
@@ -6,7 +8,8 @@ class StoreDataInFile:
 
     def __init__(self, username, password, email):
         self.username = username
-        self.password = password
+        self.passw = password
+        self.password = self.encryptpassword()
         self.email = email
 
     def run(self):
@@ -20,3 +23,6 @@ class StoreDataInFile:
         if SendEmail(self.email, self.username).run() is True:
             return True
         return False
+
+    def encryptpassword(self):
+        return base64.b64encode(self.passw.encode("utf-8"))

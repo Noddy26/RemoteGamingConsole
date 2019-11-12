@@ -1,3 +1,5 @@
+import base64
+
 import mysql.connector
 from mysql.connector import Error
 
@@ -58,7 +60,7 @@ class Database:
                                                  user=Configuration.sqluser,
                                                  password=Configuration.sqlpassword)
 
-            query = """select * from registeredusers where username = '%s' AND password = '%s'""" % (self.username, self.password)
+            query = """select * from registeredusers where username = '%s' AND password = '%s'""" % (self.username, base64.b64encode(self.password.encode("utf-8")))
             cursor = self.connection.cursor()
             cursor.execute(query)
             records = cursor.fetchall()
