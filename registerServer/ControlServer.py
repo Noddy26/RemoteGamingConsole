@@ -5,8 +5,8 @@ from Configuration import Configuration
 from Database import Database
 from Methods.FileMethods import FileMethods
 
-from registerServer.Methods.AddUser import AddUser
-from registerServer.Methods.DeleteUser import DeleteUser
+from Methods.AddUser import AddUser
+#from Methods.DeleteUser import DeleteUser
 
 app = Flask(__name__)
 
@@ -71,16 +71,15 @@ def adminpage():
     data = FileMethods.readfile(Configuration.userfilepath)
     newdata = data.split("\n")
     if request.method == 'POST':
-        print("hello")
         while(True):
             for each in newdata:
                 count = count + 1
                 if request.form["action"] == delete + str(count):
-                    AddUser(each).run()
+                    # DeleteUser(each).run()
                     return render_template('UserDeleted.html')
                 elif request.form["action"] == add + str(count):
-                    DeleteUser(each).run()
-                    return render_template('UserAdded.html')
+                    if AddUser(each).run() is True:
+                        return render_template('UserAdded.html')
             count = 0
 
 
