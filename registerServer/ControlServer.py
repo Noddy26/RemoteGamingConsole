@@ -5,6 +5,9 @@ from Configuration import Configuration
 from Database import Database
 from Methods.FileMethods import FileMethods
 
+from registerServer.Methods.AddUser import AddUser
+from registerServer.Methods.DeleteUser import DeleteUser
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -63,14 +66,23 @@ def login():
 @app.route("/admin", methods=['GET', 'POST'])
 def adminpage():
     count = 0
+    delete = "delete"
+    add = "add"
     data = FileMethods.readfile(Configuration.userfilepath)
     newdata = data.split("\n")
-    for each in newdata:
-        count = count + 1
-    if count < count + 1:
-        count += 1
-        if request.method == 'POST':
-            print(request.method)
+    if request.method == 'POST':
+        print("hello")
+        while(True):
+            for each in newdata:
+                count = count + 1
+                if request.form["action"] == delete + str(count):
+                    AddUser(each).run()
+                    return render_template('UserDeleted.html')
+                elif request.form["action"] == add + str(count):
+                    DeleteUser(each).run()
+                    return render_template('UserAdded.html')
+            count = 0
+
 
 @app.route("/logout")
 def logout():
@@ -82,4 +94,4 @@ def logout():
 if __name__ == '__main__':
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     app.secret_key = os.urandom(12)
-    app.run(debug=True, host='192.168.0.103', port=3000)
+    app.run(debug=True, host='192.168.0.102', port=3000)

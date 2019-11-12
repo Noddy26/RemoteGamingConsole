@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ab30d460-cbe0-4d4a-8064-1469c2fd8cf6" name="Default Changelist" comment="Made changes to python flask methods">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StreamingServer/Dynamic/22.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StreamingServer/Dynamic/84e4a59086383b1cfab40e342fb5e0f5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StreamingServer/Dynamic/JoyousUncomfortableAntlion-size_restricted.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StreamingServer/Dynamic/WhoppingWaryGalah-small.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StreamingServer/Dynamic/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/UserToBeAdded/David.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/UserToBeAdded/Jenna.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/UserToBeAdded/users.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/Top-Premium-WordPress-Themes-for-Gaming-and-eSports.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/fcc466cf6510749b80f81d3bab01896f.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/giphy.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/images (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/images (2).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/images (5).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/images (6).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/images.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/images.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/playstation-5-release-date-price-specs-news_0.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/preview.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/reflection-pad-gaming-gamepad.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/teaserBackground.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/templates/UserAdded.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/templates/UserDeleted.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/registerServer/ControlServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/registerServer/ControlServer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/registerServer/Methods/AddUser.py" beforeDir="false" afterPath="$PROJECT_DIR$/registerServer/Methods/AddUser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/registerServer/Methods/DeleteUser.py" beforeDir="false" afterPath="$PROJECT_DIR$/registerServer/Methods/DeleteUser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/registerServer/Methods/FileMethods.py" beforeDir="false" afterPath="$PROJECT_DIR$/registerServer/Methods/FileMethods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/registerServer/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/registerServer/templates/admin.html" afterDir="false" />
+    </list>
+    <list id="c1280463-5e43-401c-9bb5-43c114ed5725" name="Send a email to to verify account of username who wants to be added" comment="Send a email to to verify account of username who wants to be added">
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/images (3).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registerServer/static/images/images (4).jpg" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/registerServer/Methods/AddUser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/registerServer/Methods/DeleteUser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/registerServer/Methods/FileMethods.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/registerServer/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="27" column="10" lean-forward="true" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/registerServer/templates/registerPage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/registerServer/templates/admin.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/registerServer/ControlServer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="507">
+              <caret line="81" column="20" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#77#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Noddy26 &lt;neil.morrison89@gmail.com&gt;" />
+        <option value="neilm &lt;neil.morrison89@gmail.com&gt;" />
+        <option value="Noddy26" />
+        <option value="Neil Morrison" />
+      </list>
+    </option>
+    <option name="UPDATE_TYPE" value="REBASE" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Methods.py" />
+        <option value="$PROJECT_DIR$/registerServer.py" />
+        <option value="$PROJECT_DIR$/registerServer/templates/registerPage.html" />
+        <option value="$PROJECT_DIR$/registerServer/MySQL_Login.py" />
+        <option value="$PROJECT_DIR$/registerServer/registerServer.py" />
+        <option value="$PROJECT_DIR$/registerServer/templates/welcome.html" />
+        <option value="$PROJECT_DIR$/registerServer/templates/emailExists.html" />
+        <option value="$PROJECT_DIR$/registerServer/templates/userExists.html" />
+        <option value="$PROJECT_DIR$/registerServer/Methods/FileChanging.py" />
+        <option value="$PROJECT_DIR$/registerServer/templates/userEmailExists.html" />
+        <option value="$PROJECT_DIR$/StreamingServer/StreamServer.py" />
+        <option value="$PROJECT_DIR$/StreamingServer/GifPlayer.py" />
+        <option value="$PROJECT_DIR$/registerServer/ServerMain.py" />
+        <option value="$PROJECT_DIR$/registerServer/App_Main.py" />
+        <option value="$PROJECT_DIR$/registerServer/templates/userDoesNotExist.html" />
+        <option value="$PROJECT_DIR$/registerServer/static/css/downloadPage.css" />
+        <option value="$PROJECT_DIR$/registerServer/templates/downloadPage.html" />
+        <option value="$PROJECT_DIR$/registerServer/templates/index.html" />
+        <option value="$PROJECT_DIR$/StreamingServer/Client.py" />
+        <option value="$PROJECT_DIR$/PythonGui.py" />
+        <option value="$PROJECT_DIR$/StreamingServer/ThreadingClient.py" />
+        <option value="$PROJECT_DIR$/StreamingServer/GuiPart.py" />
+        <option value="$PROJECT_DIR$/registerServer/Methods/SendEmail.py" />
+        <option value="$PROJECT_DIR$/registerServer/templates/awaitingConfirmation.html" />
+        <option value="$PROJECT_DIR$/registerServer/UserToBeAdded/users.txt" />
+        <option value="$PROJECT_DIR$/registerServer/static/css/style.css" />
+        <option value="$PROJECT_DIR$/registerServer/Database.py" />
+        <option value="$PROJECT_DIR$/registerServer/Methods/StoreUserDataInFile.py" />
+        <option value="$PROJECT_DIR$/registerServer/templates/admin.html.bak" />
+        <option value="$PROJECT_DIR$/registerServer/Configuration.py" />
+        <option value="$PROJECT_DIR$/registerServer/Methods/FileMethods.py" />
+        <option value="$PROJECT_DIR$/registerServer/templates/admin.html" />
+        <option value="$PROJECT_DIR$/registerServer/templates/UserAdded.html" />
+        <option value="$PROJECT_DIR$/registerServer/templates/UserDeleted.html" />
+        <option value="$PROJECT_DIR$/registerServer/Methods/AddUser.py" />
+        <option value="$PROJECT_DIR$/registerServer/Methods/DeleteUser.py" />
+        <option value="$PROJECT_DIR$/registerServer/ControlServer.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1928" />
+    <option name="y" value="-190" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="GamingGui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GamingGui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GamingGui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GamingGui" type="462c0819:PsiDirectoryNode" />
+              <item name="registerServer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GamingGui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GamingGui" type="462c0819:PsiDirectoryNode" />
+              <item name="registerServer" type="462c0819:PsiDirectoryNode" />
+              <item name="Methods" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GamingGui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GamingGui" type="462c0819:PsiDirectoryNode" />
+              <item name="registerServer" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\neilm\PycharmProjects\GamingGui\registerServer" />
+      <recent name="C:\Users\neilm\PycharmProjects\GamingGui\registerServer\templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\neilm\PycharmProjects\GamingGui\registerServer\static\images" />
+      <recent name="C:\Users\neilm\PycharmProjects\GamingGui\registerServer\templates" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.ControlServer">
+    <configuration name="Client" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="GamingGui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/StreamingServer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/StreamingServer/Client.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ControlServer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="GamingGui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/registerServer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/registerServer/ControlServer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Database" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="GamingGui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/registerServer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/registerServer/Database.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="GuiPart" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="GamingGui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/StreamingServer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/StreamingServer/GuiPart.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PythonGui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="GamingGui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PythonGui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.ControlServer" />
+        <item itemvalue="Python.GuiPart" />
+        <item itemvalue="Python.Client" />
+        <item itemvalue="Python.PythonGui" />
+        <item itemvalue="Python.Database" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ab30d460-cbe0-4d4a-8064-1469c2fd8cf6" name="Default Changelist" comment="" />
+      <changelist id="" name="Made changes to python flask methods" comment="" />
+      <changelist id="" name="Change the way i write to a file so the data can be interperted by a different function and written to the html admin page" comment="" />
+      <changelist id="" name="Added methods to manipulate a file contents, Added a new user directory" comment="" />
+      <changelist id="" name="put all paths and passwords in an encrypted file" comment="" />
+      <changelist id="c1280463-5e43-401c-9bb5-43c114ed5725" name="Send a email to to verify account of username who wants to be added" comment="" />
+      <created>1572632637435</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572632637435</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Send a email to to verify account of username who wants to be added">
+      <created>1573481269409</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573481269409</updated>
+    </task>
+    <task id="LOCAL-00002" summary="put all paths and passwords in an encrypted file">
+      <created>1573481368800</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573481368800</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added methods to manipulate a file contents, Added a new user directory">
+      <created>1573481482131</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1573481482131</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Change the way i write to a file so the data can be interperted by a different function and written to the html admin page">
+      <created>1573481606280</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1573481606280</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Made changes to python flask methods">
+      <created>1573481687862</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1573481687862</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Send a email to to verify account of username who wants to be added">
+      <created>1573504043690</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1573504043690</updated>
+    </task>
+    <task id="LOCAL-00007" summary="put all paths and passwords in an encrypted file">
+      <created>1573504110661</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1573504110661</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Made changes to python flask methods">
+      <created>1573504144205</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1573504144205</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Change the way i write to a file so the data can be interperted by a different function and written to the html admin page">
+      <created>1573504203918</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1573504203918</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added methods to manipulate a file contents, Added a new user directory">
+      <created>1573504252084</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1573504252084</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Change the way i write to a file so the data can be interperted by a different function and written to the html admin page">
+      <created>1573504308099</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1573504308099</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1928" y="-190" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12486828" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32827735" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2654388" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.2936078" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32827735" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12486828" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32827735" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2654388" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.2936078" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32827735" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Flask python" />
+    <MESSAGE value="Send a email to to verify account of username who wants to be added" />
+    <MESSAGE value="put all paths and passwords in an encrypted file" />
+    <MESSAGE value="Made changes to python flask methods" />
+    <MESSAGE value="Added methods to manipulate a file contents, Added a new user directory" />
+    <MESSAGE value="Change the way i write to a file so the data can be interperted by a different function and written to the html admin page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change the way i write to a file so the data can be interperted by a different function and written to the html admin page" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/loading.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/reflection-pad-gaming-gamepad.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/teaserBackground.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/playstation-5-release-date-price-specs-news_0.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/Top-Premium-WordPress-Themes-for-Gaming-and-eSports.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/css/userDoesNotExist.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/images (3).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/images (2).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/images.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/images.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/giphy.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/fcc466cf6510749b80f81d3bab01896f.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/4.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/5.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/10.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/css/downloadPage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="93" column="1" selection-start-line="93" selection-start-column="1" selection-end-line="93" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/preview.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/images/1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingServer/Dynamic/JoyousUncomfortableAntlion-size_restricted.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingServer/StreamServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingServer/ThreadingClient.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingServer/GuiPart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="63" lean-forward="true" selection-start-line="26" selection-start-column="63" selection-end-line="26" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PythonGui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingServer/Dynamic/loading.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingServer/Dynamic/WhoppingWaryGalah-small.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingServer/Client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10">
+          <caret line="3" column="13" lean-forward="true" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/UserToBeAdded/Jenna.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="22" lean-forward="true" selection-start-column="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/UserToBeAdded/users.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/flask/templating.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1217">
+          <caret line="124" column="4" selection-start-line="124" selection-start-column="4" selection-end-line="124" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/css/admin.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/typing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="1518" column="8" selection-start-line="1518" selection-start-column="8" selection-end-line="1518" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="48" lean-forward="true" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2938">
+          <caret line="315" column="24" selection-start-line="315" selection-start-column="24" selection-end-line="315" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/Methods/SendEmail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/Configuration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/Methods/StoreUserDataInFile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/awaitingConfirmation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/downloadPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="155" column="41" selection-start-line="155" selection-start-column="41" selection-end-line="155" selection-end-column="41" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/userDoesNotExist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/userEmailExists.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/userExists.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/Methods/FileMethods.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="10" lean-forward="true" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/registerPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/UserAdded.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/Methods/DeleteUser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/templates/UserDeleted.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/Methods/AddUser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/Database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registerServer/ControlServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="81" column="20" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

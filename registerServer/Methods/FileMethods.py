@@ -1,5 +1,6 @@
 import fileinput
-import os, sys
+import os
+import re
 
 class FileMethods:
 
@@ -11,26 +12,25 @@ class FileMethods:
         return data
 
     @staticmethod
-    def replaceHTML(file, data, replacementText):
+    def replaceHTML(fileName, data, replacementText):
+        os.system("sudo chmod 327 " + fileName)
         count = 0
         newdata = data.split("\n")
         textToReplace = '<h1><button class="Add1">Add User</button> hello</h1>'
-        os.system("sudo cp " + file + " " + file + ".bck")
+        os.system("cp " + fileName + " " + fileName + ".bck")
         for each in newdata:
             count = count + 1
-            string = '<h1><button class ="Add%s" > Add User </button><button class ="Delete1%s">Delete User </button> %s</h1><br>\n' % (count, count, each)
+            string = '<h1><input type="submit" name="action" value="add%s"><input type="submit" name="action" value="delete%s"> %s</h1><br>\n' % (count, count, each)
             replacementText += string
         count = 0
-        with fileinput.FileInput(file) as file:
-            for line in file:
-                print(line.replace(textToReplace, replacementText), end='')
+        for line in fileinput.FileInput(fileName, inplace=1):
+            line = line.replace(textToReplace, replacementText)
+            print(line)
 
     @staticmethod
     def returnHTMLpageBack(admin, adminbackup):
         try:
             if os.path.exists(adminbackup):
-                print(admin)
-                print(adminbackup)
                 if os.path.exists(admin):
                     os.remove(admin)
                 print("sudo mv %s %s" % (adminbackup, admin))
