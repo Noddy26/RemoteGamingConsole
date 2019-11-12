@@ -1,6 +1,8 @@
 import fileinput
 import os
 import re
+from Configuration import Configuration
+
 
 class FileMethods:
 
@@ -39,3 +41,10 @@ class FileMethods:
                 print("both files changed")
         except:
             print("files not changed")
+
+    @staticmethod
+    def removefile(fileName, userdetails):
+        os.system("sudo rm -rf %s%s" % (Configuration.adduserdir, fileName))
+        for line in fileinput.FileInput(Configuration.userfilepath, inplace=1):
+            line = line.replace(userdetails, "")
+            print(line)

@@ -74,8 +74,9 @@ def adminpage():
             for each in newdata:
                 count = count + 1
                 if request.form["action"] == delete + str(count):
-                    DeleteUser(each).run()
-                    return render_template('UserDeleted.html')
+                    if DeleteUser(each).run() is True:
+                        ConfirmationEmail(each).delete()
+                        return render_template('UserDeleted.html')
                 elif request.form["action"] == add + str(count):
                     if AddUser(each).run() is True:
                         ConfirmationEmail(each).add()

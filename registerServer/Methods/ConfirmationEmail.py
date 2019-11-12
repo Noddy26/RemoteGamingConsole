@@ -1,4 +1,6 @@
-import smtplib, ssl #ssl is secure socket layer, designed to set up secure conection between client and server # smtp = Simple Mail Transfer Protocol
+import smtplib, ssl
+#ssl is secure socket layer, designed to set up secure conection between client and server
+# smtp = Simple Mail Transfer Protocol
 from Configuration import Configuration
 
 
@@ -7,7 +9,7 @@ class ConfirmationEmail:
     def __init__(self, details):
 
         self.user = ""
-        self.email = self.getemail(details)
+        self.email = self._getemail(details)
         self.port = 465
 
     def delete(self):
@@ -17,7 +19,8 @@ class ConfirmationEmail:
         receiver = self.email
         message = """\
         Subject: Confirmation of user """ + self.user + """
-        Hi """ + self.user + """ You have not been Granted access to Gaming Server for Further details email Configuration.GamingEmailAddress"""
+        Hi """ + self.user + """\r\nYou have not been Granted access to Gaming Server for Further details email %s""" \
+                  % Configuration.GamingEmailAddress
 
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
@@ -32,8 +35,9 @@ class ConfirmationEmail:
         receiver = self.email
         message = """\
                 Subject: Confirmation of user """ + self.user + """
-                Hi """ + self.user + """ You have been Granted access to Gaming Server, Go to link below, login and Download our remote Gaming Software.\n
-                Link -> http://""" + Configuration.ipAddress + """:""" + Configuration.portNumber + """/"""
+                Hi """ + self.user + """\r\nYou have been Granted access to Gaming Server, Go to link below, 
+                login and Download our remote Gaming Software.
+                \r\nLink -> http://""" + Configuration.ipAddress + """:""" + Configuration.portNumber + """/"""
 
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
@@ -41,12 +45,12 @@ class ConfirmationEmail:
             server.sendmail(sender_email, receiver, message)
             return True
 
-    def getemail(self, details):
+    def _getemail(self, details):
         data = details.split("-")
         user = data[0].split(":")
-        self.setuser(user[1])
+        self._setuser(user[1])
         email = data[1].split(":")
         return email[1]
 
-    def setuser(self, user):
+    def _setuser(self, user):
         self.user = user
