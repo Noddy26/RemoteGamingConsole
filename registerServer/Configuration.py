@@ -5,14 +5,14 @@ class Configuration(object):
     CannotConnect = None
 
     #ip Address of Server
-    ipAddress = "192.168.0.102"
+    ipAddress = "192.168.0.13"
     portNumber = 3000
 
     # paths
-    adduserdir = "UserToBeAdded//"
+    adduserdir = "/home/pi/WebServer/registerServer/UserToBeAdded/"
     userfilepath = adduserdir + "users.txt"
 
-    templates = r"/home/neil/registerServer/templates/"
+    templates = r"/home/pi/WebServer/registerServer/templates/"
 
     adminhtml = templates + "admin.html"
     adminhtmlbcakup = templates + "admin.html.bck"
