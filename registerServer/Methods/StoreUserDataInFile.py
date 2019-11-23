@@ -9,11 +9,12 @@ class StoreDataInFile:
     def __init__(self, username, password, email):
         self.username = username
         self.passw = password
-        self.password = self.encryptpassword()
+        self.password = str(self.encryptpassword()).replace("'", "_")
+        print(self.password)
         self.email = email
 
     def run(self):
-        SQLcommand = "INSERT INTO userdetails(userID, username, password, email, ipAddress) VALUES (NULL, '%s', '%s', '%s', NULL);" % (self.username, self.password, self.email)
+        SQLcommand = "INSERT INTO %s(userID, username, password, email, ipAddress) VALUES (NULL, '%s', '%s', '%s', NULL);" % (Configuration.Configuration.sqlusertable, self.username, self.password, self.email)
         filename = Configuration.adduserdir + self.username + ".txt"
         with open(filename, 'w') as f:
             f.write(SQLcommand)

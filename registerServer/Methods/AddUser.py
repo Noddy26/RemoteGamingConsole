@@ -1,7 +1,7 @@
 from Configuration import Configuration
 import mysql.connector
 from mysql.connector import Error
-from Methods import FileMethods
+from Methods.FileMethods import FileMethods
 
 
 class AddUser:

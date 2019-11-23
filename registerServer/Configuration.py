@@ -23,6 +23,7 @@ class Configuration(object):
 
     # Sql Login details
     sqldatabase = "users"
+    sqlusertable = "registeredusers"
     sqlhost = "localhost"
     sqluser = "root"
     sqlpassword = "12shroot"

@@ -28,7 +28,7 @@ class Database:
                                                  user=Configuration.sqluser,
                                                  password=Configuration.sqlpassword)
 
-            Query = """select * from registeredusers where username = '%s'""" % (self.username)
+            Query = """select * from %s where username = '%s';""" % (Configuration.sqlusertable, self.username)
             cursor = self.connection.cursor()
             cursor.execute(Query)
             records = cursor.fetchall()
@@ -59,8 +59,9 @@ class Database:
             self.connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
                                                  user=Configuration.sqluser,
                                                  password=Configuration.sqlpassword)
-
-            query = """select * from registeredusers where username = '%s' AND password = '%s'""" % (self.username, base64.b64encode(self.password.encode("utf-8")))
+            password = str(base64.b64encode(self.password.encode("utf-8")))
+            checkpass = password.replace("'", "_")
+            query = """select * from %s where username = '%s' AND password = '%s';""" % (Configuration.sqlusertable, self.username, checkpass)
             cursor = self.connection.cursor()
             cursor.execute(query)
             records = cursor.fetchall()

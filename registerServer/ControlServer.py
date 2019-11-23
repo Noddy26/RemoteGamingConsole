@@ -64,24 +64,27 @@ def login():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminpage():
-    count = 0
-    delete = "delete"
-    add = "add"
-    data = FileMethods.readfile(Configuration.userfilepath)
-    newdata = data.split("\n")
-    if request.method == 'POST':
-        while(True):
-            for each in newdata:
-                count = count + 1
-                if request.form["action"] == delete + str(count):
-                    if DeleteUser(each).run() is True:
-                        ConfirmationEmail(each).delete()
-                        return render_template('UserDeleted.html')
-                elif request.form["action"] == add + str(count):
-                    if AddUser(each).run() is True:
-                        ConfirmationEmail(each).add()
-                        return render_template('UserAdded.html')
-            count = 0
+    if os.path.exists(Configuration.userfilepath) is True and os.stat(Configuration.userfilepath).st_size is not 0:
+        count = 0
+        delete = "delete"
+        add = "add"
+        data = FileMethods.readfile(Configuration.userfilepath)
+        newdata = data.split("\n")
+        if request.method == 'POST':
+            while(True):
+                for each in newdata:
+                    count = count + 1
+                    if request.form["action"] == delete + str(count):
+                        if DeleteUser(each).run() is True:
+                            ConfirmationEmail(each).delete()
+                            return render_template('UserDeleted.html')
+                    elif request.form["action"] == add + str(count):
+                        if AddUser(each).run() is True:
+                            ConfirmationEmail(each).add()
+                            return render_template('UserAdded.html')
+                count = 0
+    else:
+        pass
 
 
 @app.route("/logout")

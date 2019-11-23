@@ -30,14 +30,14 @@ class ConfirmationEmail:
 
     def add(self):
         smtp_server = "smtp.gmail.com"
-        sender_email = "gamingserver.project@gmail.com"  # Enter your address
-        password = "GamingServer2019"
+        sender_email = Configuration.GamingEmailPassword  # Enter your address
+        password = Configuration.GamingEmailPassword
         receiver = self.email
         message = """\
                 Subject: Confirmation of user """ + self.user + """
                 Hi """ + self.user + """\r\nYou have been Granted access to Gaming Server, Go to link below, 
                 login and Download our remote Gaming Software.
-                \r\nLink -> http://""" + Configuration.ipAddress + """:""" + Configuration.portNumber + """/"""
+                \r\nLink -> http://""" + Configuration.ipAddress + """:""" + str(Configuration.portNumber) + """/"""
 
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
