@@ -10,7 +10,7 @@ class DeleteUser:
 
     def run(self):
         ConfirmationEmail(self.userdetails).delete()
-        FileMethods.removefile(self.username, self.userdetails)
+        FileMethods.removefile(self.username)
 
     def _getusername(self):
         data = self.userdetails.split("-")

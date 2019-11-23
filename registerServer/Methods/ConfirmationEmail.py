@@ -14,7 +14,7 @@ class ConfirmationEmail:
 
     def delete(self):
         smtp_server = "smtp.gmail.com"
-        sender_email = Configuration.GamingEmailAddress  # Enter your address
+        sender_email = Configuration.GamingEmailAddress
         password = Configuration.GamingEmailPassword
         receiver = self.email
         message = """\
@@ -30,7 +30,7 @@ class ConfirmationEmail:
 
     def add(self):
         smtp_server = "smtp.gmail.com"
-        sender_email = Configuration.GamingEmailPassword  # Enter your address
+        sender_email = Configuration.GamingEmailAddress
         password = Configuration.GamingEmailPassword
         receiver = self.email
         message = """\

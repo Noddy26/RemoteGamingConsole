@@ -21,8 +21,16 @@ class FileMethods:
         textToReplace = '<h1><button class="Add1">Add User</button> hello</h1>'
         os.system("cp " + fileName + " " + fileName + ".bck")
         for each in newdata:
-            count = count + 1
-            string = '<h1><input type="submit" name="action" value="add%s"><input type="submit" name="action" value="delete%s"> %s</h1><br>\n' % (count, count, each)
+            if each:
+                count = count + 1
+                string = '<h1><input type="submit" name="action" value="add%s"><input type="submit" name="action" value="delete%s"> %s</h1><br>\n' % (count, count, each)
+                replacementText += string
+            else:
+                Configuration.CheckforemptyString = True
+
+        if Configuration.CheckforemptyString is True:
+            Configuration.CheckforemptyString = False
+            string = "<p><strong>Their are currently no users to be added.</strong></p>"
             replacementText += string
         count = 0
         for line in fileinput.FileInput(fileName, inplace=1):
@@ -43,8 +51,14 @@ class FileMethods:
             print("files not changed")
 
     @staticmethod
-    def removefile(fileName, userdetails):
-        os.system("sudo rm -rf %s%s" % (Configuration.adduserdir, fileName))
+    def removefile(fileName):
+        userdetails = ""
+        os.system("sudo rm -rf %s%s" % (Configuration.adduserdir, fileName + ".txt"))
+        with open(Configuration.userfilepath) as f:
+            for line in f:
+                if line.__contains__(fileName):
+                    userdetails = line
+
         for line in fileinput.FileInput(Configuration.userfilepath, inplace=1):
             line = line.replace(userdetails, "")
             print(line)

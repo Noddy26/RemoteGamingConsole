@@ -23,7 +23,7 @@ class Configuration(object):
 
     # Sql Login details
     sqldatabase = "users"
-    sqlusertable = "registeredusers"
+    sqlusertable = "userdetails"
     sqlhost = "localhost"
     sqluser = "root"
     sqlpassword = "12shroot"
@@ -32,3 +32,5 @@ class Configuration(object):
     AdminemailAddress = "neil.morrison89@gmail.com"
     GamingEmailAddress = "gamingserver.project@gmail.com"
     GamingEmailPassword = "GamingServer2019"
+
+    CheckforemptyString = False

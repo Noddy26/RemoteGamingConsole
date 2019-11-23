@@ -20,7 +20,7 @@ class AddUser:
             Query = self.userdetails
             cursor = self.connection.cursor()
             cursor.execute(Query)
-            FileMethods.removefile(self.userName, self.userdetails)
+            FileMethods.removefile(self.userName)
             return True
 
         except Error as e:

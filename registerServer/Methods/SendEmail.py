@@ -15,11 +15,11 @@ class SendEmail:
         smtp_server = "smtp.gmail.com"
         sender_email = Configuration.GamingEmailAddress
         password = Configuration.GamingEmailPassword
-        receiver = Configuration.emailAddress
+        receiver = Configuration.AdminemailAddress
         message = """\
         Subject: Confirmation of user """ + self.user + """
-        User """ + self.user + """  """ + self.email + """ Whats to register for Gaming Server tap link to grant access\n
-        Link -> http://192.168.0.101:3000/"""
+        User """ + self.user + """  """ + self.email + """ Wants to register for Gaming Server tap link to grant access\n
+        \r\nLink -> http://""" + Configuration.ipAddress + """:""" + str(Configuration.portNumber) + """/"""
 
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:

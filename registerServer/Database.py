@@ -61,6 +61,7 @@ class Database:
                                                  password=Configuration.sqlpassword)
             password = str(base64.b64encode(self.password.encode("utf-8")))
             checkpass = password.replace("'", "_")
+            print(checkpass)
             query = """select * from %s where username = '%s' AND password = '%s';""" % (Configuration.sqlusertable, self.username, checkpass)
             cursor = self.connection.cursor()
             cursor.execute(query)
