@@ -1,4 +1,5 @@
 import base64
+import os
 
 from Configuration import Configuration
 from Methods.SendEmail import SendEmail
@@ -21,6 +22,7 @@ class StoreDataInFile:
         with open(Configuration.userfilepath, 'a') as f:
             f.write("\nUser:" + self.username)
             f.write("-Email:" + self.email)
+        os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
         if SendEmail(self.email, self.username).run() is True:
             return True
         return False

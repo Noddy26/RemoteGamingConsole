@@ -9,17 +9,19 @@ class AddUser:
     def __init__(self, userDetails):
         self.userdetails = userDetails
         self.connection = None
+        self.cursor = None
 
     def run(self):
-        global cursor
         try:
             self.connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
                                                  user=Configuration.sqluser,
                                                  password=Configuration.sqlpassword)
             self.userdetails = self._getUserQuery()
+            self.cursor = self.connection.cursor()
             Query = self.userdetails
-            cursor = self.connection.cursor()
-            cursor.execute(Query)
+            print(self.cursor)
+            self.cursor.execute(Query)
+            self.connection.commit()
             FileMethods.removefile(self.userName)
             return True
 
@@ -29,7 +31,8 @@ class AddUser:
         finally:
             if (self.connection.is_connected()):
                 self.connection.close()
-                cursor.close()
+                if self.cursor is not None:
+                    self.cursor.close()
                 print("MySQL connection is closed")
 
     def _getUserQuery(self):

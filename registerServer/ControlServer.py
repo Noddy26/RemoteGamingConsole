@@ -73,19 +73,21 @@ def adminpage():
         if request.method == 'POST':
             while(True):
                 for each in newdata:
-                    count = count + 1
-                    if request.form["action"] == delete + str(count):
-                        if DeleteUser(each).run() is True:
-                            ConfirmationEmail(each).delete()
-                            return render_template('UserDeleted.html')
-                    elif request.form["action"] == add + str(count):
-                        if AddUser(each).run() is True:
-                            ConfirmationEmail(each).add()
-                            return render_template('UserAdded.html')
+                    if each is not None:
+                        count = count + 1
+                        if request.form["action"] == delete + str(count):
+                            if DeleteUser(each).run() is True:
+                                os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
+                                ConfirmationEmail(each).delete()
+                                return render_template('UserDeleted.html')
+                        elif request.form["action"] == add + str(count):
+                            if AddUser(each).run() is True:
+                                os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
+                                ConfirmationEmail(each).add()
+                                return render_template('UserAdded.html')
                 count = 0
     else:
         pass
-
 
 @app.route("/logout")
 def logout():

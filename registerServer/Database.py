@@ -61,19 +61,15 @@ class Database:
                                                  password=Configuration.sqlpassword)
             password = str(base64.b64encode(self.password.encode("utf-8")))
             checkpass = password.replace("'", "_")
-            print(checkpass)
-            query = """select * from %s where username = '%s' AND password = '%s';""" % (Configuration.sqlusertable, self.username, checkpass)
+            query = """select * from %s where username = '%s' AND password = '%s';""" \
+                    % (Configuration.sqlusertable, self.username, checkpass.strip())
             cursor = self.connection.cursor()
             cursor.execute(query)
             records = cursor.fetchall()
             if len(records) == 0:
                 return False
             else:
-                for each in records:
-                    tuple = each
-                    if tuple[1] == self.username and tuple[2] == self.password:
-                        return True
-                    return False
+                return True
 
         except Error as e:
             print("Error reading data from MySQL table", e)
