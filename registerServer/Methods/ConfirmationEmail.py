@@ -13,6 +13,7 @@ class ConfirmationEmail:
         self.port = 465
 
     def delete(self):
+        print("email")
         smtp_server = "smtp.gmail.com"
         sender_email = Configuration.GamingEmailAddress
         password = Configuration.GamingEmailPassword

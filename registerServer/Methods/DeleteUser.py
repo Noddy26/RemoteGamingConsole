@@ -1,5 +1,8 @@
+import os
+
 from Methods.ConfirmationEmail import ConfirmationEmail
 from Methods.FileMethods import FileMethods
+from Configuration import Configuration
 
 
 class DeleteUser:
@@ -11,6 +14,7 @@ class DeleteUser:
     def run(self):
         ConfirmationEmail(self.userdetails).delete()
         FileMethods.removefile(self.username)
+        return True
 
     def _getusername(self):
         data = self.userdetails.split("-")

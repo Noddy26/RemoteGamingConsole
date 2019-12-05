@@ -58,7 +58,8 @@ class FileMethods:
             for line in f:
                 if line.__contains__(fileName):
                     userdetails = line
-
         for line in fileinput.FileInput(Configuration.userfilepath, inplace=1):
             line = line.replace(userdetails, "")
             print(line)
+        print("sudo sed -i '/^$/d' " + Configuration.userfilepath)
+        os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)

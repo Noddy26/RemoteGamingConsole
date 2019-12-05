@@ -3,7 +3,7 @@ from PIL import Image, ImageTk
 
 class GifPlayer(Label):
 
-    def __init__(self, window, filename):
+    def __init__(self, frame, filename):
         gif = Image.open(filename)
         seq = []
         try:
@@ -21,7 +21,7 @@ class GifPlayer(Label):
         first = seq[0].convert('RGBA')
         self.frames = [ImageTk.PhotoImage(first)]
 
-        Label.__init__(self, window, image=self.frames[0])
+        Label.__init__(self, frame, image=self.frames[0])
 
         temp = seq[0]
         for image in seq[1:]:

@@ -15,13 +15,15 @@ class StoreDataInFile:
         self.email = email
 
     def run(self):
-        SQLcommand = "INSERT INTO %s(id, username, password, email, ipAddress) VALUES (NULL, '%s', '%s', '%s', NULL);" % (Configuration.sqlusertable, self.username, self.password, self.email)
+        SQLcommand = "INSERT INTO %s(id, username, password, email, ipAddress) VALUES (NULL, '%s', '%s', '%s', NULL);" \
+                     % (Configuration.sqlusertable, self.username, self.password, self.email)
         filename = Configuration.adduserdir + self.username + ".txt"
         with open(filename, 'w') as f:
             f.write(SQLcommand)
         with open(Configuration.userfilepath, 'a') as f:
-            f.write("\nUser:" + self.username)
+            f.write("\rUser:" + self.username)
             f.write("-Email:" + self.email)
+        os.system('sudo sed -e "s/\\r//g" -i ' + Configuration.userfilepath)
         os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
         if SendEmail(self.email, self.username).run() is True:
             return True

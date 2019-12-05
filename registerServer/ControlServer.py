@@ -76,13 +76,13 @@ def adminpage():
                     if each is not None:
                         count = count + 1
                         if request.form["action"] == delete + str(count):
+                            os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
                             if DeleteUser(each).run() is True:
-                                os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
                                 ConfirmationEmail(each).delete()
                                 return render_template('UserDeleted.html')
                         elif request.form["action"] == add + str(count):
+                            os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
                             if AddUser(each).run() is True:
-                                os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
                                 ConfirmationEmail(each).add()
                                 return render_template('UserAdded.html')
                 count = 0

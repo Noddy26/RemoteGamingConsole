@@ -19,6 +19,7 @@ padding:10px;
 .header {
 text-align: center;
 padding-bottom:10px;
+
 }
 .header h1 img{
 width:7%;
@@ -26,6 +27,7 @@ width:7%;
 p ,a{
 font-family: "Asap-Regular";
 }
+
 .header h1 {
 font-size:50px;
 color: #fff;
@@ -38,16 +40,17 @@ width:36%;
 margin:0 auto;
 }
 .design, .register {
-  	width: 400px;
+  	width: 650px;
   	background-color: transparent;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
-  	margin: 100px auto;
+  	margin: 20px auto;
+  	color:  #FF0000
 }
 .design h1, .register h1 {
   	text-align: center;
-  	color: #5b6574;
+  	color: #fffefe;
   	font-size: 24px;
-  	padding: 20px 0 20px 0;
+  	padding: 1px  1px ;
   	border-bottom: 1px solid #dee0e4;
 }
 .design .links, .register .links {
@@ -72,14 +75,16 @@ margin:0 auto;
   	display: flex;
   	flex-wrap: wrap;
   	justify-content: center;
-  	padding-top: 20px;
+  	padding-top: 0px;
+
 }
 .design form label, .register form label {
   	display: flex;
   	justify-content: center;
   	align-items: center;
-  	width: 50px;
-  	height: 50px;
+  	width: auto;
+  	height: auto;
+  	max-width: 100px;
   	background-color: transparent;
 }
 .mail-form-agile {
@@ -203,7 +208,18 @@ width:8%;
 
 
 }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 50px;
+  color: white;
+}
 
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {background-color: #000000;}
 
 @media screen and (max-width:800px) {
     .padding-all {
@@ -308,16 +324,40 @@ width:8%;
 
 /* On mouse-over */
 .btn:hover {background: #eee;}
+}
+.buttonOn {
 
-.success {color: green;}
-.info {color: dodgerblue;}
-.warning {color: orange;}
-.danger {color: red;}
-.default {color: black;}
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  max-width: 600px;
+  position:center;
+  margin-top: 150px;
+
 
 }
+.buttonOn #button1 {
+
+  color: white;
+  background-color: #006400;
+  padding: 16px 25px;
+  border-radius: 8px;
 
 
+}
+.buttonOn #button2 {
+  background-color: #FF0000;
+  padding: 16px 25px;
+  border-radius: 8px;
+  color: white;
 
 
+}
+.buttonOn #button3 {
+  background-color: #000080;
+  padding: 16px 25px;
+  border-radius: 8px;
+  color: white;
+}
 
