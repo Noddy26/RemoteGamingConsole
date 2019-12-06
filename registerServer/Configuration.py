@@ -14,8 +14,8 @@ class Configuration(object):
 
     templates = r"/home/pi/WebServer/registerServer/templates/"
 
-    adminhtml = templates + "admin.html"
-    adminhtmlbcakup = templates + "admin.html.bck"
+    adminhtml = templates + "admin.css"
+    adminhtmlbcakup = templates + "admin.css.bck"
 
     userhtml = templates + "Users.html"
     userhtmlbackup = templates + "Users.html.bck"

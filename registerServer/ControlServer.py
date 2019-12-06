@@ -103,7 +103,6 @@ def serverpage():
             FileMethods.addUserDataToHtml(userdata)
             return render_template('Users.html')
 
-
 @app.route("/usernotfound", methods=['GET', 'POST'])
 def usernotcorrectpage():
     if request.method == 'POST':
@@ -132,8 +131,10 @@ def addinguser():
 
 @app.route("/delete")
 def deletinguser():
+    print("why")
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     if request.method == 'POST':
+        print("fuck")
         data = FileMethods.readfile(Configuration.userfilepath)
         newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
         return render_template('admin.html', data=newdata)
@@ -162,6 +163,13 @@ def returnuser():
         data = FileMethods.readfile(Configuration.userfilepath)
         newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
         return render_template('admin.html', data=newdata)
+
+@app.route("/logout", methods=['GET', 'POST'])
+def Logout():
+    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+    FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
+    session['logged_in'] = False
+    return home()
 
 if __name__ == '__main__':
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)

@@ -5,6 +5,7 @@ background: url("../images/Top-Premium-WordPress-Themes-for-Gaming-and-eSports.j
 background-size:cover;
 background-attachment: fixed;
 }
+tr:nth-child(even) {background-color: #000000;}
 @font-face{
 font-family: "Audiowide-Regular";
 src:url(/static/fonts/Audiowide-Regular.ttf);
@@ -205,22 +206,7 @@ width:8%;
 .design {
     width: 54%;
 }
-
-
 }
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 50px;
-  color: white;
-}
-
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-tr:nth-child(even) {background-color: #000000;}
-
 @media screen and (max-width:800px) {
     .padding-all {
         padding: 50px 30px;
@@ -334,7 +320,7 @@ tr:nth-child(even) {background-color: #000000;}
   border: none;
   cursor: pointer;
   width: auto;
-  max-width: 600px;
+  max-width: 200px;
   position:center;
   margin-top: 150px;
 }
@@ -347,7 +333,7 @@ tr:nth-child(even) {background-color: #000000;}
   border: none;
   cursor: pointer;
   width: auto;
-  max-width: 600px;
+  max-width: 200px;
   position:center;
   margin-top: 150px;
 }
@@ -360,8 +346,18 @@ tr:nth-child(even) {background-color: #000000;}
   border: none;
   cursor: pointer;
   width: auto;
-  max-width: 600px;
+  max-width: 200px;
   position:center;
   margin-top: 150px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 50px;
+  color: white;
+
+th, td {
+  text-align: left;
+  padding: 8px;
 }
 
