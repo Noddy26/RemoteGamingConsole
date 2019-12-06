@@ -14,8 +14,8 @@ class Configuration(object):
 
     templates = r"/home/pi/WebServer/registerServer/templates/"
 
-    adminhtml = templates + "admin.css"
-    adminhtmlbcakup = templates + "admin.css.bck"
+    adminhtml = templates + "admin.html"
+    adminhtmlbcakup = templates + "admin.html.bck"
 
     userhtml = templates + "Users.html"
     userhtmlbackup = templates + "Users.html.bck"
@@ -35,5 +35,11 @@ class Configuration(object):
     AdminemailAddress = "neil.morrison89@gmail.com"
     GamingEmailAddress = "gamingserver.project@gmail.com"
     GamingEmailPassword = "GamingServer2019"
+
+    # Gui Server Control
+    serverPath = "/root/IdeaProjects/GamingServer/out/production/GamingServer"
+    serverFile = "ServerForGui.Main"
+    running = None
+
 
     CheckforemptyString = False

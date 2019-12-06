@@ -5,6 +5,7 @@ from Methods.FileMethods import FileMethods
 from Methods.AddUser import AddUser
 from Methods.DeleteUser import DeleteUser
 from Methods.ConfirmationEmail import ConfirmationEmail
+from Methods.ServerControl import ServerControl
 import os
 
 app = Flask(__name__)
@@ -95,9 +96,15 @@ def adminpage():
 def serverpage():
     if request.method == 'POST':
         if request.form["button"] == "Turn on Server":
-            return render_template('Turnon.html')
+            if ServerControl().turnOnServer() is True:
+                return render_template('Turnon.html')
+            else:
+                return render_template('TurnonFalse.html')
         elif request.form["button"] == "Turn off Server":
-            return render_template('Turnoff.html')
+            if ServerControl().turnOffServer() is True:
+                return render_template('Turnoff.html')
+            else:
+                return render_template('TurnoffFalse.html')
         elif request.form["button"] == "List of Users":
             userdata = Database.getAllUsers(None)
             FileMethods.addUserDataToHtml(userdata)
@@ -163,6 +170,7 @@ def returnuser():
         data = FileMethods.readfile(Configuration.userfilepath)
         newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
         return render_template('admin.html', data=newdata)
+
 
 @app.route("/logout", methods=['GET', 'POST'])
 def Logout():
