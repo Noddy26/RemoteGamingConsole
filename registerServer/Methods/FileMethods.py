@@ -63,3 +63,25 @@ class FileMethods:
             print(line)
         print("sudo sed -i '/^$/d' " + Configuration.userfilepath)
         os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
+
+    @staticmethod
+    def addUserDataToHtml(data):
+        endlist = []
+        fileName = Configuration.userhtml
+        textToReplace = '<td>Peter</td>'
+        os.system("cp " + fileName + " " + fileName + ".bck")
+
+        for each in data:
+            endlist.append("<tr>")
+            change = str(each).replace("(", "").replace(")", "").replace("'", "")
+            listuser = change.split(",")
+            for item in listuser:
+                endlist.append("<td>%s</td>" % item)
+            endlist.append("</tr>")
+        toString = str(endlist).replace("[", "").replace("]", "").replace("'", "").replace(",", "")
+        print(toString)
+        replacementText = toString
+        for line in fileinput.FileInput(fileName, inplace=1):
+            line = line.replace(textToReplace, replacementText)
+            print(line)
+

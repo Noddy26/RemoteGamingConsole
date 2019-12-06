@@ -17,6 +17,9 @@ class Configuration(object):
     adminhtml = templates + "admin.html"
     adminhtmlbcakup = templates + "admin.html.bck"
 
+    userhtml = templates + "Users.html"
+    userhtmlbackup = templates + "Users.html.bck"
+
     # admin details
     adminusername = "Administrator"
     adminpassword = "12shroot"

@@ -12,6 +12,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+    FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
     return render_template('index.html')
 
 
@@ -64,6 +65,7 @@ def login():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminpage():
+
     if os.path.exists(Configuration.userfilepath) is True and os.stat(Configuration.userfilepath).st_size is not 0:
         count = 0
         delete = "delete"
@@ -89,12 +91,77 @@ def adminpage():
     else:
         pass
 
-@app.route("/logout")
-def logout():
-    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-    session['logged_in'] = False
-    return home()
+@app.route("/server", methods=['GET', 'POST'])
+def serverpage():
+    if request.method == 'POST':
+        if request.form["button"] == "Turn on Server":
+            return render_template('Turnon.html')
+        elif request.form["button"] == "Turn off Server":
+            return render_template('Turnoff.html')
+        elif request.form["button"] == "List of Users":
+            userdata = Database.getAllUsers(None)
+            FileMethods.addUserDataToHtml(userdata)
+            return render_template('Users.html')
 
+
+@app.route("/usernotfound", methods=['GET', 'POST'])
+def usernotcorrectpage():
+    if request.method == 'POST':
+        FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+        return render_template('index.html')
+
+@app.route("/userEmailExists", methods=['GET', 'POST'])
+def useremailnotcorrectpage():
+    if request.method == 'POST':
+        FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+        return render_template('registerPage.html')
+
+@app.route("/userExists", methods=['GET', 'POST'])
+def useralreadyexistspage():
+    if request.method == 'POST':
+        FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+        return render_template('registerPage.html')
+
+@app.route("/adding")
+def addinguser():
+    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+    if request.method == 'POST':
+        data = FileMethods.readfile(Configuration.userfilepath)
+        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
+        return render_template('admin.html', data=newdata)
+
+@app.route("/delete")
+def deletinguser():
+    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+    if request.method == 'POST':
+        data = FileMethods.readfile(Configuration.userfilepath)
+        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
+        return render_template('admin.html', data=newdata)
+
+@app.route("/Turnon", methods=['GET', 'POST'])
+def Turnserveron():
+    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+    if request.method == 'POST':
+        data = FileMethods.readfile(Configuration.userfilepath)
+        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
+        return render_template('admin.html', data=newdata)
+
+@app.route("/Turnoff", methods=['GET', 'POST'])
+def Turnserveroff():
+    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+    if request.method == 'POST':
+        data = FileMethods.readfile(Configuration.userfilepath)
+        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
+        return render_template('admin.html', data=newdata)
+
+@app.route("/returnUsers", methods=['GET', 'POST'])
+def returnuser():
+    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+    if request.method == 'POST':
+        FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
+        data = FileMethods.readfile(Configuration.userfilepath)
+        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
+        return render_template('admin.html', data=newdata)
 
 if __name__ == '__main__':
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)

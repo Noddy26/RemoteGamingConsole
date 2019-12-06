@@ -325,8 +325,11 @@ tr:nth-child(even) {background-color: #000000;}
 /* On mouse-over */
 .btn:hover {background: #eee;}
 }
-.buttonOn {
-
+.submitButton1{
+  color: white;
+  background-color: #006400;
+  padding: 16px 25px;
+  border-radius: 8px;
   margin: 0 auto;
   border: none;
   cursor: pointer;
@@ -334,30 +337,31 @@ tr:nth-child(even) {background-color: #000000;}
   max-width: 600px;
   position:center;
   margin-top: 150px;
-
-
 }
-.buttonOn #button1 {
-
+.submitButton2{
   color: white;
-  background-color: #006400;
-  padding: 16px 25px;
-  border-radius: 8px;
-
-
-}
-.buttonOn #button2 {
   background-color: #FF0000;
   padding: 16px 25px;
   border-radius: 8px;
-  color: white;
-
-
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  max-width: 600px;
+  position:center;
+  margin-top: 150px;
 }
-.buttonOn #button3 {
+.submitButton3{
+  color: white;
   background-color: #000080;
   padding: 16px 25px;
   border-radius: 8px;
-  color: white;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  max-width: 600px;
+  position:center;
+  margin-top: 150px;
 }
 

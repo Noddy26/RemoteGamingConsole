@@ -47,11 +47,12 @@ class Database:
         except Error as e:
             print("Error reading data from MySQL table", e)
         finally:
-            if (self.connection.is_connected()):
-                self.connection.close()
-                cursor.close()
-                print("MySQL connection is closed")
-                #return False
+            if (self.connection is not None):
+                if (self.connection.is_connected()):
+                    self.connection.close()
+                    cursor.close()
+                    print("MySQL connection is closed")
+                    #return False
 
     def checkForUserPassword(self):
         global cursor
@@ -76,6 +77,27 @@ class Database:
         finally:
             if (self.connection.is_connected()):
                 self.connection.close()
+                cursor.close()
+                print("MySQL connection is closed")
+                #return False
+
+    def getAllUsers(self):
+        global cursor
+        try:
+            print(Configuration.sqlhost + Configuration.sqldatabase + Configuration.sqluser + Configuration.sqlpassword)
+            connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
+                                                      user=Configuration.sqluser, password=Configuration.sqlpassword)
+            query = "SELECT * FROM " + Configuration.sqlusertable
+            cursor = connection.cursor()
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return result
+
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+        finally:
+            if (connection.is_connected()):
+                connection.close()
                 cursor.close()
                 print("MySQL connection is closed")
                 #return False

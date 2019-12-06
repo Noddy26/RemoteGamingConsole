@@ -1,46 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <title>Administration Page</title>
   <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
     <center style="font-size:50px;">Registered User Table</center>
     <table>
       <tr>
-        <th>Usert Name</th>
+        <th>User ID</th>
+        <th>User Name</th>
         <th>Password</th>
         <th>Email</th>
         <th>ip Address</th>
         <th>Active</th>
       </tr>
-      <tr>
         <td>Peter</td>
-        <td>Griffin</td>
-        <td>$100</td>
-        <td>$150</td>
-        <td>false</td>
-      </tr>
-      <tr>
-        <td>Lois</td>
-        <td>Griffin</td>
-        <td>$150</td>
-        <td>$150</td>
-        <td>false</td>
-      </tr>
-      <tr>
-        <td>Joe</td>
-        <td>Swanson</td>
-        <td>$300</td>
-        <td>$150</td>
-        <td>false</td>
-      </tr>
-      <tr>
-        <td>Cleveland</td>
-        <td>Brown</td>
-        <td>$250</td>
-        <td>$150</td>
-        <td>false</td>
-      </tr>
     </table>
+<div class="mail-form-agile">
+            <form action="returnUsers" method="post">
+                <input type="submit" value="Return to Admin Page">
+            </form>
+        </div>
 </body>
 </html>
