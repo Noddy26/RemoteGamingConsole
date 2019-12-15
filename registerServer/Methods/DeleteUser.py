@@ -1,8 +1,5 @@
-import os
-
 from Methods.ConfirmationEmail import ConfirmationEmail
 from Methods.FileMethods import FileMethods
-from Configuration import Configuration
 
 
 class DeleteUser:

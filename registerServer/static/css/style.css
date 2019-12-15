@@ -360,4 +360,17 @@ th, td {
   text-align: left;
   padding: 8px;
 }
-
+.dotgreen {
+  height: 25px;
+  width: 25px;
+  background-color: #FF0000;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dotred {
+  height: 25px;
+  width: 25px;
+  background-color: #00FF7F;
+  border-radius: 50%;
+  display: inline-block;
+}

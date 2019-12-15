@@ -1,5 +1,6 @@
 import base64
 
+import MySQLdb
 import mysql.connector
 from mysql.connector import Error
 
@@ -20,17 +21,29 @@ class Database:
             return True
         return False
 
-
     def checkuserReg(self):
         global cursor, tuple
+        Query = """select * from %s where username = '%s';""" % (Configuration.sqlusertable, self.username)
         try:
             self.connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
                                                  user=Configuration.sqluser,
                                                  password=Configuration.sqlpassword)
-
-            Query = """select * from %s where username = '%s';""" % (Configuration.sqlusertable, self.username)
-            cursor = self.connection.cursor()
-            cursor.execute(Query)
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+            if (self.connection is not None):
+                if (self.connection.is_connected()):
+                    self.connection.close()
+                    cursor.close()
+                    print("MySQL connection is closed")
+                    # return False
+            try:
+                cursor = self.connection.cursor()
+                cursor.execute(Query)
+            except (MySQLdb.Error, MySQLdb.Warning) as e:
+                print(e)
+                if (self.connection.is_connected()):
+                    self.connection.close()
+                return None
             records = cursor.fetchall()
             if len(records) == 0:
                 return False
@@ -44,26 +57,24 @@ class Database:
                     return True
             return False
 
-        except Error as e:
-            print("Error reading data from MySQL table", e)
-        finally:
-            if (self.connection is not None):
-                if (self.connection.is_connected()):
-                    self.connection.close()
-                    cursor.close()
-                    print("MySQL connection is closed")
-                    #return False
-
     def checkForUserPassword(self):
         global cursor
         try:
             self.connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
                                                  user=Configuration.sqluser,
                                                  password=Configuration.sqlpassword)
-            password = str(base64.b64encode(self.password.encode("utf-8")))
-            checkpass = password.replace("'", "_")
-            query = """select * from %s where username = '%s' AND password = '%s';""" \
-                    % (Configuration.sqlusertable, self.username, checkpass.strip())
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+            if (self.connection.is_connected()):
+                self.connection.close()
+                cursor.close()
+                print("MySQL connection is closed")
+
+        password = base64.b64encode(self.password.encode("utf-8"))
+        checkpass = str(password).replace("'", "_")
+        query = """select * from %s where username = '%s' AND password = '%s';""" \
+                % (Configuration.sqlusertable, self.username, checkpass.strip())
+        try:
             cursor = self.connection.cursor()
             cursor.execute(query)
             records = cursor.fetchall()
@@ -71,33 +82,32 @@ class Database:
                 return False
             else:
                 return True
-
-        except Error as e:
-            print("Error reading data from MySQL table", e)
-        finally:
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
+            print(e)
             if (self.connection.is_connected()):
                 self.connection.close()
-                cursor.close()
-                print("MySQL connection is closed")
-                #return False
 
     def getAllUsers(self):
         global cursor
+        query = "SELECT * FROM " + Configuration.sqlusertable
         try:
-            print(Configuration.sqlhost + Configuration.sqldatabase + Configuration.sqluser + Configuration.sqlpassword)
             connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
                                                       user=Configuration.sqluser, password=Configuration.sqlpassword)
-            query = "SELECT * FROM " + Configuration.sqlusertable
-            cursor = connection.cursor()
-            cursor.execute(query)
-            result = cursor.fetchall()
-            return result
-
         except Error as e:
             print("Error reading data from MySQL table", e)
-        finally:
             if (connection.is_connected()):
                 connection.close()
                 cursor.close()
                 print("MySQL connection is closed")
-                #return False
+                # return False
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return result
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
+            print("Error")
+            print(e)
+            if (connection.is_connected()):
+                connection.close()
+

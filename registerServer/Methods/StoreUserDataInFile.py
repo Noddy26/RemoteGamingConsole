@@ -15,7 +15,7 @@ class StoreDataInFile:
         self.email = email
 
     def run(self):
-        SQLcommand = "INSERT INTO %s(id, username, password, email, ipAddress) VALUES (NULL, '%s', '%s', '%s', NULL);" \
+        SQLcommand = "INSERT INTO %s(id, username, password, email, ipAddress, login) VALUES (NULL, '%s', '%s', '%s', NULL, 'False');" \
                      % (Configuration.sqlusertable, self.username, self.password, self.email)
         filename = Configuration.adduserdir + self.username + ".txt"
         with open(filename, 'w') as f:

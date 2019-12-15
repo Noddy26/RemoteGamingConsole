@@ -21,7 +21,7 @@ def home():
 def loginpage():
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     if request.method == 'POST':
-        return redirect(url_for('index'))
+        return redirect(url_for('loginpage'))
 
     return render_template('index.html')
 
@@ -66,7 +66,6 @@ def login():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminpage():
-
     if os.path.exists(Configuration.userfilepath) is True and os.stat(Configuration.userfilepath).st_size is not 0:
         count = 0
         delete = "delete"
@@ -92,6 +91,7 @@ def adminpage():
     else:
         pass
 
+
 @app.route("/server", methods=['GET', 'POST'])
 def serverpage():
     if request.method == 'POST':
@@ -106,63 +106,12 @@ def serverpage():
             else:
                 return render_template('TurnoffFalse.html')
         elif request.form["button"] == "List of Users":
-            userdata = Database.getAllUsers(None)
+            userdata = Database.getAllUsers(None, None, None)
             FileMethods.addUserDataToHtml(userdata)
             return render_template('Users.html')
 
-@app.route("/usernotfound", methods=['GET', 'POST'])
-def usernotcorrectpage():
-    if request.method == 'POST':
-        FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-        return render_template('index.html')
 
-@app.route("/userEmailExists", methods=['GET', 'POST'])
-def useremailnotcorrectpage():
-    if request.method == 'POST':
-        FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-        return render_template('registerPage.html')
-
-@app.route("/userExists", methods=['GET', 'POST'])
-def useralreadyexistspage():
-    if request.method == 'POST':
-        FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-        return render_template('registerPage.html')
-
-@app.route("/adding")
-def addinguser():
-    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-    if request.method == 'POST':
-        data = FileMethods.readfile(Configuration.userfilepath)
-        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
-        return render_template('admin.html', data=newdata)
-
-@app.route("/delete")
-def deletinguser():
-    print("why")
-    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-    if request.method == 'POST':
-        print("fuck")
-        data = FileMethods.readfile(Configuration.userfilepath)
-        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
-        return render_template('admin.html', data=newdata)
-
-@app.route("/Turnon", methods=['GET', 'POST'])
-def Turnserveron():
-    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-    if request.method == 'POST':
-        data = FileMethods.readfile(Configuration.userfilepath)
-        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
-        return render_template('admin.html', data=newdata)
-
-@app.route("/Turnoff", methods=['GET', 'POST'])
-def Turnserveroff():
-    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-    if request.method == 'POST':
-        data = FileMethods.readfile(Configuration.userfilepath)
-        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
-        return render_template('admin.html', data=newdata)
-
-@app.route("/returnUsers", methods=['GET', 'POST'])
+@app.route("/BackAdmin", methods=['GET', 'POST'])
 def returnuser():
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     if request.method == 'POST':
@@ -171,6 +120,11 @@ def returnuser():
         newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
         return render_template('admin.html', data=newdata)
 
+app.route("/BackReg", methods=['GET', 'POST'])
+def returnRegister():
+    if request.method == 'POST':
+        return render_template('registerPage.html')
+
 
 @app.route("/logout", methods=['GET', 'POST'])
 def Logout():
@@ -178,6 +132,7 @@ def Logout():
     FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
     session['logged_in'] = False
     return home()
+
 
 if __name__ == '__main__':
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)

@@ -26,8 +26,12 @@ class ConfirmationEmail:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
             server.login(sender_email, password)
-            server.sendmail(sender_email, receiver, message)
-            return True
+            try:
+                server.sendmail(sender_email, receiver, message)
+                return True
+            except:
+                print("Email of user %s Can't be reached" % self.user)
+                return True
 
     def add(self):
         smtp_server = "smtp.gmail.com"
@@ -43,8 +47,12 @@ class ConfirmationEmail:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
             server.login(sender_email, password)
-            server.sendmail(sender_email, receiver, message)
-            return True
+            try:
+                server.sendmail(sender_email, receiver, message)
+                return True
+            except:
+                print("Email of user %s Can't be reached" % self.user)
+                return True
 
     def _getemail(self, details):
         data = details.split("-")

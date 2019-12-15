@@ -76,7 +76,14 @@ class FileMethods:
             change = str(each).replace("(", "").replace(")", "").replace("'", "")
             listuser = change.split(",")
             for item in listuser:
-                endlist.append("<td>%s</td>" % item)
+                print(item)
+                if item.replace(" ", "") == "True":
+                    endlist.append('<td><span class="dotgreen"></span></td>')
+                if item.replace(" ", "") == "False":
+                    endlist.append('<td><span class="dotred"></span></td>')
+                if item.replace(" ", "") != "False":
+                    if item.replace(" ", "") != "True":
+                        endlist.append("<td>%s</td>" % item)
             endlist.append("</tr>")
         toString = str(endlist).replace("[", "").replace("]", "").replace("'", "").replace(",", "")
         print(toString)

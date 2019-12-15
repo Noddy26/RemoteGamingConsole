@@ -23,7 +23,7 @@ class ServerControl:
             print("turning on server")
             dirpath = os.getcwd()
             os.chdir(Configuration.serverPath)
-            Configuration.running = subprocess.Popen("sudo /usr/bin/java " + Configuration.serverFile + " &",
+            Configuration.running = subprocess.Popen("sudo /usr/bin/java -cp .:mysql-connector-java-8.0.18.jar " + Configuration.serverFile + " &",
                                                      shell=True, preexec_fn=os.setsid)
             os.chdir(dirpath)
             return True
