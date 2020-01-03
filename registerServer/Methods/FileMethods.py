@@ -70,18 +70,24 @@ class FileMethods:
         fileName = Configuration.userhtml
         textToReplace = '<td>Peter</td>'
         os.system("cp " + fileName + " " + fileName + ".bck")
-
+        UserCount = 0
+        count = 0
         for each in data:
+            UserCount = UserCount + 1
             endlist.append("<tr>")
             change = str(each).replace("(", "").replace(")", "").replace("'", "")
             listuser = change.split(",")
             for item in listuser:
-                print(item)
+                count = count + 1
+                if count == 6:
+                    count = 0
+                if count == 1:
+                    endlist.append('<td><input type="checkbox" name="check" value="user' + item +'">%s<br></td>' % item)
                 if item.replace(" ", "") == "True":
                     endlist.append('<td><span class="dotgreen"></span></td>')
                 if item.replace(" ", "") == "False":
                     endlist.append('<td><span class="dotred"></span></td>')
-                if item.replace(" ", "") != "False":
+                if item.replace(" ", "") != "False" and count is not 1:
                     if item.replace(" ", "") != "True":
                         endlist.append("<td>%s</td>" % item)
             endlist.append("</tr>")

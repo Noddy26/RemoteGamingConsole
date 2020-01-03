@@ -16,7 +16,6 @@ def home():
     FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
     return render_template('index.html')
 
-
 @app.route('/index2', methods=['GET', 'POST'])
 def loginpage():
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
@@ -25,7 +24,6 @@ def loginpage():
 
     return render_template('index.html')
 
-
 @app.route('/index3', methods=['GET', 'POST'])
 def registerpage():
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
@@ -33,7 +31,6 @@ def registerpage():
         return redirect(url_for('index'))
 
     return render_template('registerPage.html')
-
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -46,7 +43,6 @@ def register():
     else:
         if Database(request.form['name'], request.form['password'], request.form['email']).addUser() is True:
             return render_template('awaitingConfirmation.html')
-
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -63,68 +59,67 @@ def login():
         else:
             return render_template('userDoesNotExist.html')
 
-
 @app.route("/admin", methods=['GET', 'POST'])
 def adminpage():
-    if os.path.exists(Configuration.userfilepath) is True and os.stat(Configuration.userfilepath).st_size is not 0:
-        count = 0
-        delete = "delete"
-        add = "add"
-        data = FileMethods.readfile(Configuration.userfilepath)
-        newdata = data.split("\n")
-        if request.method == 'POST':
-            while(True):
-                for each in newdata:
-                    if each is not None:
-                        count = count + 1
-                        if request.form["action"] == delete + str(count):
-                            os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
-                            if DeleteUser(each).run() is True:
-                                ConfirmationEmail(each).delete()
-                                return render_template('UserDeleted.html')
-                        elif request.form["action"] == add + str(count):
-                            os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
-                            if AddUser(each).run() is True:
-                                ConfirmationEmail(each).add()
-                                return render_template('UserAdded.html')
-                count = 0
-    else:
-        pass
-
+    if session['logged_in'] == True:
+        if os.path.exists(Configuration.userfilepath) is True and os.stat(Configuration.userfilepath).st_size is not 0:
+            count = 0
+            delete = "delete"
+            add = "add"
+            data = FileMethods.readfile(Configuration.userfilepath)
+            newdata = data.split("\n")
+            if request.method == 'POST':
+                while(True):
+                    for each in newdata:
+                        if each is not None:
+                            count = count + 1
+                            if request.form["action"] == delete + str(count):
+                                os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
+                                if DeleteUser(each).run() is True:
+                                    ConfirmationEmail(each).delete()
+                                    return render_template('UserDeleted.html')
+                            elif request.form["action"] == add + str(count):
+                                os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)
+                                if AddUser(each).run() is True:
+                                    ConfirmationEmail(each).add()
+                                    return render_template('UserAdded.html')
+                    count = 0
+        else:
+            pass
 
 @app.route("/server", methods=['GET', 'POST'])
 def serverpage():
-    if request.method == 'POST':
-        if request.form["button"] == "Turn on Server":
-            if ServerControl().turnOnServer() is True:
-                return render_template('Turnon.html')
-            else:
-                return render_template('TurnonFalse.html')
-        elif request.form["button"] == "Turn off Server":
-            if ServerControl().turnOffServer() is True:
-                return render_template('Turnoff.html')
-            else:
-                return render_template('TurnoffFalse.html')
-        elif request.form["button"] == "List of Users":
-            userdata = Database.getAllUsers(None, None, None)
-            FileMethods.addUserDataToHtml(userdata)
-            return render_template('Users.html')
-
+    if session['logged_in'] == True:
+        if request.method == 'POST':
+            if request.form["button"] == "Turn on Server":
+                if ServerControl().turnOnServer() is True:
+                    return render_template('Turnon.html')
+                else:
+                    return render_template('TurnonFalse.html')
+            elif request.form["button"] == "Turn off Server":
+                if ServerControl().turnOffServer() is True:
+                    return render_template('Turnoff.html')
+                else:
+                    return render_template('TurnoffFalse.html')
+            elif request.form["button"] == "List of Users":
+                userdata = Database.getAllUsers(None)
+                FileMethods.addUserDataToHtml(userdata)
+                return render_template('Users.html')
 
 @app.route("/BackAdmin", methods=['GET', 'POST'])
 def returnuser():
-    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-    if request.method == 'POST':
-        FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
-        data = FileMethods.readfile(Configuration.userfilepath)
-        newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
-        return render_template('admin.html', data=newdata)
+    if session['logged_in'] == True:
+        FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+        if request.method == 'POST':
+            FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
+            data = FileMethods.readfile(Configuration.userfilepath)
+            newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
+            return render_template('admin.html', data=newdata)
 
-app.route("/BackReg", methods=['GET', 'POST'])
+@app.route("/BackReg", methods=['GET', 'POST'])
 def returnRegister():
     if request.method == 'POST':
         return render_template('registerPage.html')
-
 
 @app.route("/logout", methods=['GET', 'POST'])
 def Logout():
@@ -133,6 +128,18 @@ def Logout():
     session['logged_in'] = False
     return home()
 
+@app.route("/deleteUser", methods=['GET', 'POST'])
+def deleteUser():
+    if session['logged_in'] == True:
+        if request.method == "POST":
+            #if request.form['submit'] == 'Delete User':
+            selected = request.form.getlist('check')
+            for each in selected:
+                Database.deleteUser(each)
+            FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
+            userdata = Database.getAllUsers(None)
+            FileMethods.addUserDataToHtml(userdata)
+            return render_template('Users.html')
 
 if __name__ == '__main__':
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)

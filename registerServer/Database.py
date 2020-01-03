@@ -88,7 +88,7 @@ class Database:
                 self.connection.close()
 
     def getAllUsers(self):
-        global cursor
+        global cursor, connection
         query = "SELECT * FROM " + Configuration.sqlusertable
         try:
             connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
@@ -111,3 +111,28 @@ class Database:
             if (connection.is_connected()):
                 connection.close()
 
+    @staticmethod
+    def deleteUser(Check):
+        User = Check.replace("user", "")
+        global cursor, connection
+        query = "DELETE FROM %s WHERE id = '%s'" % (Configuration.sqlusertable, User)
+        try:
+            connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
+                                                 user=Configuration.sqluser, password=Configuration.sqlpassword)
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+            if (connection.is_connected()):
+                connection.close()
+                cursor.close()
+                print("MySQL connection is closed")
+                # return False
+        try:
+            cursor = connection.cursor()
+            print(query)
+            cursor.execute(query)
+            connection.commit()
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
+            print("Error")
+            print(e)
+            if (connection.is_connected()):
+                connection.close()
