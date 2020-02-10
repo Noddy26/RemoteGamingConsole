@@ -1,8 +1,8 @@
 import base64
 import os
 
-from Configuration import Configuration
-from Methods.SendEmail import SendEmail
+from registerServer.Configuration import Configuration
+from registerServer.Methods.SendEmail import SendEmail
 
 
 class StoreDataInFile:

@@ -5,7 +5,7 @@ class Configuration(object):
     CannotConnect = None
 
     #ip Address of Server
-    ipAddress = "192.168.0.13"
+    ipAddress = "192.168.22.1"
     portNumber = 3000
 
     # paths

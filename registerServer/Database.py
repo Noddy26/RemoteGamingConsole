@@ -4,8 +4,8 @@ import MySQLdb
 import mysql.connector
 from mysql.connector import Error
 
-from Configuration import Configuration
-from Methods.StoreUserDataInFile import StoreDataInFile
+from registerServer.Configuration import Configuration
+from registerServer.Methods.StoreUserDataInFile import StoreDataInFile
 
 
 class Database:
@@ -71,7 +71,7 @@ class Database:
                 print("MySQL connection is closed")
 
         password = base64.b64encode(self.password.encode("utf-8"))
-        checkpass = str(password).replace("'", "_")
+        checkpass = str(password).replace("'", "_").replace("=", "")
         query = """select * from %s where username = '%s' AND password = '%s';""" \
                 % (Configuration.sqlusertable, self.username, checkpass.strip())
         try:
@@ -136,3 +136,57 @@ class Database:
             print(e)
             if (connection.is_connected()):
                 connection.close()
+
+    @staticmethod
+    def addIptoUser(sql):
+        global cursor, connection
+
+        try:
+            connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
+                                                 user=Configuration.sqluser, password=Configuration.sqlpassword)
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+            if (connection.is_connected()):
+                connection.close()
+                cursor.close()
+                print("MySQL connection is closed")
+                # return False
+        try:
+            cursor = connection.cursor()
+            cursor.execute(sql)
+            connection.commit()
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
+            print("Error")
+            print(e)
+            if (connection.is_connected()):
+                connection.close()
+
+    @staticmethod
+    def checkIp(sql):
+        global cursor, connection
+
+        try:
+            connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
+                                                 user=Configuration.sqluser, password=Configuration.sqlpassword)
+        except Error as e:
+            print("Error reading data from MySQL table", e)
+            if (connection.is_connected()):
+                connection.close()
+                cursor.close()
+                print("MySQL connection is closed")
+                # return False
+        try:
+            cursor = connection.cursor()
+            cursor.execute(sql)
+            return True
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
+            print("Error")
+            print(e)
+            if (connection.is_connected()):
+                connection.close()
+                return False
+
+    @staticmethod
+    def loggedIn():
+        #code for making database user to true
+        pass

@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    session['logged_in'] = False
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
     return render_template('index.html')
@@ -132,14 +133,15 @@ def Logout():
 def deleteUser():
     if session['logged_in'] == True:
         if request.method == "POST":
-            #if request.form['submit'] == 'Delete User':
-            selected = request.form.getlist('check')
-            for each in selected:
-                Database.deleteUser(each)
-            FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
-            userdata = Database.getAllUsers(None)
-            FileMethods.addUserDataToHtml(userdata)
-            return render_template('Users.html')
+            if request.form['submit'] == 'Delete User':
+                selected = request.form.getlist('check')
+                for each in selected:
+                    Database.deleteUser(each)
+                FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
+                userdata = Database.getAllUsers(None)
+                FileMethods.addUserDataToHtml(userdata)
+            elif request.form['submit'] == 'Delete User':
+                return render_template('Users.html')
 
 if __name__ == '__main__':
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
