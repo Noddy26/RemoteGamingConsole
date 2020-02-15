@@ -5,7 +5,7 @@ class Configuration(object):
     CannotConnect = None
 
     #ip Address of Server
-    ipAddress = "192.168.22.1"
+    ipAddress = "192.168.1.13"
     portNumber = 3000
 
     # paths
@@ -39,7 +39,6 @@ class Configuration(object):
     # Gui Server Control
     serverPath = "/root/IdeaProjects/GamingServer/out/production/GamingServer"
     serverFile = "ServerForGui.Main"
-    running = None
-
+    running = False
 
     CheckforemptyString = False

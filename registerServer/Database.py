@@ -177,8 +177,11 @@ class Database:
                 # return False
         try:
             cursor = connection.cursor()
-            cursor.execute(sql)
-            return True
+            check = cursor.execute(sql)
+            if check is None:
+                return False
+            else:
+                return True
         except (MySQLdb.Error, MySQLdb.Warning) as e:
             print("Error")
             print(e)

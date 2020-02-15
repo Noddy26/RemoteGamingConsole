@@ -7,8 +7,9 @@ from ClientGui.MainGui import MainGui
 
 class Login:
 
-    def __init__(self):
+    def __init__(self, sock):
         self.window = Tk()
+        self.socket = sock
         self.window.title("Login")
         # root.wm_attributes('-alpha', 0.5)
         self.image_file = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\WebpNetResizeimage.jpg"
@@ -54,8 +55,8 @@ class Login:
 
     def buttonPressed(self):
         if self.username.get() is not None and self.password.get() is not None:
-            if DatabaseCheck(self.username.get(), self.password.get(), None).check_user() is True:
-                MainGui(self.window).run()
+            if DatabaseCheck(self.username.get(), self.password.get(), None, self.socket).check_user() is True:
+                MainGui(self.window, self.socket).run()
             else:
                 messagebox.showerror("Incorrect Details", "The Details are incorrect")
                 self.username.set("")

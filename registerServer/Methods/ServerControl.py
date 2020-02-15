@@ -1,31 +1,32 @@
-import os
-from Configuration import Configuration
-import subprocess
-import signal
+from ClientGui.Configuration import Configuration
+from GamingStreaming.Server import Server
+
 
 class ServerControl:
 
     def __init__(self):
         print("Control Server")
+        self.threads = []
 
     def turnOffServer(self):
-        if Configuration.running is not None:
+        if Configuration.running is not False:
             print("turning off Server")
-            print(Configuration.running.pid)
-            os.killpg(Configuration.running.pid, signal.SIGTERM)
-            Configuration.running = None
+            Server().stop()
+            Configuration.running = False
             return True
         else:
             return False
 
     def turnOnServer(self):
-        if Configuration.running == None:
-            print("turning on server")
-            dirpath = os.getcwd()
-            os.chdir(Configuration.serverPath)
-            Configuration.running = subprocess.Popen("sudo /usr/bin/java -cp .:mysql-connector-java-8.0.18.jar " + Configuration.serverFile + " &",
-                                                     shell=True, preexec_fn=os.setsid)
-            os.chdir(dirpath)
+        if Configuration.running is False:
+            try:
+                print("turning on server")
+                newthread = Server()
+                newthread.start()
+                self.threads.append(newthread)
+            except():
+                for t in self.threads:
+                    t.join()
             return True
         else:
             return False
