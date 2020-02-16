@@ -133,15 +133,16 @@ def Logout():
 def deleteUser():
     if session['logged_in'] == True:
         if request.method == "POST":
-            if request.form['submit'] == 'Delete User':
-                selected = request.form.getlist('check')
-                for each in selected:
-                    Database.deleteUser(each)
-                FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
-                userdata = Database.getAllUsers(None)
-                FileMethods.addUserDataToHtml(userdata)
-            elif request.form['submit'] == 'Delete User':
-                return render_template('Users.html')
+            selected = request.form.getlist('check')
+            #if request.form['submit'] == 'Delete User' and selected is not None:
+            selected = request.form.getlist('check')
+            for each in selected:
+                Database.deleteUser(each)
+            FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
+            userdata = Database.getAllUsers(None)
+            FileMethods.addUserDataToHtml(userdata)
+            #elif request.form['submit'] == 'Delete User':
+            return render_template('Users.html')
 
 if __name__ == '__main__':
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)

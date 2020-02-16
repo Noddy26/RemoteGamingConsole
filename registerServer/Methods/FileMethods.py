@@ -42,7 +42,7 @@ class FileMethods:
         try:
             if os.path.exists(adminbackup):
                 if os.path.exists(admin):
-                    os.remove(admin)
+                    os.system("sudo rm -rf " + admin)
                 print("sudo mv %s %s" % (adminbackup, admin))
                 os.system("sudo mv %s %s" % (adminbackup, admin))
 
@@ -69,7 +69,7 @@ class FileMethods:
         endlist = []
         fileName = Configuration.userhtml
         textToReplace = '<td>Peter</td>'
-        os.system("cp " + fileName + " " + fileName + ".bck")
+        os.system("sudo cp " + fileName + " " + fileName + ".bck")
         UserCount = 0
         count = 0
         for each in data:
