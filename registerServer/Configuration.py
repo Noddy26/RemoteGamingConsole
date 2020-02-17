@@ -6,7 +6,8 @@ class Configuration(object):
 
     #ip Address of Server
     ipAddress = "192.168.1.13"
-    portNumber = 3000
+    portNumber = 2000
+    server_running = None
 
     # paths
     adduserdir = "/home/pi/WebServer/registerServer/UserToBeAdded/"
@@ -37,8 +38,13 @@ class Configuration(object):
     GamingEmailPassword = "GamingServer2019"
 
     # Gui Server Control
-    serverPath = "/root/IdeaProjects/GamingServer/out/production/GamingServer"
-    serverFile = "ServerForGui.Main"
-    running = False
+    #serverPath = "/root/IdeaProjects/GamingServer/out/production/GamingServer"
+    #serverFile = "ServerForGui.Main"
+    #running = False
 
     CheckforemptyString = False
+
+    # Streming control
+    stream_portNumber = 2003
+    streaming = None
+    stream_socket = None

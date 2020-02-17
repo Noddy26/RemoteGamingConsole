@@ -1,6 +1,10 @@
 import base64
 from threading import Thread
-from registerServer.Database import Database
+
+from Streamer import Streamer
+from Configuration import Configuration
+from Database import Database
+from time import sleep
 
 
 class ClientThread(Thread):
@@ -17,15 +21,19 @@ class ClientThread(Thread):
     def run(self):
 
         while True:
-            print("hello")
             data = self.connection.recv(2048).decode()
             if str(data).__contains__("StartStreamingServer"):
-                frames = str(data).split(',')
-                print(frames[1])
-                print(frames[2])
-                # TODO: Start Stream
-
-                self.connection.send("StreamStarted".encode())
+                video = str(data).split(',')
+                quality = video[1]
+                frames = video[2]
+                if Configuration.streaming == True:
+                    streamThread = Streamer(quality, frames)
+                    streamThread .start()
+                    sleep(5)
+                    self.connection.send("StreamStarted".encode())
+                else:
+                    print("Stream already started")
+                    self.connection.send("StreamalreadyStarted".encode())
             elif str(data).__contains__("_"):
                 parts = str(data).split("_")
                 self.username = parts[0]
@@ -57,9 +65,9 @@ class ClientThread(Thread):
                 else:
                     self.connection.send("No Ip Found in database".encode())
             elif str(data).__contains__("StreamStop"):
-                print("hello")
-                #TODO: stop stream
-
+                print("Stoping stream")
+                stop = Streamer(None, None).stop
+                stop.join()
             elif str(data).__contains__("Connection Terminate"):
                 print(data)
                 break

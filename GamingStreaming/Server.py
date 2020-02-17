@@ -7,10 +7,10 @@ class Server():
 
     def __init__(self):
         self.sock = socket.socket()
-        self.host = "192.168.22.1"
-        self.port = 2003
+        self.host = Configuration.ipAddress
+        self.port = Configuration.portNumber
         self.buffer = 1024
-        Configuration.running = True
+        Configuration.server_running = True
 
     def run(self):
         global threads
@@ -21,7 +21,7 @@ class Server():
             threads = []
             print('Server started!')
             print('Waiting for clients...')
-            while Configuration.running:
+            while Configuration.server_running:
                 tcpServer.listen(4)
                 (conn, (ip, port)) = tcpServer.accept()
                 newthread = ClientThread(ip, port, conn)
@@ -34,9 +34,7 @@ class Server():
             self.sock.close()
 
     def stop(self):
-        Configuration.running = False
+        Configuration.server_running = False
         socket.socket(socket.AF_INET,
                       socket.SOCK_STREAM).connect((self.host, self.port))
         self.sock.close()
-
-Server().run()

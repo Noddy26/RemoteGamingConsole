@@ -1,27 +1,50 @@
-import base64
-import cv2
-import zmq
+import io
+import struct
+import time
+import picamera
+import socket
+from threading import Thread
 
-class Streamer:
+from registerServer.Configuration import Configuration
 
-    def __init__(self, frames, quality, socket):
+
+class Streamer(Thread):
+
+    def __init__(self, frames, quality):
+        Thread.__init__(self)
+        Configuration.streaming = True
+        self.host = Configuration.ipAddress
+        self.port = Configuration.stream_portNumber
         self.frames = frames
         self.quality = quality
-        self.socket = socket
-
 
     def run(self):
-        camera = cv2.VideoCapture(0)
+        try:
+            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            self.socket.bind((self.host, self.port))
+            threads = []
+            if Configuration.streaming == True:
+                with picamera.PiCamera(resolution=self.quality, framerate=int(self.frames)) as hdmi_input:
+                    hdmi_input.start_preview()
+                    time.sleep(2)
 
-        while True:
-            try:
-                grabbed, frame = camera.read()
-                frame = cv2.resize(frame, (640, 480))
-                encoded, buffer = cv2.imencode('.jpg', frame)
-                jpg_as_text = base64.b64encode(buffer)
-                self.socket.send(jpg_as_text)
+                    stream = io.BytesIO()
 
-            except KeyboardInterrupt:
-                camera.release()
-                cv2.destroyAllWindows()
-                break
+                    for _ in hdmi_input.capture_continuous(stream, 'jpeg'):
+                        self.socket.write(struct.pack('<L', stream.tell()))  # Write the length of the capture to the stream and flush toensure it actually gets sent
+                        self.socket.flush()
+                        stream.seek(0)
+                        self.socket.write(stream.read())
+                        if Configuration.streaming is False:
+                            break
+                        stream.seek(0)
+                        stream.truncate()
+                self.socket.write(struct.pack('<L', 0))
+        finally:
+            self.socket.close()
+
+    def stop(self):
+        print("Stopping stream")
+        Configuration.streaming = False
+        self.socket.close()
