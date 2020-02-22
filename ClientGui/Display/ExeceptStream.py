@@ -1,7 +1,7 @@
 from threading import Thread
 import subprocess
 import socket
-from ClientGui.Configuration import Configuration
+from ClientGui.variables.Configuration import Configuration
 
 
 class ExpectStream(Thread):

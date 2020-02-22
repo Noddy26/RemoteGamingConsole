@@ -3,7 +3,7 @@ from threading import Thread
 from inputs import devices, get_gamepad
 
 from ClientGui.Logging.logger import Logger
-from ClientGui.Sendmessages import SendReceive
+from ClientGui.functions.Sendmessages import SendReceive
 
 
 class ControllerControl(Thread):

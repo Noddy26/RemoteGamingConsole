@@ -1,10 +1,10 @@
-from ClientGui.Configuration import Configuration
+from ClientGui.variables.Configuration import Configuration
 from ClientGui.Logging.logger import Logger
-from ClientGui.Login import Login
-from ClientGui.MainGui import MainGui
+from ClientGui.Display.Login import Login
+from ClientGui.Display.MainGui import MainGui
 import socket
 
-from ClientGui.Sendmessages import SendReceive
+from ClientGui.functions.Sendmessages import SendReceive
 
 
 def main():

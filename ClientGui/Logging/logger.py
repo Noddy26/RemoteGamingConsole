@@ -1,6 +1,6 @@
 import logging
 
-from ClientGui.Configuration import Configuration
+from ClientGui.variables.Configuration import Configuration
 
 
 class Logger(object):

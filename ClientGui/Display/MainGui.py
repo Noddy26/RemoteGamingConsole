@@ -3,13 +3,13 @@ from PIL import Image, ImageTk
 import ctypes
 import os
 
-from ClientGui.Configuration import Configuration
-from ClientGui.Controllers import ControllerControl
-from ClientGui.DatbaseCheck import DatabaseCheck
-from ClientGui.ExeceptStream import ExpectStream
+from ClientGui.variables.Configuration import Configuration
+from ClientGui.functions.Controllers import ControllerControl
+from ClientGui.functions.DatbaseCheck import DatabaseCheck
+from ClientGui.Display.ExeceptStream import ExpectStream
 from ClientGui.Logging.logger import Logger
-from ClientGui.VideoWindow import VideoWindow
-from ClientGui.gif_player import GifPlayer
+from ClientGui.Display.VideoWindow import VideoWindow
+from ClientGui.Display.gif_player import GifPlayer
 
 
 class MainGui:

@@ -1,10 +1,10 @@
 from tkinter import Tk, Label, Entry, Button, StringVar, messagebox
 from PIL import Image, ImageDraw, ImageTk, ImageFont
 
-from ClientGui.Configuration import Configuration
-from ClientGui.DatbaseCheck import DatabaseCheck
+from ClientGui.variables.Configuration import Configuration
+from ClientGui.functions.DatbaseCheck import DatabaseCheck
 from ClientGui.Logging.logger import Logger
-from ClientGui.MainGui import MainGui
+from ClientGui.Display.MainGui import MainGui
 
 
 class Login:
