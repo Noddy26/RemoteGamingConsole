@@ -1,4 +1,4 @@
-from ClientGui.Configuration import Configuration
+from Configuration import Configuration
 from GamingStreaming.Server import Server
 
 
@@ -9,10 +9,12 @@ class ServerControl:
         self.threads = []
 
     def turnOffServer(self):
-        if Configuration.running is not False:
+        if Configuration.running is True:
             print("turning off Server")
             Server().stop()
             Configuration.running = False
+            for t in self.threads:
+                t.join()
             return True
         else:
             return False
@@ -20,6 +22,7 @@ class ServerControl:
     def turnOnServer(self):
         if Configuration.running is False:
             try:
+                Configuration.running = True
                 print("turning on server")
                 newthread = Server()
                 newthread.start()

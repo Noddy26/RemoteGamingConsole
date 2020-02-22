@@ -1,4 +1,6 @@
-import socket
+from ClientGui.Logging.logger import Logger
+from ClientGui.Sendmessages import SendReceive
+
 
 class DatabaseCheck:
 
@@ -10,27 +12,33 @@ class DatabaseCheck:
 
     def check_user(self):
         message = self.user + "_" + self.password
-        self.sock.send(message.encode())
-        mess = self.sock.recv(1024).decode()
+        SendReceive(self.sock, message).send()
+        mess = SendReceive(self.sock, None).receive()
         if mess == "Access Granted":
-            self.sock.close()
+            Logger.error("Access Granted")
             return True
         else:
+            Logger.error("incorrect details logged")
             return False
 
     def start_Stream(self):
-        self.sock.send(self.message.encode())
-        mess = self.sock.recv(1024).decode()
+        SendReceive(self.sock, self.message).send()
+        mess = SendReceive(self.sock, None).receive()
         if mess == "StreamStarted":
-            print(mess)
+            Logger.error("Stream has started")
+            # TODO: START TIMER HERE FOR WHEN STREAM HAS STARTED
             return True
+        return False
 
     def disconnect(self):
-        self.sock.send(self.message.encode())
+        SendReceive(self.sock, self.message).send()
         print(self.message)
-        mess = self.sock.recv(1024).decode()
+        mess = SendReceive(self.sock, None).receive()
         print(mess)
         if mess == "Logged out":
+            Logger.error("Logged out from server")
+            print("return")
             return True
         else:
+            Logger.error("Cannot log out from server")
             return False

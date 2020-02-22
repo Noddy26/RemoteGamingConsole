@@ -1,11 +1,13 @@
-from tkinter import Tk, Label, Entry, Button, StringVar, messagebox, Menu, YES, PhotoImage, BOTH
-from PIL import Image, ImageDraw, ImageTk, ImageFont
+from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
+from PIL import Image, ImageTk
 import ctypes
-import sys
+import os
 
 from ClientGui.Configuration import Configuration
+from ClientGui.Controllers import ControllerControl
 from ClientGui.DatbaseCheck import DatabaseCheck
-
+from ClientGui.ExeceptStream import ExpectStream
+from ClientGui.Logging.logger import Logger
 from ClientGui.VideoWindow import VideoWindow
 from ClientGui.gif_player import GifPlayer
 
@@ -19,7 +21,7 @@ class MainGui:
         self.window = Tk()
         self.window.title("Gaming Server")
         self.image_file = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\Playstation-Wallpaper-20-1920x1080.jpg"
-        self.play_gif = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\loading.gif"
+        self.play_gif = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\Fmh8EMk.gif"
         height, width = self._screen_size()
         self.window.geometry("%sx%s" % (height, width))
 
@@ -35,16 +37,16 @@ class MainGui:
         menu = Menu(self.window)
         self.window.config(menu=menu)
 
-        system = Menu(menu)
+        self.system = Menu(menu)
         configure = Menu(menu)
         help = Menu(menu)
 
-        system.add_command(label="Start Stream", command=self.start_stream)
-        system.add_command(label="Stop Stream", command=self.stop_stream)
-        system.add_command(label="Exit", command=self.exit)
-        menu.add_cascade(label="System", menu=system)
+        self.system.add_command(label="Start Stream", command=self.start_stream)
+        self.system.add_command(label="Stop Stream", command=self.stop_stream)
+        self.system.add_command(label="Exit", command=self.exit)
+        menu.add_cascade(label="System", menu=self.system)
 
-        configure.add_command(label="Controller", command=self.controller)
+        configure.add_command(label="Detect Controller", command=self.controller)
         configure.add_command(label="Audio", command=self.audio)
         configure.add_command(label="Video", command=self.video)
         menu.add_cascade(label="Configure", menu=configure)
@@ -56,9 +58,7 @@ class MainGui:
         self.window.mainloop()
 
     def start_stream(self):
-
-        self.gif = GifPlayer(self.window, self.play_gif).place(x=500, y=200)
-        self.gif.pack()
+        GifPlayer(self.window, self.play_gif).place(x=0, y=0)
 
         if Configuration.frames and Configuration.quality is not None:
             frames = str(Configuration.frames)
@@ -67,25 +67,37 @@ class MainGui:
             Configuration.quality = "720x480"
         message = "StartStreamingServer," + Configuration.quality + "," + frames
         if DatabaseCheck(None, None, message, self.socket).start_Stream() is True:
-            print("well done")
+            thread = ExpectStream()
+            thread.start()
+            # TODO: GET STREAM
+        else:
+            if messagebox.askokcancel("Server Error", "Do you want to quit?"):
+                message = "Connection Terminate"
+                DatabaseCheck(None, None, message, self.socket).disconnect()
+                os._exit(0)
+
 
     def stop_stream(self):
-
-        print("stopping stream")
+        GifPlayer(self.window, self.play_gif).destroy()
+        Logger.info("stopping stream")
 
     def controller(self):
-        print("Controller")
+        Logger.info("Controller")
+        if ControllerControl.showController() is True:
+            ControllerThread = ControllerControl(self.socket)
+            ControllerThread.start()
+            Logger.info("Controller Thread working")
 
     def audio(self):
-        print("Audio")
+        Logger.info("Audio")
 
     def video(self):
-        print("Video")
+        Logger.info("Video")
         VideoWindow(self.window).run()
-        #self.window.mainloop()
 
     def about(self):
-        print("About")
+        Logger.info("About")
+        #TODO: Make a class to open a file in this executable
 
     def _screen_size(self):
         user32 = ctypes.windll.user32
@@ -93,14 +105,16 @@ class MainGui:
 
     def exit(self):
         message = "Connection Terminate"
-        if DatabaseCheck(None, None, message, self.socket).disconnect() is True:
-            sys.exit(0)
+        Logger.info("Exiting gui")
+        DatabaseCheck(None, None, message, self.socket).disconnect()
+        os._exit(0)
 
     def on_closing(self):
+        Logger.info("Exiting gui")
         if messagebox.askokcancel("Exit", "Do you want to quit?"):
             message = "Connection Terminate"
             DatabaseCheck(None, None, message, self.socket).disconnect()
-            sys.exit(0)
+            os._exit(0)
 
     def _resize_image(self, event):
         new_width = event.width
@@ -109,3 +123,4 @@ class MainGui:
         self.image = self.img_copy.resize((new_width, new_height))
         self.background_image = ImageTk.PhotoImage(self.image)
         self.background.configure(image=self.background_image)
+

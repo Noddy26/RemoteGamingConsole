@@ -2,11 +2,13 @@ from tkinter import Toplevel, IntVar, Button, Checkbutton, Label, DISABLED, NORM
 from tkinter import ttk
 
 from ClientGui.Configuration import Configuration
+from ClientGui.Logging.logger import Logger
 
 
 class VideoWindow:
 
     def __init__(self, window):
+        Logger.info("Opened video window")
         self.window = window
         self.sub = Toplevel(self.window)
         self.radioVar1 = IntVar(value=0)

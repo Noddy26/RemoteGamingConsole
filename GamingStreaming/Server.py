@@ -1,14 +1,16 @@
 import socket
+from threading import Thread
 from GamingStreaming.ClientThread import ClientThread
-from registerServer.Configuration import Configuration
+from Configuration import Configuration
 
 
-class Server():
+class Server(Thread):
 
     def __init__(self):
+        Thread.__init__(self)
         self.sock = socket.socket()
         self.host = Configuration.ipAddress
-        self.port = Configuration.portNumber
+        self.port = Configuration.Serverport
         self.buffer = 1024
         Configuration.server_running = True
 
@@ -21,7 +23,7 @@ class Server():
             threads = []
             print('Server started!')
             print('Waiting for clients...')
-            while Configuration.server_running:
+            while Configuration.server_running is True:
                 tcpServer.listen(4)
                 (conn, (ip, port)) = tcpServer.accept()
                 newthread = ClientThread(ip, port, conn)
@@ -34,6 +36,7 @@ class Server():
             self.sock.close()
 
     def stop(self):
+        print("Stopping Server")
         Configuration.server_running = False
         socket.socket(socket.AF_INET,
                       socket.SOCK_STREAM).connect((self.host, self.port))

@@ -1,7 +1,7 @@
 import base64
 from threading import Thread
 
-from Streamer import Streamer
+from GamingStreaming.Streamer import Streamer
 from Configuration import Configuration
 from Database import Database
 from time import sleep
@@ -23,14 +23,20 @@ class ClientThread(Thread):
         while True:
             data = self.connection.recv(2048).decode()
             if str(data).__contains__("StartStreamingServer"):
+                print(data)
                 video = str(data).split(',')
                 quality = video[1]
                 frames = video[2]
-                if Configuration.streaming == True:
-                    streamThread = Streamer(quality, frames)
-                    streamThread .start()
+                if Configuration.streaming_has_started == False:
+                    self.streamThread = Streamer(quality, frames)
+                    self.streamThread.start()
                     sleep(5)
-                    self.connection.send("StreamStarted".encode())
+                    if Configuration.streamStarted is True:
+                        print("stream started")
+                        self.connection.send("StreamStarted".encode())
+                    else:
+                        self.connection.send("Stream Error".encode())
+                        print("Stream Error")
                 else:
                     print("Stream already started")
                     self.connection.send("StreamalreadyStarted".encode())
@@ -65,11 +71,15 @@ class ClientThread(Thread):
                 else:
                     self.connection.send("No Ip Found in database".encode())
             elif str(data).__contains__("StreamStop"):
-                print("Stoping stream")
-                stop = Streamer(None, None).stop
-                stop.join()
+                print("Stopping stream")
+                if Configuration.streaming_has_started is True:
+                    Streamer(None, None).stop()
+                    self.streamThread.join()
             elif str(data).__contains__("Connection Terminate"):
                 print(data)
+                if Configuration.streaming_has_started is True:
+                    Streamer(None, None).stop()
+                    self.streamThread.join()
                 break
 
         print(self.ip)

@@ -1,13 +1,16 @@
 from tkinter import Tk, Label, Entry, Button, StringVar, messagebox
 from PIL import Image, ImageDraw, ImageTk, ImageFont
 
+from ClientGui.Configuration import Configuration
 from ClientGui.DatbaseCheck import DatabaseCheck
+from ClientGui.Logging.logger import Logger
 from ClientGui.MainGui import MainGui
 
 
 class Login:
 
     def __init__(self, sock):
+        Logger.info("Running Login page")
         self.window = Tk()
         self.socket = sock
         self.window.title("Login")
@@ -56,8 +59,11 @@ class Login:
     def buttonPressed(self):
         if self.username.get() is not None and self.password.get() is not None:
             if DatabaseCheck(self.username.get(), self.password.get(), None, self.socket).check_user() is True:
+                Logger.info("Details were Correct Logged in as user: " + self.username.get())
+                Configuration.Username = self.username.get()
                 MainGui(self.window, self.socket).run()
             else:
+                Logger.info("Incorrect Details")
                 messagebox.showerror("Incorrect Details", "The Details are incorrect")
                 self.username.set("")
                 self.password.set("")

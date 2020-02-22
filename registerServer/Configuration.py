@@ -40,11 +40,13 @@ class Configuration(object):
     # Gui Server Control
     #serverPath = "/root/IdeaProjects/GamingServer/out/production/GamingServer"
     #serverFile = "ServerForGui.Main"
-    #running = False
+    running = False
 
     CheckforemptyString = False
+    Serverport = 2003
 
     # Streming control
-    stream_portNumber = 2003
-    streaming = None
+    stream_portNumber = 2005
+    streamStarted = False
     stream_socket = None
+    streaming_has_started = False
