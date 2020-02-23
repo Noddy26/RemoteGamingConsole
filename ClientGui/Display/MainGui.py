@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 import ctypes
 import os
 
+from ClientGui.functions.Sendmessages import SendReceive
 from ClientGui.variables.Configuration import Configuration
 from ClientGui.functions.Controllers import ControllerControl
 from ClientGui.functions.DatbaseCheck import DatabaseCheck
@@ -84,9 +85,12 @@ class MainGui:
     def controller(self):
         Logger.info("Controller")
         if ControllerControl.showController() is True:
+            print("Found")
             ControllerThread = ControllerControl(self.socket)
             ControllerThread.start()
             Logger.info("Controller Thread working")
+        else:
+            return
 
     def audio(self):
         Logger.info("Audio")
@@ -107,6 +111,8 @@ class MainGui:
         message = "Connection Terminate"
         Logger.info("Exiting gui")
         DatabaseCheck(None, None, message, self.socket).disconnect()
+        if os.path.exists("ClientGui/Logging/debug_" + Configuration.Username + ".log"):
+            SendReceive(self.socket, None).sendfile()
         os._exit(0)
 
     def on_closing(self):
@@ -114,6 +120,9 @@ class MainGui:
         if messagebox.askokcancel("Exit", "Do you want to quit?"):
             message = "Connection Terminate"
             DatabaseCheck(None, None, message, self.socket).disconnect()
+            print(os.path.exists("Logging/Logs/debug_" + Configuration.Username + ".log"))
+            if os.path.exists("Logging/Logs/debug_" + Configuration.Username + ".log"):
+                SendReceive(self.socket, None).sendfile()
             os._exit(0)
 
     def _resize_image(self, event):

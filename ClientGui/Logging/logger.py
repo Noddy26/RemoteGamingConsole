@@ -1,5 +1,5 @@
 import logging
-
+import os
 from ClientGui.variables.Configuration import Configuration
 
 
@@ -7,6 +7,8 @@ class Logger(object):
     _static_logger = None
 
     def __init__(self, name='logger', level=logging.DEBUG):
+        if os.path.exists("Logging/logs") is False:
+            os.mkdir("Logging/logs")
         logger = logging.getLogger(name)
         logger.setLevel(level)
         formatter = logging.Formatter(Configuration.Username + ': %(asctime)s:%(levelname)s:%(msg)s', )
@@ -14,6 +16,10 @@ class Logger(object):
         fh.setFormatter(formatter)
         logger.addHandler(fh)
         Logger._static_logger = logger
+
+    def shutdownLogger(self):
+        print("Log is being stopped")
+        logging.shutdown()
 
     @staticmethod
     def debug(msg):
@@ -37,5 +43,5 @@ class Logger(object):
 
     def _logfile(self):
         file = 'debug_' + Configuration.Username + '.log'
-        fh = logging.FileHandler("Logging/" + file)
+        fh = logging.FileHandler("Logging/logs/" + file)
         return fh

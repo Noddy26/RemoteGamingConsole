@@ -177,11 +177,14 @@ class Database:
                 # return False
         try:
             cursor = connection.cursor()
-            check = cursor.execute(sql)
-            if check is None:
-                return False
+            cursor.execute(sql)
+            data = cursor.fetchall()
+            if data is None:
+                return None
             else:
-                return True
+                for each in data:
+                    user = each.replace(",", "").replace("(", "").replace(")", "").trim()
+                    return user
         except (MySQLdb.Error, MySQLdb.Warning) as e:
             print("Error")
             print(e)
