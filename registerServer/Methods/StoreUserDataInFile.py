@@ -1,8 +1,8 @@
 import base64
 import os
 
-from registerServer.Configuration import Configuration
-from registerServer.Methods.SendEmail import SendEmail
+from Configuration import Configuration
+from Methods.SendEmail import SendEmail
 
 
 class StoreDataInFile:
@@ -15,7 +15,7 @@ class StoreDataInFile:
         self.email = email
 
     def run(self):
-        SQLcommand = "INSERT INTO %s(id, username, password, email, ipAddress, login) VALUES (NULL, '%s', '%s', '%s', NULL, 'False');" \
+        SQLcommand = "INSERT INTO %s(UserID, username, password, Email, ipAddress, login) VALUES (NULL, '%s', '%s', '%s', '', 'False');" \
                      % (Configuration.sqlusertable, self.username, self.password, self.email)
         filename = Configuration.adduserdir + self.username + ".txt"
         with open(filename, 'w') as f:

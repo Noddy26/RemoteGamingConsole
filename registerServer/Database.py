@@ -4,8 +4,8 @@ import MySQLdb
 import mysql.connector
 from mysql.connector import Error
 
-from registerServer.Configuration import Configuration
-from registerServer.Methods.StoreUserDataInFile import StoreDataInFile
+from Configuration import Configuration
+from Methods.StoreUserDataInFile import StoreDataInFile
 
 
 class Database:
@@ -71,7 +71,7 @@ class Database:
                 print("MySQL connection is closed")
 
         password = base64.b64encode(self.password.encode("utf-8"))
-        checkpass = str(password).replace("'", "_").replace("=", "")
+        checkpass = str(password).replace("'", "_")
         query = """select * from %s where username = '%s' AND password = '%s';""" \
                 % (Configuration.sqlusertable, self.username, checkpass.strip())
         try:
@@ -115,7 +115,7 @@ class Database:
     def deleteUser(Check):
         User = Check.replace("user", "")
         global cursor, connection
-        query = "DELETE FROM %s WHERE id = '%s'" % (Configuration.sqlusertable, User)
+        query = "DELETE FROM %s WHERE UserID = '%s'" % (Configuration.sqlusertable, User)
         try:
             connection = mysql.connector.connect(host=Configuration.sqlhost, database=Configuration.sqldatabase,
                                                  user=Configuration.sqluser, password=Configuration.sqlpassword)
@@ -183,7 +183,7 @@ class Database:
                 return None
             else:
                 for each in data:
-                    user = each.replace(",", "").replace("(", "").replace(")", "").trim()
+                    user = str(each).replace(",", "").replace("(", "").replace(")", "").strip()
                     return user
         except (MySQLdb.Error, MySQLdb.Warning) as e:
             print("Error")

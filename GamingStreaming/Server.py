@@ -38,6 +38,4 @@ class Server(Thread):
     def stop(self):
         print("Stopping Server")
         Configuration.server_running = False
-        socket.socket(socket.AF_INET,
-                      socket.SOCK_STREAM).connect((self.host, self.port))
         self.sock.close()

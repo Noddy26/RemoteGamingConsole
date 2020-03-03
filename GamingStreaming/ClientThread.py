@@ -29,21 +29,17 @@ class ClientThread(Thread):
                 video = str(data).split(',')
                 quality = video[1]
                 frames = video[2]
-                if Configuration.streaming_has_started == False:
+                if Configuration.streaming_has_started is False or Configuration.server_running is False:
                     self.streamThread = Streamer(quality, frames)
                     self.streamThread.start()
                     sleep(5)
-                    if Configuration.streamStarted is True:
-                        print("stream started")
-                        self.connection.send("StreamStarted".encode())
-                    else:
-                        self.connection.send("Stream Error".encode())
-                        print("Stream Error")
+                    print("stream started")
+                    self.connection.send("StreamStarted".encode())
                 else:
                     print("Stream already started")
                     self.connection.send("StreamalreadyStarted".encode())
-            elif str(data).__contains__("-"):
-                parts = str(data).split("-")
+            elif str(data).__contains__("+"):
+                parts = str(data).split("+")
                 self.username = parts[0]
                 raw_password = parts[1]
                 if self.username is not None and parts[1] is not None:
@@ -64,10 +60,10 @@ class ClientThread(Thread):
                     self.connection.send("Access Denied".encode())
             elif str(data).__contains__("."):
                 self.ip = data
-                sql = "SELECT ipAddress FROM userdetails Where ipAddress='" + data + "';"
+                sql = "SELECT username FROM userdetails Where ipAddress='" + data + "';"
                 user_loggedin = "UPDATE userdetails set login = 'True' WHERE ipAddress='" + data + "';"
                 user = Database.checkIp(sql)
-                if user is not "":
+                if user is not None:
                     self.User = user
                     print("IP Found in database")
                     self.connection.send("IP Found in database".encode())
@@ -93,12 +89,12 @@ class ClientThread(Thread):
                 print("poo")
                 # this is for get the debug file
 
-        print(self.ip)
         if self.ip is None:
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE username='" + self.username + "';"
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
-            with open('', 'wb') as f:
+            logfile = "User_logs/debug_" + self.User + ".log"
+            with open(logfile, 'wb') as f:
                 file = self.connection.recv(1024)
                 if not file:
                     print("No debug file received")
@@ -108,8 +104,8 @@ class ClientThread(Thread):
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE ipAddress='" + self.ip + "';"
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
-            file = self.connection.recv(1024)
-            with open('', 'wb') as f:
+            logfile = "User_logs/debug_" + self.User + ".log"
+            with open(logfile, 'wb') as f:
                 file = self.connection.recv(1024)
                 if not file:
                     print("No debug file received")

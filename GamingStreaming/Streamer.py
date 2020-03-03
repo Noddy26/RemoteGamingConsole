@@ -1,42 +1,48 @@
-import time
 import picamera
+import io
+import subprocess
 import socket
 from threading import Thread
-
-from Configuration.Configuartion import Configuration
+from Configuration import Configuration
+from GamingStreaming.videoFeed import VideoFeed
 
 
 class Streamer(Thread):
 
-    def __init__(self, frames, quality):
+    def __init__(self, quality, frames):
         Thread.__init__(self)
-        Configuration.streaming_has_started = True
-        self.host = Configuration.ipAddress
-        self.port = Configuration.stream_portNumber
-        self.frames = frames
         self.quality = quality
+        self.frames = frames
+        self.sock = socket.socket()
+        self.host = Configuration.ipAddress
+        self.port = 2005
+        self.buffer = 1024
+        Configuration.server_running = True
 
     def run(self):
-        global hdmi_input
+        global threads
         try:
-            print("Turning on hdmi input")
-            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            self.socket.bind((self.host, self.port))
-            while Configuration.streaming_has_started == True:
-                with picamera.PiCamera(resolution=self.quality, framerate=int(self.frames)) as hdmi_input:
-                    Configuration.streamStarted = True
-                    hdmi_input.start_preview()
-                    time.sleep(2)
-                    hdmi_input.start_recording(self.socket, format='h264')
-        finally:
-            print("Stream finished or Error occurred")
-            Configuration.streaming_has_started = False
-            Configuration.streamStarted = False
-            self.socket.close()
-
+            tcpServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            tcpServer.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            tcpServer.bind((self.host, self.port))
+            threads = []
+            print('Stream Server started!')
+            print('Waiting for the client...')
+            while Configuration.server_running is True:
+                tcpServer.listen(4)
+                (conn, (ip, port)) = tcpServer.accept()
+                newthread = VideoFeed(self.quality, self.frames, ip, port, conn)
+                newthread.start()
+                threads.append(newthread)
+        except():
+            for t in threads:
+                t.join()
+            self.sock.close()
 
     def stop(self):
-        print("Stopping stream")
-        Configuration.streaming_has_started = False
-        self.socket.close()
+        print("Stopping Stream Server")
+        Configuration.server_running = False
+        self.sock.close()
+        for t in threads:
+            t.join()
+        self.sock.close()

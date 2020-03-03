@@ -11,7 +11,7 @@ class DatabaseCheck:
         self.message = message
 
     def check_user(self):
-        message = self.user + "-" + self.password
+        message = self.user + "+" + self.password
         SendReceive(self.sock, message).send()
         mess = SendReceive(self.sock, None).receive()
         if mess == "Access Granted":
@@ -24,7 +24,7 @@ class DatabaseCheck:
     def start_Stream(self):
         SendReceive(self.sock, self.message).send()
         mess = SendReceive(self.sock, None).receive()
-        if mess == "StreamStarted":
+        if mess == "StreamStarted" or mess == "StreamalreadyStarted":
             Logger.error("Stream has started")
             # TODO: START TIMER HERE FOR WHEN STREAM HAS STARTED
             return True

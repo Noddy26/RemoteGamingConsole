@@ -35,7 +35,7 @@ class ControllerControl(Thread):
             for each in devices.gamepads:
                 if each is not None:
                     if str(each).__contains__("Microsoft"):
-                        control = "Xbox Controller"
+                        control = "Xbox Controller Detected"
                         Logger.info(control)
                         messagebox.showinfo(title="Controller Found", message=control + " found")
                         return True

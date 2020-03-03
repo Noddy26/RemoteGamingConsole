@@ -1,4 +1,5 @@
 from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
+import cv2
 from PIL import Image, ImageTk
 import ctypes
 import os
@@ -23,8 +24,8 @@ class MainGui:
         self.window.title("Gaming Server")
         self.image_file = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\Playstation-Wallpaper-20-1920x1080.jpg"
         self.play_gif = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\Fmh8EMk.gif"
-        height, width = self._screen_size()
-        self.window.geometry("%sx%s" % (height, width))
+        self.height, self.width = self._screen_size()
+        self.window.geometry("%sx%s" % (self.height, self.width))
 
     def run(self):
         print("Starting Main Gui")
@@ -59,7 +60,9 @@ class MainGui:
         self.window.mainloop()
 
     def start_stream(self):
-        GifPlayer(self.window, self.play_gif).place(x=0, y=0)
+
+        new = GifPlayer(self.window, self.play_gif)
+        new.start()
 
         if Configuration.frames and Configuration.quality is not None:
             frames = str(Configuration.frames)

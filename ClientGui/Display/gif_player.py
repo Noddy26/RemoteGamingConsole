@@ -1,9 +1,12 @@
 from tkinter import *
 from PIL import Image, ImageTk
+from threading import Thread
 
-class GifPlayer(Label):
+
+class GifPlayer(Thread, Label):
 
     def __init__(self, frame, filename):
+        Thread.__init__(self)
         gif = Image.open(filename)
         seq = []
         try:
@@ -37,4 +40,3 @@ class GifPlayer(Label):
         if self.index == len(self.frames):
             self.index = 0
         self.cancel = self.after(self.delay, self.run)
-
