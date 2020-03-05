@@ -112,3 +112,7 @@ class ClientThread(Thread):
                     print("No debug file received")
                 else:
                     f.write(file)
+
+    def stop(self):
+        self.connection.close()
+        self.join()
