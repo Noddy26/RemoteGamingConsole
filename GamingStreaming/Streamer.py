@@ -33,6 +33,7 @@ class Streamer(Thread):
                 (conn, (ip, port)) = tcpServer.accept()
                 newthread = VideoFeed(self.quality, self.frames, ip, port, conn)
                 newthread.start()
+                newthread.setDaemon(True)
                 threads.append(newthread)
         except():
             for t in threads:
@@ -42,7 +43,6 @@ class Streamer(Thread):
     def stop(self):
         print("Stopping Stream Server")
         Configuration.server_running = False
-        self.sock.close()
         for t in threads:
-            t.join()
+            t.stop()
         self.sock.close()

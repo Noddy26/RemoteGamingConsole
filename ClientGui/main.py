@@ -1,13 +1,10 @@
 import errno
 from tkinter import messagebox
-
 from ClientGui.variables.Configuration import Configuration
 from ClientGui.Logging.logger import Logger
 from ClientGui.Display.Login import Login
 from ClientGui.Display.MainGui import MainGui
 import socket
-
-
 from ClientGui.functions.Sendmessages import SendReceive
 
 

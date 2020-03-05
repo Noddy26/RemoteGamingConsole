@@ -32,6 +32,7 @@ class ClientThread(Thread):
                 if Configuration.streaming_has_started is False or Configuration.server_running is False:
                     self.streamThread = Streamer(quality, frames)
                     self.streamThread.start()
+                    self.streamThread.setDaemon(True)
                     sleep(5)
                     print("stream started")
                     self.connection.send("StreamStarted".encode())

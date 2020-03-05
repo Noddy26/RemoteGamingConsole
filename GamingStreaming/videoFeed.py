@@ -1,8 +1,6 @@
-import picamera
-import io
-import subprocess
-import socket
+import pickle
 import struct
+import cv2
 from threading import Thread
 from Configuration import Configuration
 
@@ -14,34 +12,36 @@ class VideoFeed(Thread):
         print("Starting stream")
         self.connection = conn
         new = quality.split("x")
-        first = new[0]
-        second = new[1]
+        self.running = True
+        self.first = new[0]
+        self.second = new[1]
         print("New Streaming Thread started for " + ip + ":" + str(port))
-        self.camera = picamera.PiCamera(resolution=(int(first), int(second)), framerate=frames)
+        try:
+            self.hdmi = cv2.VideoCapture(0)
+            self.hdmi.set(3, self.first)
+            self.hdmi.set(4, self.second)
+            self.hdmi.set(5, frames)
+            self.encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
+            self.img_counter = 0
+        except:
+            self.hdmi.release()
+            self.connection.close()
 
     def run(self):
-        global hdmi_input
-        while True:
-            print("Turning on hdmi input")
+        while self.running:
             try:
-                stream = io.BytesIO()
-                for _ in self.camera.capture_continuous(stream, 'jpeg'):
-                    self.connection.write(struct.pack('<L', stream.tell()))
-                    self.connection.flush()
-                    stream.seek(0)
-                    self.connection.write(stream.read())
-                    stream.seek(0)
-                    stream.truncate()
-                # gst - launch - 1.0
-                # filesrc
-                # location = test.ogg ! oggdemux
-                # name = demuxer
-                # demuxer. ! queue ! vorbisdec ! audioconvert ! audioresample ! autoaudiosink
-                # demuxer. ! queue ! theoradec ! autovideosink
-                # audio = subprocess.Popen(['gst-launch-1.0', '-v', 'fdsrc', '!', ''])
-            finally:
-                print("Stopping stream")
+                ret, frame = self.hdmi.read()
+                result, frame = cv2.imencode('.jpg', frame, self.encode_param)
+                data = pickle.dumps(frame, 0)
+                size = len(data)
+                self.connection.sendall(struct.pack(">L", size) + data)
+                self.img_counter += 1
+            except:
+                self.hdmi.release()
                 self.connection.close()
-                self.camera.stop_recording()
-                Configuration.streaming_has_started = False
                 return False
+
+    def stop(self):
+        print("Stopping stream socket")
+        self.running = False
+        self.join()

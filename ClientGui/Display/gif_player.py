@@ -5,7 +5,7 @@ from threading import Thread
 
 class GifPlayer(Thread, Label):
 
-    def __init__(self, frame, filename):
+    def __init__(self, frames, filename):
         Thread.__init__(self)
         gif = Image.open(filename)
         seq = []
@@ -24,7 +24,7 @@ class GifPlayer(Thread, Label):
         first = seq[0].convert('RGBA')
         self.frames = [ImageTk.PhotoImage(first)]
 
-        Label.__init__(self, frame, image=self.frames[-1])
+        Label.__init__(self, frames, image=self.frames[-1])
 
         temp = seq[0]
         for image in seq[1:]:

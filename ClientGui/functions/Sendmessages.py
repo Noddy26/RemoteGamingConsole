@@ -30,4 +30,3 @@ class SendReceive:
             os.remove(debug_file + file_name)
         except OSError as e:
             Logger.error("Error: %s - %s." % (e.filename, e.strerror))
-

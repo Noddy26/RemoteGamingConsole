@@ -1,5 +1,5 @@
+import multiprocessing
 from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
-import cv2
 from PIL import Image, ImageTk
 import ctypes
 import os
@@ -61,8 +61,10 @@ class MainGui:
 
     def start_stream(self):
 
-        new = GifPlayer(self.window, self.play_gif)
-        new.start()
+        p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
+        p1.start()
+        print("passing by process")
+
 
         if Configuration.frames and Configuration.quality is not None:
             frames = str(Configuration.frames)
@@ -71,7 +73,7 @@ class MainGui:
             Configuration.quality = "720x480"
         message = "StartStreamingServer," + Configuration.quality + "," + frames
         if DatabaseCheck(None, None, message, self.socket).start_Stream() is True:
-            thread = ExpectStream()
+            thread = ExpectStream(self.window)
             thread.start()
             # TODO: GET STREAM
         else:
@@ -135,4 +137,3 @@ class MainGui:
         self.image = self.img_copy.resize((new_width, new_height))
         self.background_image = ImageTk.PhotoImage(self.image)
         self.background.configure(image=self.background_image)
-

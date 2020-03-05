@@ -1,7 +1,7 @@
 class Configuration(object):
 
     #ip Address of Server
-    ipAddress = "95.44.241.122"
+    ipAddress = "192.168.1.13"
     portNumber = 2003
 
     Username = "User"
