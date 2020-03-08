@@ -20,7 +20,9 @@ class ControllerControl(Thread):
                 events = get_gamepad()
                 for event in events:
                     if event.state is not 0:
-                        SendReceive(self.socket, event.code + "-" + str(event.state)).send()
+                        data = event.code + "_" + str(event.state)
+                        self.check(data)
+
         except:
             Logger.error("Controller disconnected by user")
 
@@ -43,3 +45,12 @@ class ControllerControl(Thread):
             Logger.info("No controller Found")
             messagebox.showinfo(title="Controller", message="Controller not found")
             return False
+
+    def check(self, data):
+        dictionary = {"ABS_HAT0Y_-1": 1, "ABS_HAT0Y_1": 2, "ABS_HAT0X_-1": 3, "ABS_HAT0X_1": 4, "BTN_THUMBL_1": 5,
+                      "BTN_TL_1": 6, "BTN_START_1": 7, "home_button_1": 8, "BTN_SELECT_1": 9, "BTN_TR_1": 10,
+                      "BTN_THUMBR_1": 11, "BTN_WEST_1": 12, "BTN_NORTH_1": 13, "BTN_EAST_1": 14, "BTN_SOUTH_1": 15}
+
+        if data in dictionary:
+            data = dictionary[data]
+            SendReceive(self.socket, data).send()

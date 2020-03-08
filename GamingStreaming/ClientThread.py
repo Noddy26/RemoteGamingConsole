@@ -1,6 +1,7 @@
 import base64
 from threading import Thread
 
+from GamingStreaming.ControllerControl import ControllerControl
 from GamingStreaming.Streamer import Streamer
 from Configuration import Configuration
 from Database import Database
@@ -85,9 +86,9 @@ class ClientThread(Thread):
                         Streamer(None, None).stop()
                         self.streamThread.join()
                     break
-                elif str(data).__contains__("_") is True:
-                    print(data)
+                elif (type(data) is int):
                     print("Buttons")
+                    ControllerControl(data)
                 elif str(data).__contains__("poo") is True:
                     print("poo")
                     # this is for get the debug file

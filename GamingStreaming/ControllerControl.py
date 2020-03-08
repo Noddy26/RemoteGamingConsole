@@ -3,10 +3,12 @@ import pyfirmata
 class ControllerControl():
 
     def __init__(self, data):
-        self.data = data
         self.ardunio = pyfirmata.Arduino('/dev/ttyACM0')
+        data.split = data.split("_")
+        new_data = data.split[1]
+        self.run(new_data)
 
-    def run(self):
+    def run(self, data):
         switcher = {
             1: self.DpadUp(),
             2: self.DpadDown(),
@@ -24,9 +26,10 @@ class ControllerControl():
             14: self.BButton(),
             15: self.AButton()
         }
-        print(switcher.get(self.data, "Invalid Button Press"))
+        print(switcher.get(data, "Invalid Button Press"))
 
     def DpadUp(self):
+        print("Dpad up")
         pinA0 = self.ardunio.get_pin('a:0:o')
         pinA0.write(0)
 
