@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-
+from time import sleep
 
 class ControllerControl():
 
@@ -29,45 +29,75 @@ class ControllerControl():
     def DpadUp(self):
         print("Dpad up")
         GPIO.output(26, 0)
+        sleep(0.2)
+        GPIO.output(26, 1)
 
     def DpadDown(self):
         GPIO.output(21, 0)
+        sleep(0.2)
+        GPIO.output(21, 1)
 
     def DpadLeft(self):
         GPIO.output(12, 0)
+        sleep(0.2)
+        GPIO.output(12, 1)
 
     def DpadRight(self):
         GPIO.output(7, 0)
+        sleep(0.2)
+        GPIO.output(7, 1)
 
     def L3Button(self):
         GPIO.output(8, 0)
+        sleep(0.2)
+        GPIO.output(8, 1)
 
     def L1Button(self):
         GPIO.output(25, 0)
+        sleep(0.2)
+        GPIO.output(25, 1)
 
     def selectButton(self):
         GPIO.output(24, 0)
+        sleep(0.2)
+        GPIO.output(24, 1)
 
     def homeButton(self):
         GPIO.output(23, 0)
+        sleep(0.2)
+        GPIO.output(23, 1)
 
     def startButton(self):
         GPIO.output(2, 0)
+        sleep(0.2)
+        GPIO.output(2, 1)
 
     def R1Button(self):
         GPIO.output(3, 0)
+        sleep(0.2)
+        GPIO.output(3, 1)
 
     def R3Button(self):
         GPIO.output(4, 0)
+        sleep(0.2)
+        GPIO.output(4, 1)
 
     def XButton(self):
         GPIO.output(17, 0)
+        sleep(0.2)
+        GPIO.output(17, 1)
 
     def YButton(self):
         GPIO.output(27, 0)
+        sleep(0.2)
+        GPIO.output(27, 1)
 
     def BButton(self):
         GPIO.output(22, 0)
+        sleep(0.2)
+        GPIO.output(22, 1)
 
     def AButton(self):
         GPIO.output(9, 0)
+        sleep(0.2)
+        GPIO.output(9, 1)

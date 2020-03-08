@@ -4,6 +4,7 @@ import pyfirmata
 from threading import Thread
 
 from GamingStreaming.ControllerControl import ControllerControl
+from GamingStreaming.GpioControl import GpioControl
 from GamingStreaming.Streamer import Streamer
 from Configuration import Configuration
 from Database import Database
@@ -20,7 +21,6 @@ class ClientThread(Thread):
         self.username = None
         self.ip = None
         self.User = None
-        self.Arduino = None
         self.Handler_running = True
         print("New Thread started for " + ip + ":" + str(port))
 
@@ -36,6 +36,7 @@ class ClientThread(Thread):
                     quality = video[1]
                     frames = video[2]
                     if Configuration.streaming_has_started is False or Configuration.server_running is False:
+                        GpioControl().turnOnXbox()
                         self.streamThread = Streamer(quality, frames)
                         self.streamThread.setDaemon(True)
                         self.streamThread.start()
@@ -90,11 +91,7 @@ class ClientThread(Thread):
                         self.streamThread.join()
                     break
                 elif str(data).__contains__("_") is True:
-                    print(data)
-                    if self.Arduino is not None:
-                        ControllerControl(data)
-                    else:
-                        messagebox.showerror("ERROR", "Controller Error")
+                    ControllerControl(data)
                 elif str(data).__contains__("hello") is True:
                     print("poo")
             except:

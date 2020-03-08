@@ -8,11 +8,14 @@ from Methods.ConfirmationEmail import ConfirmationEmail
 from Methods.ServerControl import ServerControl
 import os
 
+from GamingStreaming.GpioControl import GpioControl
+
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     session['logged_in'] = False
+    GpioControl().gpiohigh()
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
     return render_template('index.html')
