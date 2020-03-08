@@ -1,5 +1,5 @@
 import errno
-from tkinter import messagebox
+from tkinter import Tk, messagebox
 from ClientGui.variables.Configuration import Configuration
 from ClientGui.Logging.logger import Logger
 from ClientGui.Display.Login import Login
@@ -12,6 +12,7 @@ def main():
     Logger()
     sock = socket.socket()
     sock.connect((Configuration.ipAddress, Configuration.portNumber))
+    #sock.setblocking(False)
 
     host_name = socket.gethostname()
     host_ip = socket.gethostbyname(host_name)
@@ -31,8 +32,10 @@ if __name__ == '__main__':
     except socket.error as serr:
         Logger.error(serr)
         if serr.errno == errno.ECONNREFUSED:
+            Tk().withdraw()
             messagebox.showerror("ERROR", "Can not connect to server")
         else:
+            Tk().withdraw()
             messagebox.showerror("ERROR", "Something went wrong with the server")
     except Exception as e:
         Logger.error(e)

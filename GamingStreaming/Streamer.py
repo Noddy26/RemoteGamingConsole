@@ -32,8 +32,8 @@ class Streamer(Thread):
                 tcpServer.listen(4)
                 (conn, (ip, port)) = tcpServer.accept()
                 newthread = VideoFeed(self.quality, self.frames, ip, port, conn)
-                newthread.start()
                 newthread.setDaemon(True)
+                newthread.start()
                 threads.append(newthread)
         except():
             for t in threads:

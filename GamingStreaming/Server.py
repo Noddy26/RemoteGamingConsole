@@ -28,9 +28,13 @@ class Server(Thread):
                 (conn, (ip, port)) = self.sock.accept()
                 newthread = ClientThread(ip, port, conn)
                 newthread.start()
-                newthread.setDaemon(True)
                 print("starting")
                 threads.append(newthread)
+                for thread in threads:
+                    if thread.is_alive():
+                        pass
+                    else:
+                        thread.join()
         finally:
             for t in threads:
                 t.join()
