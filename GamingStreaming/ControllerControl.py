@@ -1,15 +1,13 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
+
+
 class ControllerControl():
 
     def __init__(self, data):
-        pins = [2, 3, 4, 7, 8, 9, 12, 17, 21, 22, 23, 24, 25, 26, 27]
-        GPIO.setmode(GPIO.BCM)
-        for each in pins:
-            GPIO.setup(each, GPIO.OUT)
-            GPIO.output(each, 1)
         print("Controller Class")
+        GPIO.setmode(GPIO.BCM)
         self.check(data)
 
     def check(self, data):

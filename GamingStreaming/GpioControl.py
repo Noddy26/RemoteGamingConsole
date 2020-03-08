@@ -1,22 +1,26 @@
 import RPi.GPIO as GPIO
 import time
 
+from Configuration import Configuration
+
 
 class GpioControl():
 
     def __init__(self):
+        GPIO.setmode(GPIO.BCM)
         print("Gpio Control")
 
     def gpiohigh(self):
-        pins = [2, 3, 4, 7, 8, 9, 12, 17, 21, 22, 23, 24, 25, 26, 27]
-        GPIO.setmode(GPIO.BCM)
-        for each in pins:
-            GPIO.setup(each, GPIO.OUT)
-            GPIO.output(each, 1)
+        if Configuration.pins_high is False:
+            Configuration.pins_high = True
+            pins = [2, 3, 4, 7, 8, 9, 12, 17, 21, 22, 23, 24, 25, 26, 27]
+            for each in pins:
+                GPIO.setup(each, GPIO.OUT)
+                GPIO.output(each, 1)
 
     def gpiolow(self):
+        Configuration.pins_high = False
         pins = [2, 3, 4, 7, 8, 9, 12, 17, 21, 22, 23, 24, 25, 26, 27]
-        GPIO.setmode(GPIO.BCM)
         for each in pins:
             GPIO.setup(each, GPIO.OUT)
             GPIO.output(each, 0)

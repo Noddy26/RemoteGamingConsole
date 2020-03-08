@@ -50,3 +50,6 @@ class Configuration(object):
     streamStarted = False
     stream_socket = None
     streaming_has_started = False
+
+    # gpio
+    pins_high = False
