@@ -90,7 +90,6 @@ class MainGui:
     def controller(self):
         Logger.info("Controller")
         if ControllerControl.showController() is True:
-            print("Found")
             ControllerThread = ControllerControl(self.socket)
             ControllerThread.start()
             Logger.info("Controller Thread working")
