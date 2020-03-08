@@ -1,4 +1,6 @@
-import base64
+from tkinter import messagebox
+
+import pyfirmata
 from threading import Thread
 
 from GamingStreaming.ControllerControl import ControllerControl
@@ -18,6 +20,7 @@ class ClientThread(Thread):
         self.username = None
         self.ip = None
         self.User = None
+        self.Arduino = None
         self.Handler_running = True
         print("New Thread started for " + ip + ":" + str(port))
 
@@ -86,12 +89,14 @@ class ClientThread(Thread):
                         Streamer(None, None).stop()
                         self.streamThread.join()
                     break
-                elif (type(data) is int):
-                    print("Buttons")
-                    ControllerControl(data)
-                elif str(data).__contains__("poo") is True:
+                elif str(data).__contains__("_") is True:
+                    print(data)
+                    if self.Arduino is not None:
+                        ControllerControl(data)
+                    else:
+                        messagebox.showerror("ERROR", "Controller Error")
+                elif str(data).__contains__("hello") is True:
                     print("poo")
-                    # this is for get the debug file
             except:
                 self.stop()
 
