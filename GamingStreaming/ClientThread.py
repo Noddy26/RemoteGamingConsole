@@ -9,7 +9,7 @@ from GamingStreaming.Streamer import Streamer
 from Configuration import Configuration
 from Database import Database
 from time import sleep
-
+import os
 
 class ClientThread(Thread):
 
@@ -101,25 +101,43 @@ class ClientThread(Thread):
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
             logfile = Configuration.logDir + "debug_" + self.User + ".log"
-            with open(logfile, 'wb') as f:
-                file = self.connection.recv(4024)
-                if not file:
-                    print("No debug file received")
-                else:
-                    print("Writing to file")
-                    f.write(file)
+            if os.path.exists(logfile):
+                with open(logfile, 'a') as f:
+                    file = self.connection.recv(4024)
+                    if not file:
+                        print("No debug file received")
+                    else:
+                        print("Writing to file")
+                        f.write(file)
+            else:
+                with open(logfile, 'wb') as f:
+                    file = self.connection.recv(4024)
+                    if not file:
+                        print("No debug file received")
+                    else:
+                        print("Writing to file")
+                        f.write(file)
         else:
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE ipAddress='" + self.ip + "';"
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
             logfile = Configuration.logDir + "debug_" + self.User + ".log"
-            with open(logfile, 'wb') as f:
-                file = self.connection.recv(4024)
-                if not file:
-                    print("No debug file received")
-                else:
-                    print("Writing to file")
-                    f.write(file)
+            if os.path.exists(logfile):
+                with open(logfile, 'a') as f:
+                    file = self.connection.recv(4024)
+                    if not file:
+                        print("No debug file received")
+                    else:
+                        print("Writing to file")
+                        f.write(file)
+            else:
+                with open(logfile, 'wb') as f:
+                    file = self.connection.recv(4024)
+                    if not file:
+                        print("No debug file received")
+                    else:
+                        print("Writing to file")
+                        f.write(file)
 
     def stop(self):
         print("Client Handler for " + str(self.User) + " Unexpectedly stopped")
