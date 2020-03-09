@@ -21,11 +21,6 @@ class Logger(object):
         Logger._static_logger = logger
 
     def shutdownLogger(self):
-        Configuration.end_time = time.time()
-        Total_time = Configuration.start_time - Configuration.end_time
-        with open("Logging/logs/" + self.file, "w") as f:
-            f.write("Total Time online: %s" % Total_time)
-            f.write("*****************End of Log********************")
         print("Log is being stopped")
         logging.shutdown()
 
@@ -52,5 +47,5 @@ class Logger(object):
     def _logfile(self):
         fh = logging.FileHandler("Logging/logs/" + self.file)
         with open("Logging/logs/" + self.file, "w") as f:
-            f.write("*****************Start of Log********************")
+            f.write("*****************Start of Log********************\n")
         return fh

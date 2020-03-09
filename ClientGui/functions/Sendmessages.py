@@ -1,3 +1,5 @@
+import time
+
 from ClientGui.Logging.logger import Logger
 from ClientGui.variables.Configuration import Configuration
 import os
@@ -18,9 +20,15 @@ class SendReceive:
         return mess
 
     def sendfile(self):
-        Logger.info("Sending debug file to server")
         debug_file = "Logging/Logs"
         file_name = "/debug_" + Configuration.Username + ".log"
+        Configuration.end_time = time.time()
+        Total_time = Configuration.start_time - Configuration.end_time
+        Logger.info("Sending debug file to server")
+        with open("Logging/logs/" + file_name, "a") as f:
+            f.write("Total Time online: %s" % Total_time)
+            f.write("\n*****************End of Log********************")
+        f.close()
         with open(debug_file + file_name, 'rb') as f:
             sendData = f.read()
             print(sendData)

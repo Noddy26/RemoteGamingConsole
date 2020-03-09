@@ -91,7 +91,7 @@ class ClientThread(Thread):
                     break
                 elif str(data).__contains__("_") is True:
                     ControllerControl(data)
-                elif str(data).__contains__("b'") is True:
+                elif str(data).__contains__("*****************Start of Log********************") is True:
                     break
             except:
                 self.stop()
@@ -102,7 +102,7 @@ class ClientThread(Thread):
             self.connection.send("Logged out".encode())
             logfile = Configuration.logDir + "debug_" + self.User + ".log"
             if os.path.exists(logfile):
-                with open(logfile, 'a') as f:
+                with open(logfile, 'ab') as f:
                     file = self.connection.recv(4024)
                     if not file:
                         print("No debug file received")
@@ -123,7 +123,7 @@ class ClientThread(Thread):
             self.connection.send("Logged out".encode())
             logfile = Configuration.logDir + "debug_" + self.User + ".log"
             if os.path.exists(logfile):
-                with open(logfile, 'a') as f:
+                with open(logfile, 'ab') as f:
                     file = self.connection.recv(4024)
                     if not file:
                         print("No debug file received")

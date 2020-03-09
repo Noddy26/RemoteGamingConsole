@@ -1,7 +1,10 @@
 import struct
 import socket
 import pickle
+import tkinter
 from threading import Thread
+
+import PIL
 from PIL import Image, ImageTk
 import tkinter as tki
 import threading
@@ -40,21 +43,15 @@ class ExpectStream(Thread):
 
             frame = pickle.loads(frame_data, fix_imports=True, encoding="bytes")
             frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
-            #img = Image.fromarray(frame)
-            #width, height, channels = img.shape
-            #w = int(width * 3)
-            #h = int(height * 1)
-            #dim = (w, h)
-            #image_scaled = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-            image = self._scale(frame)
-            cv2.imshow('ImageWindow', image)
-            cv2.waitKey(1)
-            # stream = ImageTk.PhotoImage(image=Image.fromarray(frame))
-
-            # canvas = tk.Canvas(self.window, width=400, height=400)
-            # canvas.pack()
-            # canvas.create_image(400, 400, anchor="nw", image=stream)
-            # canvas.place(x=0, y=0)
+            #height, width, no_channels = frame.shape
+            canvas = tkinter.Canvas(self.window, width=1000, height=800)
+            canvas.pack()
+            photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(frame))
+            canvas.create_image(0, 0, image=photo, anchor=tkinter.NW)
+            canvas.place(x=0, y=0)
+            #cv2.namedWindow("preview")
+            #cv2.imshow('ImageWindow', image)
+            #cv2.waitKey(1)
 
     def stop(self):
         print("hello")
