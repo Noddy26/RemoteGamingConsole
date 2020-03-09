@@ -29,7 +29,9 @@ class ClientThread(Thread):
         while self.Handler_running:
             try:
                 data = self.connection.recv(2048).decode()
-                if str(data).__contains__("StartStreamingServer"):
+                if str(data).__contains__("_") is True:
+                    ControllerControl(data)
+                elif str(data).__contains__("StartStreamingServer"):
                     print(data)
                     video = str(data).split(',')
                     quality = video[1]
@@ -89,8 +91,6 @@ class ClientThread(Thread):
                         Streamer(None, None).stop()
                         self.streamThread.join()
                     break
-                elif str(data).__contains__("_") is True:
-                    ControllerControl(data)
                 elif str(data).__contains__("*****************Start of Log********************") is True:
                     break
             except:
