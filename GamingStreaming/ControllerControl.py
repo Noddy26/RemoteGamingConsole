@@ -6,7 +6,6 @@ from time import sleep
 class ControllerControl():
 
     def __init__(self, data):
-        print("Controller Class")
         GPIO.setmode(GPIO.BCM)
         self.check(data)
 
@@ -25,7 +24,6 @@ class ControllerControl():
             function()
 
     def DpadUp(self):
-        print("Dpad up")
         GPIO.output(26, 0)
         sleep(0.2)
         GPIO.output(26, 1)

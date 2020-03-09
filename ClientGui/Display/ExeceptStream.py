@@ -46,7 +46,8 @@ class ExpectStream(Thread):
             #h = int(height * 1)
             #dim = (w, h)
             #image_scaled = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-            cv2.imshow('ImageWindow', frame)
+            image = self._scale(frame)
+            cv2.imshow('ImageWindow', image)
             cv2.waitKey(1)
             # stream = ImageTk.PhotoImage(image=Image.fromarray(frame))
 
@@ -57,3 +58,13 @@ class ExpectStream(Thread):
 
     def stop(self):
         print("hello")
+
+    def _scale(self, image):
+        width, height, channels = image.shape
+        w = int(width * 2)
+        h = int(height * 1.5)
+        dim = (w, h)
+        image_scaled = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
+        # cv.imshow('', image_scaled)
+        # cv2.waitKey(0)
+        return image_scaled

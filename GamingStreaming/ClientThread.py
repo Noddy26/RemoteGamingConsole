@@ -29,7 +29,6 @@ class ClientThread(Thread):
         while self.Handler_running:
             try:
                 data = self.connection.recv(2048).decode()
-                print(data)
                 if str(data).__contains__("StartStreamingServer"):
                     print(data)
                     video = str(data).split(',')
@@ -92,8 +91,8 @@ class ClientThread(Thread):
                     break
                 elif str(data).__contains__("_") is True:
                     ControllerControl(data)
-                elif str(data).__contains__("hello") is True:
-                    print("poo")
+                elif str(data).__contains__("b'") is True:
+                    break
             except:
                 self.stop()
 
@@ -101,23 +100,25 @@ class ClientThread(Thread):
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE username='" + self.username + "';"
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
-            logfile = "User_logs/debug_" + self.User + ".log"
+            logfile = Configuration.logDir + "User_logs/debug_" + self.User + ".log"
             with open(logfile, 'wb') as f:
-                file = self.connection.recv(1024)
+                file = self.connection.recv(4024)
                 if not file:
                     print("No debug file received")
                 else:
+                    print("Writing to file")
                     f.write(file)
         else:
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE ipAddress='" + self.ip + "';"
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
-            logfile = "User_logs/debug_" + self.User + ".log"
+            logfile = Configuration.logDir + "User_logs/debug_" + self.User + ".log"
             with open(logfile, 'wb') as f:
-                file = self.connection.recv(1024)
+                file = self.connection.recv(4024)
                 if not file:
                     print("No debug file received")
                 else:
+                    print("Writing to file")
                     f.write(file)
 
     def stop(self):

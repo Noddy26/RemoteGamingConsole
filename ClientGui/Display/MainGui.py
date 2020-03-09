@@ -70,7 +70,7 @@ class MainGui:
             frames = str(Configuration.frames)
         else:
             frames = "30"
-            Configuration.quality = "720x480"
+            Configuration.quality = "480x720"
         message = "StartStreamingServer," + Configuration.quality + "," + frames
         if DatabaseCheck(None, None, message, self.socket).start_Stream() is True:
             thread = ExpectStream(self.window)

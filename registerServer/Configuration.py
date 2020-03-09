@@ -11,6 +11,7 @@ class Configuration(object):
 
     # paths
     adduserdir = "/home/pi/Server/registerServer/UserToBeAdded/"
+    logDir = "/home/pi/Server/registerServer/GamingStreaming/User_logs/"
     userfilepath = adduserdir + "users.txt"
 
     templates = r"/home/pi/Server/registerServer/templates/"
@@ -50,6 +51,10 @@ class Configuration(object):
     streamStarted = False
     stream_socket = None
     streaming_has_started = False
+
+    # Sockets
+    Gui_Socket = None
+    Stream_Socket = None
 
     # gpio
     pins_high = False

@@ -2,7 +2,6 @@ import pickle
 import struct
 import cv2
 from threading import Thread
-from Configuration import Configuration
 
 
 class VideoFeed(Thread):
@@ -13,13 +12,16 @@ class VideoFeed(Thread):
         self.connection = conn
         new = quality.split("x")
         self.running = True
-        self.first = new[0]
-        self.second = new[1]
+        first = new[0]
+        second = new[1]
         print("New Streaming Thread started for " + ip + ":" + str(port))
         try:
             self.hdmi = cv2.VideoCapture(0)
-            self.hdmi.set(3, self.first)
-            self.hdmi.set(4, self.second)
+            print(first)
+            print(second)
+            print(frames)
+            self.hdmi.set(3, first)
+            self.hdmi.set(4, second)
             self.hdmi.set(5, frames)
             self.encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
             self.img_counter = 0

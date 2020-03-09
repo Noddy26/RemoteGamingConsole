@@ -56,5 +56,4 @@ class ControllerControl(Thread):
 
         if data in dictionary:
             data = dictionary[data]
-            print(data)
             SendReceive(self.socket, data).send()

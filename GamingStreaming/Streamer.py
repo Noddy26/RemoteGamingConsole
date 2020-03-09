@@ -22,27 +22,28 @@ class Streamer(Thread):
     def run(self):
         global threads
         try:
-            tcpServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            tcpServer.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            tcpServer.bind((self.host, self.port))
+            Configuration.Gui_Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.streamServer = Configuration.Gui_Socket
+            self.streamServer.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            self.streamServer.bind((self.host, self.port))
             threads = []
             print('Stream Server started!')
             print('Waiting for the client...')
             while Configuration.server_running is True:
-                tcpServer.listen(4)
-                (conn, (ip, port)) = tcpServer.accept()
+                self.streamServer.listen(4)
+                (conn, (ip, port)) = self.streamServer.accept()
                 newthread = VideoFeed(self.quality, self.frames, ip, port, conn)
-                newthread.setDaemon(True)
                 newthread.start()
                 threads.append(newthread)
         except():
             for t in threads:
                 t.join()
-            self.sock.close()
+            self.streamServer.close()
 
     def stop(self):
         print("Stopping Stream Server")
         Configuration.server_running = False
         for t in threads:
             t.stop()
-        self.sock.close()
+        Configuration.Stream_Socket.shutdown(socket.SHUT_RDWR)
+        Configuration.Stream_Socket.close()

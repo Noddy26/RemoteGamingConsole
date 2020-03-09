@@ -21,9 +21,9 @@ class SendReceive:
         Logger.info("Sending debug file to server")
         debug_file = "Logging/Logs"
         file_name = "/debug_" + Configuration.Username + ".log"
-        filesize = os.path.getsize(debug_file)
         with open(debug_file + file_name, 'rb') as f:
-            sendData = f.read(filesize)
+            sendData = f.read()
+            print(sendData)
             self.socket.send(sendData)
         try:
             Logger().shutdownLogger()
