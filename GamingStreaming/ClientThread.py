@@ -100,7 +100,7 @@ class ClientThread(Thread):
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE username='" + self.username + "';"
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
-            logfile = Configuration.logDir + "User_logs/debug_" + self.User + ".log"
+            logfile = Configuration.logDir + "debug_" + self.User + ".log"
             with open(logfile, 'wb') as f:
                 file = self.connection.recv(4024)
                 if not file:
@@ -112,7 +112,7 @@ class ClientThread(Thread):
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE ipAddress='" + self.ip + "';"
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
-            logfile = Configuration.logDir + "User_logs/debug_" + self.User + ".log"
+            logfile = Configuration.logDir + "debug_" + self.User + ".log"
             with open(logfile, 'wb') as f:
                 file = self.connection.recv(4024)
                 if not file:

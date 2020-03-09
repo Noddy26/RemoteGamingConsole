@@ -1,5 +1,7 @@
 import logging
 import os
+import time
+
 from ClientGui.variables.Configuration import Configuration
 
 
@@ -7,6 +9,7 @@ class Logger(object):
     _static_logger = None
 
     def __init__(self, name='logger', level=logging.DEBUG):
+        self.file = 'debug_' + Configuration.Username + '.log'
         if os.path.exists("Logging/logs") is False:
             os.mkdir("Logging/logs")
         logger = logging.getLogger(name)
@@ -18,6 +21,11 @@ class Logger(object):
         Logger._static_logger = logger
 
     def shutdownLogger(self):
+        Configuration.end_time = time.time()
+        Total_time = Configuration.start_time - Configuration.end_time
+        with open("Logging/logs/" + self.file, "w") as f:
+            f.write("Total Time online: %s" % Total_time)
+            f.write("*****************End of Log********************")
         print("Log is being stopped")
         logging.shutdown()
 
@@ -42,6 +50,7 @@ class Logger(object):
         Logger._static_logger.critical(msg)
 
     def _logfile(self):
-        file = 'debug_' + Configuration.Username + '.log'
-        fh = logging.FileHandler("Logging/logs/" + file)
+        fh = logging.FileHandler("Logging/logs/" + self.file)
+        with open("Logging/logs/" + self.file, "w") as f:
+            f.write("*****************Start of Log********************")
         return fh

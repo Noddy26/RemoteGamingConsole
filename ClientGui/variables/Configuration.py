@@ -10,3 +10,7 @@ class Configuration(object):
     quality = None
 
     gif_running = None
+
+    # Timer
+    start_time = None
+    end_time = None

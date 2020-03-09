@@ -2,7 +2,7 @@ import multiprocessing
 from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
 from PIL import Image, ImageTk
 import ctypes
-import os
+import os, time
 
 from ClientGui.functions.Sendmessages import SendReceive
 from ClientGui.variables.Configuration import Configuration
@@ -17,6 +17,7 @@ from ClientGui.Display.gif_player import GifPlayer
 class MainGui:
 
     def __init__(self, login_window, socket):
+        Configuration.start_time = time.time()
         if login_window is not None:
             login_window.destroy()
         self.socket = socket
