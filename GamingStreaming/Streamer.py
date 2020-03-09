@@ -38,9 +38,10 @@ class Streamer(Thread):
         except():
             for t in threads:
                 t.join()
-            self.streamServer.close()
+            self.sock.close()
 
     def stop(self):
+
         print("Stopping Stream Server")
         Configuration.server_running = False
         for t in threads:

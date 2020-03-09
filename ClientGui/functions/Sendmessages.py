@@ -31,7 +31,6 @@ class SendReceive:
         f.close()
         with open(debug_file + file_name, 'rb') as f:
             sendData = f.read()
-            print(sendData)
             self.socket.send(sendData)
         try:
             Logger().shutdownLogger()

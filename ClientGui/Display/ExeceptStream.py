@@ -1,17 +1,10 @@
 import struct
 import socket
 import pickle
-import tkinter
+from tkinter import *
 from threading import Thread
 
-import PIL
 from PIL import Image, ImageTk
-import tkinter as tki
-import threading
-import datetime
-import imutils
-import cv2
-import os
 import cv2
 
 from ClientGui.variables.Configuration import Configuration
@@ -30,6 +23,8 @@ class ExpectStream(Thread):
         print("Starting")
         buffer = b''
         payload_size = struct.calcsize("<L")
+        vidLabel = Label(self.window, anchor=NW)
+        vidLabel.pack(expand=YES, fill=BOTH)
         while True:
             while len(buffer) < payload_size:
                 buffer += self.client_socket.recv(4096)
@@ -43,25 +38,23 @@ class ExpectStream(Thread):
 
             frame = pickle.loads(frame_data, fix_imports=True, encoding="bytes")
             frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
-            #height, width, no_channels = frame.shape
-            canvas = tkinter.Canvas(self.window, width=1000, height=800)
-            canvas.pack()
-            photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(frame))
-            canvas.create_image(0, 0, image=photo, anchor=tkinter.NW)
-            canvas.place(x=0, y=0)
-            #cv2.namedWindow("preview")
-            #cv2.imshow('ImageWindow', image)
-            #cv2.waitKey(1)
+            frame2 = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            frame3 = Image.fromarray(frame2)
+            frame4 = ImageTk.PhotoImage(frame3)
+            vidLabel.configure(image=frame4)
+            vidLabel.image = frame4
+            vidLabel.place(x=0, y=0)
 
     def stop(self):
         print("hello")
 
     def _scale(self, image):
         width, height, channels = image.shape
-        w = int(width * 2)
-        h = int(height * 1.5)
+        w = int(width * 3)
+        h = int(height * 1.2)
         dim = (w, h)
         image_scaled = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
         # cv.imshow('', image_scaled)
         # cv2.waitKey(0)
         return image_scaled
+
