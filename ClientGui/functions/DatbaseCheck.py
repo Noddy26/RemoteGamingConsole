@@ -26,7 +26,6 @@ class DatabaseCheck:
         mess = SendReceive(self.sock, None).receive()
         if mess == "StreamStarted" or mess == "StreamalreadyStarted":
             Logger.error("Stream has started")
-            # TODO: START TIMER HERE FOR WHEN STREAM HAS STARTED
             return True
         return False
 

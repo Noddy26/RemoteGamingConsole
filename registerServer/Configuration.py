@@ -7,7 +7,7 @@ class Configuration(object):
     #ip Address of Server
     ipAddress = "192.168.1.13"
     portNumber = 2000
-    server_running = None
+    server_running = False
 
     # paths
     adduserdir = "/home/pi/Server/registerServer/UserToBeAdded/"

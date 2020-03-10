@@ -62,8 +62,8 @@ class MainGui:
 
     def start_stream(self):
 
-        p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
-        p1.start()
+        self.p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
+        self.p1.start()
         print("passing by process")
 
 
@@ -85,8 +85,11 @@ class MainGui:
 
 
     def stop_stream(self):
+        print("stopping stream")
+        self.p1.kill()
         GifPlayer(self.window, self.play_gif).destroy()
         Logger.info("stopping stream")
+        SendReceive(self.socket, "StreamStop").send()
 
     def controller(self):
         Logger.info("Controller")

@@ -36,7 +36,7 @@ class ClientThread(Thread):
                     video = str(data).split(',')
                     quality = video[1]
                     frames = video[2]
-                    if Configuration.streaming_has_started is False or Configuration.server_running is False:
+                    if Configuration.server_running is False:
                         GpioControl().turnOnXbox()
                         self.streamThread = Streamer(quality, frames)
                         self.streamThread.setDaemon(True)
@@ -82,12 +82,13 @@ class ClientThread(Thread):
                         self.connection.send("No Ip Found in database".encode())
                 elif str(data).__contains__("StreamStop"):
                     print("Stopping stream")
-                    if Configuration.streaming_has_started is True:
+                    if Configuration.server_running is True:
                         Streamer(None, None).stop()
                         self.streamThread.join()
                 elif str(data).__contains__("Connection Terminate"):
                     print(data)
-                    if Configuration.streaming_has_started is True:
+                    if Configuration.server_running is True:
+                        Configuration.server_running = False
                         Streamer(None, None).stop()
                         self.streamThread.join()
                     break

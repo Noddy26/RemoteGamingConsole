@@ -13,6 +13,7 @@ class SendReceive:
         self.message = message
 
     def send(self):
+        print("sending: " + self.message)
         self.socket.send(self.message.encode())
 
     def receive(self):
