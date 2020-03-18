@@ -1,11 +1,9 @@
-import struct
-import socket
-import pickle
 from tkinter import *
 from threading import Thread
-
+import io
+import socket
+import struct
 from PIL import Image, ImageTk
-import cv2
 
 from ClientGui.variables.Configuration import Configuration
 
@@ -21,31 +19,28 @@ class ExpectStream(Thread):
 
     def run(self):
         print("Starting")
-        buffer = b''
-        payload_size = struct.calcsize("<L")
-        vidLabel = Label(self.window, anchor=NW)
-        vidLabel.pack(expand=YES, fill=BOTH)
-        while True:
-            while len(buffer) < payload_size:
-                buffer += self.client_socket.recv(4096)
-            frame_size = buffer[:payload_size]
-            buffer = buffer[payload_size:]
-            pic_size = struct.unpack(">L", frame_size)[0]
-            while len(buffer) < pic_size:
-                buffer += self.client_socket.recv(4096)
-            frame_data = buffer[:pic_size]
-            buffer = buffer[pic_size:]
-
-            frame = pickle.loads(frame_data, fix_imports=True, encoding="bytes")
-            frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
-            frame2 = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            frame3 = Image.fromarray(frame2)
-            frame4 = ImageTk.PhotoImage(frame3)
-            vidLabel.configure(image=frame4)
-            vidLabel.image = frame4
-            vidLabel.place(x=0, y=0)
+        connection = self.client_socket.makefile('b')
+        self.vidLabel = Label(self.window, anchor=NW)
+        self.vidLabel.pack(expand=YES, fill=BOTH)
+        try:
+            while True:
+                image_len = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
+                if not image_len:
+                    break
+                image_stream = io.BytesIO()
+                image_stream.write(connection.read(image_len))
+                image_stream.seek(0)
+                frame3 = Image.open(image_stream)
+                image = ImageTk.PhotoImage(frame3)
+                self.vidLabel.configure(image=image)
+                self.vidLabel.image = image
+                self.vidLabel.place(x=0, y=0)
+        finally:
+            connection.close()
 
     def stop(self):
+        self.vidLabel.destroy()
+        self.join()
         print("hello")
 
     def _scale(self, image):

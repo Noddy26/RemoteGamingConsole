@@ -1,11 +1,8 @@
-from tkinter import messagebox
-
-import pyfirmata
 from threading import Thread
 
-from GamingStreaming.ControllerControl import ControllerControl
-from GamingStreaming.GpioControl import GpioControl
-from GamingStreaming.Streamer import Streamer
+from registerServer.GamingStreaming.ControllerControl import ControllerControl
+from registerServer.GamingStreaming.GpioControl import GpioControl
+from registerServer.GamingStreaming.Streamer import Streamer
 from Configuration import Configuration
 from Database import Database
 from time import sleep
@@ -90,7 +87,6 @@ class ClientThread(Thread):
                     if Configuration.server_running is True:
                         Configuration.server_running = False
                         Streamer(None, None).stop()
-                        self.streamThread.join()
                     break
                 elif str(data).__contains__("*****************Start of Log********************") is True:
                     break

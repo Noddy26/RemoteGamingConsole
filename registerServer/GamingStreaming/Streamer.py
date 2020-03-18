@@ -1,9 +1,7 @@
-import picamera
-import io
-import subprocess
 import socket
 from threading import Thread
 from Configuration import Configuration
+
 from GamingStreaming.videoFeed import VideoFeed
 
 
@@ -31,13 +29,13 @@ class Streamer(Thread):
             print('Waiting for the client...')
             while Configuration.server_running is True:
                 self.streamServer.listen(4)
-                (conn, (ip, port)) = self.streamServer.accept()
-                newthread = VideoFeed(self.quality, self.frames, ip, port, conn)
+                (connection, (ip, port)) = self.streamServer.accept()
+                newthread = VideoFeed(self.quality, self.frames, ip, port, connection)
                 newthread.start()
                 threads.append(newthread)
         except():
             for t in threads:
-                t.join()
+                t.stop()
             self.sock.close()
 
     def stop(self):
