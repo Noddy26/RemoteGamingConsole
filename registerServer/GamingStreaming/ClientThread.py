@@ -1,8 +1,8 @@
 from threading import Thread
 
-from registerServer.GamingStreaming.ControllerControl import ControllerControl
-from registerServer.GamingStreaming.GpioControl import GpioControl
-from registerServer.GamingStreaming.Streamer import Streamer
+from GamingStreaming.ControllerControl import ControllerControl
+from GamingStreaming.GpioControl import GpioControl
+from GamingStreaming.Streamer import Streamer
 from Configuration import Configuration
 from Database import Database
 from time import sleep
@@ -22,7 +22,7 @@ class ClientThread(Thread):
         print("New Thread started for " + ip + ":" + str(port))
 
     def run(self):
-
+        global streamThread
         while self.Handler_running:
             try:
                 data = self.connection.recv(2048).decode()
@@ -33,11 +33,10 @@ class ClientThread(Thread):
                     video = str(data).split(',')
                     quality = video[1]
                     frames = video[2]
-                    if Configuration.server_running is False:
+                    if Configuration.streaming_has_started is False:
                         GpioControl().turnOnXbox()
-                        self.streamThread = Streamer(quality, frames)
-                        self.streamThread.setDaemon(True)
-                        self.streamThread.start()
+                        streamThread = Streamer(quality, frames)
+                        streamThread.start()
                         sleep(5)
                         print("stream started")
                         self.connection.send("StreamStarted".encode())
@@ -77,21 +76,24 @@ class ClientThread(Thread):
                         print("User Logged in")
                     else:
                         self.connection.send("No Ip Found in database".encode())
-                elif str(data).__contains__("StreamStop"):
+                elif str(data).__contains__("Stop"):
                     print("Stopping stream")
-                    if Configuration.server_running is True:
+                    if Configuration.streaming_has_started is True:
+                        Configuration.streaming_has_started = False
+                        print("stopping")
                         Streamer(None, None).stop()
                         self.streamThread.join()
                 elif str(data).__contains__("Connection Terminate"):
                     print(data)
-                    if Configuration.server_running is True:
-                        Configuration.server_running = False
-                        Streamer(None, None).stop()
+                    if Configuration.streaming_has_started is True:
+                        Configuration.streaming_has_started = False
+                        streamThread.kill()
                     break
                 elif str(data).__contains__("*****************Start of Log********************") is True:
                     break
-            except:
-                self.stop()
+            except Exception as e:
+                print(e)
+                self.kill()
 
         if self.ip is None:
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE username='" + self.username + "';"
@@ -136,7 +138,8 @@ class ClientThread(Thread):
                         print("Writing to file")
                         f.write(file)
 
-    def stop(self):
+    def kill(self):
+        Configuration.streaming_has_started = False
         print("Client Handler for " + str(self.User) + " Unexpectedly stopped")
         self.Handler_running = False
 

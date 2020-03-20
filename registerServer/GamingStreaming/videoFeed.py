@@ -19,6 +19,7 @@ class VideoFeed(Thread):
         print("New Streaming Thread started for " + ip + ":" + str(port))
 
     def run(self):
+        global camera
         try:
             first = self.new[0]
             second = self.new[1]
@@ -39,10 +40,15 @@ class VideoFeed(Thread):
                     stream.seek(0)
                     stream.truncate()
             self.connection.write(struct.pack('<L', 0))
-        finally:
+        except Exception as e:
+            print(e)
+            print("problem in starting camera")
             self.connection.close()
+            camera.stop_preview()
 
     def stop(self):
         print("Stopping stream socket")
+        self.connection.close()
+        camera.stop_preview()
         self.running = False
         self.join()

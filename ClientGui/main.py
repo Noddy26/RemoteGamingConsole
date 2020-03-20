@@ -12,7 +12,6 @@ def main():
     Logger()
     sock = socket.socket()
     sock.connect((Configuration.ipAddress, Configuration.portNumber))
-    #sock.setblocking(False)
 
     host_name = socket.gethostname()
     host_ip = socket.gethostbyname(host_name)
@@ -32,6 +31,7 @@ if __name__ == '__main__':
     except socket.error as serr:
         Logger.error(serr)
         if serr.errno == errno.ECONNREFUSED:
+            print("hello")
             Tk().withdraw()
             messagebox.showerror("ERROR", "Can not connect to server")
         else:

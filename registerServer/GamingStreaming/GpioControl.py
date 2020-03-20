@@ -26,6 +26,7 @@ class GpioControl():
             GPIO.output(each, 0)
 
     def turnOnXbox(self):
+        GPIO.setup(2, GPIO.OUT)
         GPIO.output(2, 0)
         time.sleep(0.5)
         GPIO.output(2, 1)

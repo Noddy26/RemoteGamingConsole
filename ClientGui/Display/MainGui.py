@@ -1,9 +1,3 @@
-import multiprocessing
-from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
-from PIL import Image, ImageTk
-import ctypes
-import os, time
-
 from ClientGui.functions.Sendmessages import SendReceive
 from ClientGui.variables.Configuration import Configuration
 from ClientGui.functions.Controllers import ControllerControl
@@ -12,7 +6,12 @@ from ClientGui.Display.ExeceptStream import ExpectStream
 from ClientGui.Logging.logger import Logger
 from ClientGui.Display.VideoWindow import VideoWindow
 from ClientGui.Display.gif_player import GifPlayer
-
+import multiprocessing
+from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
+from PIL import Image, ImageTk
+import ctypes
+import os, time
+import socket
 
 class MainGui:
 
@@ -40,9 +39,9 @@ class MainGui:
         menu = Menu(self.window)
         self.window.config(menu=menu)
 
-        self.system = Menu(menu)
-        configure = Menu(menu)
-        help = Menu(menu)
+        self.system = Menu(menu, tearoff=False)
+        configure = Menu(menu, tearoff=False)
+        help = Menu(menu, tearoff=False)
 
         self.system.add_command(label="Start Stream", command=self.start_stream)
         self.system.add_command(label="Stop Stream", command=self.stop_stream)
@@ -61,7 +60,7 @@ class MainGui:
         self.window.mainloop()
 
     def start_stream(self):
-
+        global thread
         self.p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
         self.p1.start()
 
@@ -73,6 +72,7 @@ class MainGui:
             Configuration.quality = "480x720"
         message = "StartStreamingServer," + Configuration.quality + "," + frames
         if DatabaseCheck(None, None, message, self.socket).start_Stream() is True:
+            Configuration.stream_started = True
             thread = ExpectStream(self.window)
             thread.start()
             # TODO: GET STREAM
@@ -82,29 +82,46 @@ class MainGui:
                 DatabaseCheck(None, None, message, self.socket).disconnect()
                 os._exit(0)
 
-
     def stop_stream(self):
         print("stopping stream")
-        self.p1.kill()
-        GifPlayer(self.window, self.play_gif).destroy()
-        Logger.info("stopping stream")
-        SendReceive(self.socket, "StreamStop").send()
+        if Configuration.stream_started is True:
+            Configuration.stream_started = False
+            SendReceive(self.socket, "Stop").send()
+            thread.kill()
+            thread.join()
+            try:
+                ExpectStream(None).vidLabel.quit()
+            except Exception as e:
+                print(e)
+            self.p1.join()
+            self.p1.kill()
+            #GifPlayer(None, None).stop()
+            Logger.info("stopping stream")
+
+        else:
+            messagebox.showerror("Stream", "Stream hasn't Started")
 
     def controller(self):
-        Logger.info("Controller")
-        if ControllerControl.showController() is True:
-            ControllerThread = ControllerControl(self.socket)
-            ControllerThread.start()
-            Logger.info("Controller Thread working")
+        if Configuration.stream_started is True:
+            Logger.info("Controller")
+            if ControllerControl.showController() is True:
+                ControllerThread = ControllerControl(self.socket)
+                ControllerThread.start()
+                Logger.info("Controller Thread working")
+            else:
+                return
         else:
-            return
+            messagebox.showerror("Stream", "Start Stream First")
 
     def audio(self):
         Logger.info("Audio")
 
     def video(self):
-        Logger.info("Video")
-        VideoWindow(self.window).run()
+        if Configuration.stream_started is False:
+            Logger.info("Video")
+            VideoWindow(self.window).run()
+        else:
+            messagebox.showerror("Stream", "Stream has Started, Stop stream and change resolution")
 
     def about(self):
         Logger.info("About")

@@ -14,3 +14,6 @@ class Configuration(object):
     # Timer
     start_time = None
     end_time = None
+
+    stream_started = False
+    connection = None

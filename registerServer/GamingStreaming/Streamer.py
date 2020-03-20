@@ -8,6 +8,7 @@ from GamingStreaming.videoFeed import VideoFeed
 class Streamer(Thread):
 
     def __init__(self, quality, frames):
+        print("coming")
         Thread.__init__(self)
         self.quality = quality
         self.frames = frames
@@ -18,7 +19,7 @@ class Streamer(Thread):
         Configuration.server_running = True
 
     def run(self):
-        global threads
+        global threads, newthread
         try:
             Configuration.Gui_Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.streamServer = Configuration.Gui_Socket
@@ -35,13 +36,12 @@ class Streamer(Thread):
                 threads.append(newthread)
         except():
             for t in threads:
-                t.stop()
+                t.Join()
             self.sock.close()
 
-    def stop(self):
+    def kill(self):
         print("Stopping Stream Server")
         Configuration.server_running = False
-        for t in threads:
-            t.stop()
+        newthread.stop()
         Configuration.Stream_Socket.shutdown(socket.SHUT_RDWR)
         Configuration.Stream_Socket.close()

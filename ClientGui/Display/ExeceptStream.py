@@ -1,10 +1,10 @@
+import ctypes
 from tkinter import *
 from threading import Thread
 import io
 import socket
 import struct
 from PIL import Image, ImageTk
-
 from ClientGui.variables.Configuration import Configuration
 
 
@@ -13,17 +13,20 @@ class ExpectStream(Thread):
     def __init__(self, window):
         Thread.__init__(self)
         self.window = window
-        print("waiting to except stream")
+        self.vidLabel = Label(self.window, anchor=NW)
+        self.vidLabel.pack(expand=YES, fill=BOTH)
         self.client_socket = socket.socket()
-        self.client_socket.connect((Configuration.ipAddress, 2005))
+        self.streamer = True
+        print("waiting to except stream")
 
     def run(self):
         print("Starting")
-        connection = self.client_socket.makefile('b')
-        self.vidLabel = Label(self.window, anchor=NW)
-        self.vidLabel.pack(expand=YES, fill=BOTH)
+        self.client_socket.connect((Configuration.ipAddress, 2005))
+        Configuration.connection = self.client_socket.makefile('b')
+        connection = Configuration.connection
         try:
-            while True:
+            while self.streamer:
+                main = False
                 image_len = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
                 if not image_len:
                     break
@@ -31,25 +34,31 @@ class ExpectStream(Thread):
                 image_stream.write(connection.read(image_len))
                 image_stream.seek(0)
                 frame3 = Image.open(image_stream)
+                self.img_copy = frame3.copy()
                 image = ImageTk.PhotoImage(frame3)
                 self.vidLabel.configure(image=image)
                 self.vidLabel.image = image
+                if main is False:
+                    main = True
+                    self.vidLabel.bind('<Configure>', self._resize_image)
                 self.vidLabel.place(x=0, y=0)
         finally:
             connection.close()
 
-    def stop(self):
-        self.vidLabel.destroy()
-        self.join()
-        print("hello")
+    def kill(self):
+        self.client_socket.close()
+        self.streamer = False
+        self.client_socket.shutdown(socket.SHUT_WR)
 
-    def _scale(self, image):
-        width, height, channels = image.shape
-        w = int(width * 3)
-        h = int(height * 1.2)
-        dim = (w, h)
-        image_scaled = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
-        # cv.imshow('', image_scaled)
-        # cv2.waitKey(0)
-        return image_scaled
+    def _resize_image(self, event):
+        #new_width, new_height = self._screen_size()
+        new_width = 1370
+        new_height = 740
 
+        self.image = self.img_copy.resize((new_width, new_height))
+        self.background_image = ImageTk.PhotoImage(self.image)
+        self.vidLabel.configure(image=self.background_image)
+
+    def _screen_size(self):
+        user32 = ctypes.windll.user32
+        return user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)

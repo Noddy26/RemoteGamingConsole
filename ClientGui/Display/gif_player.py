@@ -3,14 +3,14 @@ from PIL import Image, ImageTk
 from threading import Thread
 
 
-class GifPlayer(Thread, Label):
+class GifPlayer(Label):
 
     def __init__(self, frames, filename):
-        Thread.__init__(self)
+        self.running = True
         gif = Image.open(filename)
         seq = []
         try:
-            while 1:
+            while self.running:
                 seq.append(gif.copy())
                 gif.seek(len(seq))
         except EOFError:
@@ -40,3 +40,8 @@ class GifPlayer(Thread, Label):
         if self.index == len(self.frames):
             self.index = 0
         self.cancel = self.after(self.delay, self.run)
+
+    def stop(self):
+        print("stopping")
+        self.running = False
+        self.pack_forget()
