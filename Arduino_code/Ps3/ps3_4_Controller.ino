@@ -3,10 +3,6 @@
 
 #define SLAVE_ADDRESS 0x05
 
-char controllerInput = '0';
-int controllerInputdigit2 = 0;
-
-String combinedData = "";
 int byteCount = 0;
 char temp[32];
 int led = 13;
@@ -14,31 +10,28 @@ int ledState = 0;
 
 #define numberOfDigits 3
 char theNumberString[numberOfDigits + 1];
-int joyVal;
 
-
-boolean triangleOn = 0;
-boolean circleOn = 0;
-boolean squareOn = 0;
-boolean crossOn = 0;
-boolean dpadUpOn = 0;
-boolean dpadDownOn = 0;
-boolean dpadLeftOn = 0;
-boolean dpadRightOn = 0;
-boolean l1On = 0;
-boolean l2On = 0;
-boolean l3On = 0;
-boolean r1On = 0;
-boolean r2On = 0;
-boolean r3On = 0;
-boolean selectOn = 0;
-boolean startOn = 0;
-boolean homeOn = 0;
+int triangleOn = 0;
+int circleOn = 0;
+int squareOn = 0;
+int crossOn = 0;
+int dpadUpOn = 0;
+int dpadDownOn = 0;
+int dpadLeftOn = 0;
+int dpadRightOn = 0;
+int l1On = 0;
+int l2On = 0;
+int l3On = 0;
+int r1On = 0;
+int r2On = 0;
+int r3On = 0;
+int selectOn = 0;
+int startOn = 0;
+int homeOn = 0;
 int leftStickX = 128;
 int leftStickY = 128;
 int rightStickX = 128;
 int rightStickY = 128;
-long lastSerialTime = 0;
 int digit0 = 128;
 int digit1 =  128;
 int digit2 =  128;
@@ -177,23 +170,23 @@ dataForController_t getControllerData(void){
 }
 
 void forceReset() {
-  triangleOn = False;
-  circleOn = False;
-  squareOn = False;
-  crossOn = False;
-  dpadUpOn = False;
-  dpadDownOn = False;
-  dpadLeftOn = False;
-  dpadRightOn = False;
-  l1On = False;
-  l2On = False;
-  l3On = False;
-  r1On = False;
-  r2On = False;
-  r3On = False;
-  selectOn = False;
-  startOn = False;
-  homeOn = False;
+  triangleOn = 0;
+  circleOn = 0;
+  squareOn = 0;
+  crossOn = 0;
+  dpadUpOn = 0;
+  dpadDownOn = 0;
+  dpadLeftOn = 0;
+  dpadRightOn = 0;
+  l1On = 0;
+  l2On = 0;
+  l3On = 0;
+  r1On = 0;
+  r2On = 0;
+  r3On = 0;
+  selectOn = 0;
+  startOn = 0;
+  homeOn = 0;
   leftStickX = 128;
   leftStickY = 128;
   rightStickX = 128;
