@@ -2,7 +2,6 @@ import io
 import struct
 import time
 import picamera
-import cv2
 from threading import Thread
 
 
@@ -35,14 +34,12 @@ class VideoFeed(Thread):
                     self.connection.flush()
                     stream.seek(0)
                     self.connection.write(stream.read())
-                    if self.running is True:
+                    if self.running is False:
                         break
                     stream.seek(0)
                     stream.truncate()
             self.connection.write(struct.pack('<L', 0))
-        except Exception as e:
-            print(e)
-            print("problem in starting camera")
+        finally:
             self.connection.close()
             camera.stop_preview()
 

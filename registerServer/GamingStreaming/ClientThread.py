@@ -1,5 +1,6 @@
+import socket
 from threading import Thread
-
+import picamera
 from GamingStreaming.ControllerControl import ControllerControl
 from GamingStreaming.GpioControl import GpioControl
 from GamingStreaming.Streamer import Streamer
@@ -35,9 +36,9 @@ class ClientThread(Thread):
                     frames = video[2]
                     if Configuration.streaming_has_started is False:
                         GpioControl().turnOnXbox()
+                        Configuration.streaming_has_started = True
                         streamThread = Streamer(quality, frames)
                         streamThread.start()
-                        sleep(5)
                         print("stream started")
                         self.connection.send("StreamStarted".encode())
                     else:
@@ -81,19 +82,26 @@ class ClientThread(Thread):
                     if Configuration.streaming_has_started is True:
                         Configuration.streaming_has_started = False
                         print("stopping")
-                        Streamer(None, None).stop()
-                        self.streamThread.join()
+                        streamThread.kill()
+                        streamThread.join()
+                    else:
+                        print("stream has not started")
                 elif str(data).__contains__("Connection Terminate"):
                     print(data)
                     if Configuration.streaming_has_started is True:
                         Configuration.streaming_has_started = False
+                        print("stopping stream")
                         streamThread.kill()
+                        streamThread.join()
                     break
                 elif str(data).__contains__("*****************Start of Log********************") is True:
                     break
+            except socket.error as serr:
+                print(serr)
+            except picamera.PiCameraError as p:
+                print(p)
             except Exception as e:
-                print(e)
-                self.kill()
+                self.kill_handler()
 
         if self.ip is None:
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE username='" + self.username + "';"
@@ -138,7 +146,7 @@ class ClientThread(Thread):
                         print("Writing to file")
                         f.write(file)
 
-    def kill(self):
+    def kill_handler(self):
         Configuration.streaming_has_started = False
         print("Client Handler for " + str(self.User) + " Unexpectedly stopped")
         self.Handler_running = False

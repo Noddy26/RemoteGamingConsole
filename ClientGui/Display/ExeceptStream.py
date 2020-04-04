@@ -4,6 +4,7 @@ from threading import Thread
 import io
 import socket
 import struct
+from time import sleep
 from PIL import Image, ImageTk
 from ClientGui.variables.Configuration import Configuration
 
@@ -12,6 +13,7 @@ class ExpectStream(Thread):
 
     def __init__(self, window):
         Thread.__init__(self)
+        sleep(5)
         self.window = window
         self.vidLabel = Label(self.window, anchor=NW)
         self.vidLabel.pack(expand=YES, fill=BOTH)
@@ -25,7 +27,7 @@ class ExpectStream(Thread):
         Configuration.connection = self.client_socket.makefile('b')
         connection = Configuration.connection
         try:
-            while self.streamer:
+            while self.streamer is True:
                 main = False
                 image_len = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
                 if not image_len:
@@ -46,9 +48,10 @@ class ExpectStream(Thread):
             connection.close()
 
     def kill(self):
-        self.client_socket.close()
         self.streamer = False
-        self.client_socket.shutdown(socket.SHUT_WR)
+        Configuration.connection.close()
+        self.client_socket.shutdown(socket.SHUT_WR) ####################problem,
+        self.client_socket.close()
 
     def _resize_image(self, event):
         #new_width, new_height = self._screen_size()

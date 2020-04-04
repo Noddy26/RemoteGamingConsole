@@ -11,7 +11,7 @@ from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
 from PIL import Image, ImageTk
 import ctypes
 import os, time
-import socket
+from time import sleep
 
 class MainGui:
 
@@ -49,6 +49,7 @@ class MainGui:
         menu.add_cascade(label="System", menu=self.system)
 
         configure.add_command(label="Detect Controller", command=self.controller)
+        configure.add_command(label="Enable Two Player", command=self.two_player)
         configure.add_command(label="Audio", command=self.audio)
         configure.add_command(label="Video", command=self.video)
         menu.add_cascade(label="Configure", menu=configure)
@@ -69,7 +70,7 @@ class MainGui:
             frames = str(Configuration.frames)
         else:
             frames = "30"
-            Configuration.quality = "480x720"
+            Configuration.quality = "1280x720"
         message = "StartStreamingServer," + Configuration.quality + "," + frames
         if DatabaseCheck(None, None, message, self.socket).start_Stream() is True:
             Configuration.stream_started = True
@@ -90,7 +91,7 @@ class MainGui:
             thread.kill()
             thread.join()
             try:
-                ExpectStream(None).vidLabel.quit()
+                ExpectStream(None).vidLabel.destroy()
             except Exception as e:
                 print(e)
             self.p1.join()
@@ -115,6 +116,9 @@ class MainGui:
 
     def audio(self):
         Logger.info("Audio")
+
+    def two_player(self):
+        print("welcome")
 
     def video(self):
         if Configuration.stream_started is False:

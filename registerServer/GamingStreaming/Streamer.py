@@ -1,7 +1,6 @@
 import socket
 from threading import Thread
 from Configuration import Configuration
-
 from GamingStreaming.videoFeed import VideoFeed
 
 
@@ -30,8 +29,11 @@ class Streamer(Thread):
             print('Waiting for the client...')
             while Configuration.server_running is True:
                 self.streamServer.listen(4)
-                (connection, (ip, port)) = self.streamServer.accept()
-                newthread = VideoFeed(self.quality, self.frames, ip, port, connection)
+                try:
+                    (connection, (ip, port)) = self.streamServer.accept()
+                    newthread = VideoFeed(self.quality, self.frames, ip, port, connection)
+                except socket.error as serr:
+                    print(serr)
                 newthread.start()
                 threads.append(newthread)
         except():
@@ -42,6 +44,5 @@ class Streamer(Thread):
     def kill(self):
         print("Stopping Stream Server")
         Configuration.server_running = False
-        newthread.stop()
-        Configuration.Stream_Socket.shutdown(socket.SHUT_RDWR)
-        Configuration.Stream_Socket.close()
+        Configuration.Gui_Socket.shutdown(socket.SHUT_RDWR)
+        Configuration.Gui_Socket.close()
