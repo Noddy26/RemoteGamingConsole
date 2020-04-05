@@ -1,6 +1,6 @@
 import socket
 from threading import Thread
-from registerServer.GamingStreaming.ClientThread import ClientThread
+from Server_code.GamingStreaming.ClientThread import ClientThread
 from Configuration import Configuration
 
 

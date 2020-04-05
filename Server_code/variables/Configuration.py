@@ -10,11 +10,11 @@ class Configuration(object):
     server_running = False
 
     # paths
-    adduserdir = "/home/pi/Server/registerServer/UserToBeAdded/"
-    logDir = "/home/pi/Server/registerServer/GamingStreaming/User_logs/"
+    adduserdir = "/home/pi/Server/Server_code/UserToBeAdded/"
+    logDir = "/home/pi/Server/Server_code/GamingStreaming/User_logs/"
     userfilepath = adduserdir + "users.txt"
 
-    templates = r"/home/pi/Server/registerServer/templates/"
+    templates = r"/home/pi/Server/Server_code/templates/"
 
     adminhtml = templates + "admin.html"
     adminhtmlbcakup = templates + "admin.html.bck"
