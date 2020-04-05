@@ -13,46 +13,52 @@ class ConfirmationEmail:
         self.port = 465
 
     def delete(self):
-        print("email")
-        smtp_server = "smtp.gmail.com"
-        sender_email = Configuration.GamingEmailAddress
-        password = Configuration.GamingEmailPassword
-        receiver = self.email
-        message = """\
-        Subject: Confirmation of user """ + self.user + """
-        Hi """ + self.user + """\r\nYou have not been Granted access to Gaming Server for Further details email %s""" \
-                  % Configuration.GamingEmailAddress
+        try:
+            print("email")
+            smtp_server = "smtp.gmail.com"
+            sender_email = Configuration.GamingEmailAddress
+            password = Configuration.GamingEmailPassword
+            receiver = self.email
+            message = """\
+            Subject: Confirmation of user """ + self.user + """
+            Hi """ + self.user + """\r\nYou have not been Granted access to Gaming Server for Further details email %s""" \
+                      % Configuration.GamingEmailAddress
 
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
-            server.login(sender_email, password)
-            try:
-                server.sendmail(sender_email, receiver, message)
-                return True
-            except:
-                print("Email of user %s Can't be reached" % self.user)
-                return True
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
+                server.login(sender_email, password)
+                try:
+                    server.sendmail(sender_email, receiver, message)
+                    return True
+                except:
+                    print("Email of user %s Can't be reached" % self.user)
+                    return True
+        except smtplib.SMTPAuthenticationError as e:
+            print(e)
 
     def add(self):
-        smtp_server = "smtp.gmail.com"
-        sender_email = Configuration.GamingEmailAddress
-        password = Configuration.GamingEmailPassword
-        receiver = self.email
-        message = """\
-                Subject: Confirmation of user """ + self.user + """
-                Hi """ + self.user + """\r\nYou have been Granted access to Gaming Server, Go to link below, 
-                login and Download our remote Gaming Software.
-                \r\nLink -> http://""" + Configuration.ipAddress + """:""" + str(Configuration.portNumber) + """/"""
+        try:
+            smtp_server = "smtp.gmail.com"
+            sender_email = Configuration.GamingEmailAddress
+            password = Configuration.GamingEmailPassword
+            receiver = self.email
+            message = """\
+                    Subject: Confirmation of user """ + self.user + """
+                    Hi """ + self.user + """\r\nYou have been Granted access to Gaming Server, Go to link below, 
+                    login and Download our remote Gaming Software.
+                    \r\nLink -> http://""" + Configuration.ipAddress + """:""" + str(Configuration.portNumber) + """/"""
 
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
-            server.login(sender_email, password)
-            try:
-                server.sendmail(sender_email, receiver, message)
-                return True
-            except:
-                print("Email of user %s Can't be reached" % self.user)
-                return True
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
+                server.login(sender_email, password)
+                try:
+                    server.sendmail(sender_email, receiver, message)
+                    return True
+                except:
+                    print("Email of user %s Can't be reached" % self.user)
+                    return True
+        except smtplib.SMTPAuthenticationError as e:
+            print(e)
 
     def _getemail(self, details):
         data = details.split("-")
