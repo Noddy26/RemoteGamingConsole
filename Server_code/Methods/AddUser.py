@@ -1,4 +1,4 @@
-from Configuration import Configuration
+from variables.Configuration import Configuration
 import mysql.connector
 from mysql.connector import Error
 from Methods.FileMethods import FileMethods

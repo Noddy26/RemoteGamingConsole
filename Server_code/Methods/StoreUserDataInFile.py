@@ -1,7 +1,7 @@
 import base64
 import os
 
-from Configuration import Configuration
+from variables.Configuration import Configuration
 from Methods.SendEmail import SendEmail
 
 

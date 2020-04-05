@@ -1,7 +1,7 @@
 import smtplib, ssl
 #ssl is secure socket layer, designed to set up secure conection between client and server
 # smtp = Simple Mail Transfer Protocol
-from Configuration import Configuration
+from variables.Configuration import Configuration
 
 
 class ConfirmationEmail:

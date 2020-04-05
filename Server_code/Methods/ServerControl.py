@@ -1,4 +1,4 @@
-from Configuration import Configuration
+from variables.Configuration import Configuration
 from GamingStreaming.Server import Server
 
 

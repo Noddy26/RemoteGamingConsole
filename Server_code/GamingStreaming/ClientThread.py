@@ -4,8 +4,8 @@ import picamera
 from GamingStreaming.ControllerControl import ControllerControl
 from GamingStreaming.GpioControl import GpioControl
 from GamingStreaming.Streamer import Streamer
-from Configuration import Configuration
-from Database import Database
+from variables.Configuration import Configuration
+from variables.Database import Database
 from time import sleep
 import os
 

@@ -1,6 +1,6 @@
 import socket
 from threading import Thread
-from Configuration import Configuration
+from variables.Configuration import Configuration
 from GamingStreaming.videoFeed import VideoFeed
 
 

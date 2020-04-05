@@ -1,7 +1,7 @@
 import fileinput
 import os
 import re
-from Configuration import Configuration
+from variables.Configuration import Configuration
 
 
 class FileMethods:

@@ -4,7 +4,7 @@ import MySQLdb
 import mysql.connector
 from mysql.connector import Error
 
-from Configuration import Configuration
+from variables.Configuration import Configuration
 from Methods.StoreUserDataInFile import StoreDataInFile
 
 

@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, url_for
-from Configuration import Configuration
-from Database import Database
+from variables.Configuration import Configuration
+from variables.Database import Database
 from Methods.FileMethods import FileMethods
 from Methods.AddUser import AddUser
 from Methods.DeleteUser import DeleteUser
@@ -8,14 +8,11 @@ from Methods.ConfirmationEmail import ConfirmationEmail
 from Methods.ServerControl import ServerControl
 import os
 
-from GamingStreaming.GpioControl import GpioControl
-
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     session['logged_in'] = False
-    GpioControl().gpiohigh()
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
     return render_template('Main.html')
