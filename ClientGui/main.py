@@ -33,7 +33,6 @@ if __name__ == '__main__':
     except socket.error as serr:
         Logger.error(serr)
         if serr.errno == errno.ECONNREFUSED:
-            print("hello")
             Tk().withdraw()
             messagebox.showerror("ERROR", "Can not connect to server")
         else:

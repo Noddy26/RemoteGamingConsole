@@ -1,4 +1,4 @@
-import smtplib, ssl #ssl is secure socket layer, designed to set up secure conection between client and server # smtp = Simple Mail Transfer Protocol
+import smtplib, ssl  # ssl is secure socket layer, designed to set up secure conection between client and server # smtp = Simple Mail Transfer Protocol
 from variables.Configuration import Configuration
 
 
@@ -12,22 +12,26 @@ class SendEmail:
         self.context = None
 
     def run(self):
-        port = 465  # For SSL
-        smtp_server = "smtp.gmail.com"
-        sender_email = Configuration.GamingEmailAddress
-        password = Configuration.GamingEmailPassword
-        receiver = Configuration.AdminemailAddress
-        message = """\
-        Subject: Confirmation of user """ + self.user + """
-        User """ + self.user + """  """ + self.email + """ Wants to register for Gaming Server tap link to grant access\n
-        \r\nLink -> http://""" + Configuration.ipAddress + """:""" + str(Configuration.portNumber) + """/"""
+        try:
+            port = 465  # For SSL
+            smtp_server = "smtp.gmail.com"
+            sender_email = Configuration.GamingEmailAddress
+            password = Configuration.GamingEmailPassword
+            receiver = Configuration.AdminemailAddress
+            message = """\
+            Subject: Confirmation of user """ + self.user + """
+            User """ + self.user + """  """ + self.email + """ Wants to register for Gaming Server tap link to grant access\n
+            \r\nLink -> http://""" + Configuration.ipAddress + """:""" + str(Configuration.portNumber) + """/"""
 
-        self.context = ssl.create_default_context()
-        with smtplib.SMTP_SSL(smtp_server, port, context=self.context) as server:
-            server.login(sender_email, password)
-            server.sendmail(sender_email, receiver, message)
+            self.context = ssl.create_default_context()
+            with smtplib.SMTP_SSL(smtp_server, port, context=self.context) as server:
+                server.login(sender_email, password)
+                server.sendmail(sender_email, receiver, message)
+                return True
+        except smtplib.SMTPAuthenticationError as e:
+            print("Problem logging in to email")
+            print(e)
             return True
-
 
 
 
