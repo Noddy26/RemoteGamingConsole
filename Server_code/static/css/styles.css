@@ -1,33 +1,130 @@
-body{
-font-family: 'Lato', sans-serif;
-text-align: center;
-background: url("../images/back.jpg") 0px 0px no-repeat;
-background-size: cover;
-background-attachment: fixed;
-min-height: 900px;
+/* ----------------------------------------------------------*/
+/*--------------------Basic set up---------------------------*/
+/*-----------------------------------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-canvas {
-    border:1px solid #d3d3d3;
-    background-color: #f1f1f1;
-}
-  .grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
 
-  padding: 2px;
+html {
+    background-color: #fff;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
 }
-.grid-item {
 
-  padding: 1px;
-  font-size: 30px;
-  text-align: center;
+.clearfix {
+    zoom: 1
 }
-  .grid-item p:after {
-    padding-bottom: 1px;
-  }
 
-.grid-container .grid-item button{
-	color: #000;
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/* ----------------------------------------------------------*/
+/*-------------------Reusable components---------------------------*/
+/*-----------------------------------------------------------*/
+.row {
+    max-width: 1140px;
+    margin: auto auto;
+}
+
+section {
+    padding: 80px 0px;
+}
+
+section.section-shop-grid,
+section.section-rent-grid {
+    background-color: rgba(242, 254, 255, 0.65);
+}
+
+.box {
+    padding: 1%;
+}
+
+/*------------------- Headings ---------------------------*/
+
+
+h1,
+h2,
+h3 {
+
+    font-weight: 300;
+    text-transform: uppercase;
+    word-spacing: 50px;
+
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 300%;
+    word-spacing: 50px;
+    letter-spacing: 10px;
+
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 10px;
+}
+
+h3 {
+    font-size: 110%;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    text-align: center;
+
+}
+
+h2:after {
+    display: block;
+    height: 2px;
+    background-color: rgba(81, 214, 225, 0.63);
+    content: " ";
+    margin-top: 30px;
+}
+
+/*-------------------Paragraphs---------------------------*/
+.long-copy {
+    line-height: 145%;
+    width: 70%;
+    margin-left: 15%;
+
+}
+
+.box p {
+    font-size: 90%;
+    line-height: 145%;
+    text-align: center;
+}
+
+/*-------------------icons---------------------------*/
+.icon-big {
+    font-size: 400%;
+    display: block;
+    color: rgba(81, 214, 225, 0.63);
+    margin-bottom: 10%;
+    text-align: center;
+}
+
+
+/*-------------------Buttons---------------------------*/
+
+.btn:link,
+.btn:visited {
+    color: #fff;
     display: inline-block;
     padding: 10px 30px;
     font-weight: 300;
@@ -35,10 +132,107 @@ canvas {
     border-radius: 200px;
     transition: background-color 0.5s, border 0.5s, color 0.5s;
 }
-.grid-container .grid-item button:hover
-.grid-container .grid-item button:active {
-	border: 2px solid rgba(45, 204, 213, 0.52);
-    color: #000;
-    font-size: 115%;
 
+.btn-full:link,
+.btn-full:visited {
+    background-color: rgba(114, 232, 241, 0.4);
+    border: 2px solid rgb(230, 234, 234);
+    margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn ghost:visited {
+    background-color: rgba(114, 232, 241, 0.4);
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: rgba(81, 214, 225, 0.63);
+    transition: font-size 0.1s;
+    font-weight: 300;
+}
+
+.btn-full:hover,
+.btn-full:active {
+    border: 2px solid rgba(45, 204, 213, 0.52);
+    color: #fff;
+    font-size: 115%;
+}
+
+.btn-ghost:hover,
+.btn ghost:active {
+    border: 2px solid rgba(81, 214, 225, 0.63);
+    color: #fff;
+    background-color: rgba(81, 214, 225, 0.63);
+    font-size: 115%;
+}
+
+
+/* ----------------------------------------------------------*/
+/*------------------- Header ---------------------------*/
+/*-----------------------------------------------------------*/
+header {
+    background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.47)), url(../images/sat.png);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+
+
+}
+
+.wave-text-box {
+    position: absolute;
+    width: 1140px;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.logo {
+
+    height: 12.5vh;
+    width: auto;
+    float: left;
+    opacity: 0.5;
+    
+
+
+}
+
+/* ------------- Nav bar ----------------------*/
+main-nav {
+
+    float: right;
+    list-style: none;
+
+}
+
+.main-nav li {
+    margin-top: 55px;
+    display: inline-block;
+    margin-left: 100px;
+
+}
+
+.main-nav li a:link,
+.main-nav li a:visited {
+    padding: 8px, 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 105%;
+    font-weight: 300;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+    border-bottom: 2px solid rgba(81, 214, 225, 0.63);
+    font-weight: 400;
+    font-size: 115%;
 }
