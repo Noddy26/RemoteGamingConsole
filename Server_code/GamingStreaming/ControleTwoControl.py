@@ -44,71 +44,81 @@ class ControllerTwoControl:
         self.writeData("*")
 
     def L3Button(self):
-        self.writeData("F1")
+        self.writeData("<1")
+        time.sleep(0.01)
+        self.writeData("*")
+
+    def L2Button(self):
+        self.writeData("{1")
         time.sleep(0.01)
         self.writeData("*")
 
     def L1Button(self):
-        self.writeData("F1")
+        self.writeData("[1")
         time.sleep(0.01)
         self.writeData("*")
 
     def selectButton(self):
-        self.writeData("F1")
+        self.writeData("Z1")
         time.sleep(0.01)
         self.writeData("*")
 
     def homeButton(self):
-        self.writeData("F1")
+        self.writeData("P1")
         time.sleep(0.01)
         self.writeData("*")
 
     def startButton(self):
-        self.writeData("F1")
+        self.writeData("Y1")
         time.sleep(0.01)
         self.writeData("*")
 
     def R1Button(self):
-        self.writeData("F1")
+        self.writeData("]1")
+        time.sleep(0.01)
+        self.writeData("*")
+
+    def R2Button(self):
+        self.writeData("}1")
         time.sleep(0.01)
         self.writeData("*")
 
     def R3Button(self):
-        self.writeData("F1")
+        self.writeData(">1")
         time.sleep(0.01)
         self.writeData("*")
 
     def XButton(self):
-        self.writeData("F1")
+        self.writeData("S1")
         time.sleep(0.01)
         self.writeData("*")
 
     def YButton(self):
-        self.writeData("F1")
+        self.writeData("T1")
         time.sleep(0.01)
         self.writeData("*")
 
     def BButton(self):
-        self.writeData("F1")
+        self.writeData("O1")
         time.sleep(0.01)
         self.writeData("*")
 
     def AButton(self):
-        self.writeData("F1")
+        self.writeData("X1")
         time.sleep(0.01)
         self.writeData("*")
 
-    def leftStickX(self):
-        self.writeData("L")
+    def leftStickX(self, val):
+        self.writeData("L" + val)
 
-    def leftStickY(self):
-        self.writeData("l")
+    def leftStickY(self, val):
+        self.writeData("l" + val)
 
-    def rightStickX(self):
-        self.writeData("R")
+    def rightStickX(self, val):
+        self.writeData("R" + val)
 
-    def rightStickY(self):
-        self.writeData("r")
+    def rightStickY(self, val):
+        self.writeData("r" + val)
 
     def writeData(self, value):
         byteValue = self.StringToBytes(value)
@@ -116,7 +126,7 @@ class ControllerTwoControl:
         return -1
 
     def StringToBytes(self, val):
-            retVal = []
-            for c in val:
-                    retVal.append(ord(c))
-            return retVal
+        retVal = []
+        for c in val:
+            retVal.append(ord(c))
+        return retVal
