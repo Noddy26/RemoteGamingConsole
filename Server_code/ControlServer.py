@@ -18,7 +18,7 @@ def home():
     GpioControl().gpiohigh()
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
-    return render_template('index.html')
+    return render_template('Main.html')
 
 @app.route('/index2', methods=['GET', 'POST'])
 def loginpage():
@@ -26,7 +26,7 @@ def loginpage():
     if request.method == 'POST':
         return redirect(url_for('loginpage'))
 
-    return render_template('index.html')
+    return render_template('login.html')
 
 @app.route('/index3', methods=['GET', 'POST'])
 def registerpage():

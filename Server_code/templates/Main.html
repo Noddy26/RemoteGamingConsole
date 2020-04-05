@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/normalise.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <title>Robot Camera</title>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="row">
+
+                <ul class="main-nav">
+                    <li style="margin-left: 0;"><a href="/pages/about.html">About</a></li>
+                    <li><a href="{{ url_for('registerpage') }}">Register</a></li>
+                    <li><a href={{ url_for('loginpage') }}">Login</a></li>
+
+                </ul>
+            </div>
+        </nav>
+        <div class="wave-text-box">
+
+            <h1>Remote Gaming Server/h1>
+            <a class="btn btn-full" href="{{ url_for('loginpage') }}">Login</a>
+            <a class="btn btn-ghost" href="{{ url_for('registerpage') }}">Register</a>
+        </div>
+    </header>
+
+
+
+	<div class="footer">
+        <p>©2020 Neil Morrison Gaming Server</p>
+    </div>
+</body>
+
+</html>
