@@ -1,5 +1,7 @@
 import errno
 from tkinter import Tk, messagebox
+
+from ClientGui.functions.GetLocation import UserLocation
 from ClientGui.variables.Configuration import Configuration
 from ClientGui.Logging.logger import Logger
 from ClientGui.Display.Login import Login
@@ -12,7 +14,7 @@ def main():
     Logger()
     sock = socket.socket()
     sock.connect((Configuration.ipAddress, Configuration.portNumber))
-
+    UserLocation().run()
     host_name = socket.gethostname()
     host_ip = socket.gethostbyname(host_name)
     message = host_ip
