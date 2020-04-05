@@ -1,0 +1,44 @@
+body{
+font-family: 'Lato', sans-serif;
+text-align: center;
+background: url("../images/back.jpg") 0px 0px no-repeat;
+background-size: cover;
+background-attachment: fixed;
+min-height: 900px;
+}
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+  .grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+  padding: 2px;
+}
+.grid-item {
+
+  padding: 1px;
+  font-size: 30px;
+  text-align: center;
+}
+  .grid-item p:after {
+    padding-bottom: 1px;
+  }
+
+.grid-container .grid-item button{
+	color: #000;
+    display: inline-block;
+    padding: 10px 30px;
+    font-weight: 300;
+    text-decoration: none;
+    border-radius: 200px;
+    transition: background-color 0.5s, border 0.5s, color 0.5s;
+}
+.grid-container .grid-item button:hover
+.grid-container .grid-item button:active {
+	border: 2px solid rgba(45, 204, 213, 0.52);
+    color: #000;
+    font-size: 115%;
+
+}
