@@ -1,56 +1,78 @@
  <link href="../static/css/about.css" rel="stylesheet" type="text/css" media="all" />
-<div class="about-section">
-  <h1>About Final Year Project</h1>
-  <p>The Remote Gaming Server </p>
-  <p>This Remote Gaming Server allows users to play games anywhere without having to bring their console with them.
+ <body>
+ <div class="whole-section">
+   <div class="top-section">
+      <header>
+        <nav>
+            <div class="row">
+                <ul class="main-nav">
+                    <li style="margin-left: 0;"><a href="Main.html">Main</a></li>
+                    <li><a href="{{ url_for('registerpage') }}">Register</a></li>
+                    <li><a href="{{ url_for('loginpage') }}">Login</a></li>
 
-This is accomplished by  hosting a website with  login authentication to control the amount of users that will be using the server. The webpage has an admin page to control users and turn on/off the server using threading.
+                </ul>
+            </div>
+        </nav>
+      </header>
+     </div>
+   <div class="title-section">
+       <h1>About Final Year Project</h1>
+        <p>The Remote Gaming Server </p>
+   </div>
+    <div class="about-section">
+      <p>This Remote Gaming Server allows users to play games anywhere without having to bring their console with them.
+        This is accomplished by  hosting a website with  login authentication to control the amount of users that will be using the server.
+        The webpage has an admin page to control users and turn on/off the server using threading.</p>
 
-Once registered, users can login and download either the graphical user interface or the mobile application. Once downloaded user’s login and connect a controller, then the user can stream video from their console. The button presses are passed back to the server using sockets in a separate thread from the streaming socket.
+      <p>Once registered, users can login and download either the graphical user interface or the mobile application.
+        Once downloaded, user's can login and connect a controller, then the user can stream video from their console.
+        The button presses are passed back to the server using sockets in a separate thread from the streaming socket.</p>
+      <p>The mobile app will work the same as the GUI (Graphical User Interface),  the only differences are that the controllers can connect over Bluetooth and you can cast the video stream to a TV.
+        This Project will be packaged in an RPM(Red-Hat Package Manager) so it can be deployed on any server.</p>
 
-The mobile app will work the same as the GUI (Graphical User Interface),  the only differences are that the controllers can connect over Bluetooth and you can cast the video stream to a TV.
-</p>
-</div>
-<h2 style="text-align:left">About me</h2>
-<div class="row">
-  <div class="column">
-    <div class="card">
-      <img src="../static/images/Me.jpg" alt="Neil Morrison" style="width:30%; text-align:center">
-      <div class="container">
-        <h2>Neil Morrison</h2>
-        <p class="title">Student at Galway-Mayo Institute of Technology</p>
-        <p>Course: Software & electronic Engineering</p>
-        <p>neil.morrison89@gmail.com</p>
-        <p><button class="button">Contact</button></p>
+    </div>
+ </div>
+  <h2 style="text-align:center">Project Overview</h2>
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img src="../static/images/Me.jpg" alt="Neil Morrison" style="width:30%; text-align:center">
+        <div class="container">
+          <h2>Neil Morrison</h2>
+          <p class="title">Student at Galway-Mayo Institute of Technology</p>
+          <p>Course: Software & electronic Engineering</p>
+          <p>neil.morrison89@gmail.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="column">
-    <div class="card">
-      <img src="../static/images/github.png" alt="Mike" style="width:85%">
-      <div class="container">
-        <h2>Github Account</h2>
-        <p class="title">Link to Project repository</p>
-         <a class="btn btn-full" href="https://github.com/Noddy26/RemoteGamingConsole.git">https://github.com/Noddy26/RemoteGamingConsole.git</a><br><br><br>
+    <div class="column">
+      <div class="card">
+        <img src="../static/images/github.png" alt="Mike" style="width:85%">
+        <div class="container">
+          <h2>Github Account</h2>
+          <p class="title">Link to Project repository</p>
+           <a class="btn btn-full" href="https://github.com/Noddy26/RemoteGamingConsole.git">https://github.com/Noddy26/RemoteGamingConsole.git</a><br><br><br>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <video width="400" height="190" controls>
+          <source src="../static/images/Episode1.mp4" type="video/mp4">
+          <source src="../static/images/Episode1.mp4" type="video/ogg">
+          Your browser does not support the video tag.
+        </video><br>
+          <br><h2>Video of Project</h2>
+          <a class="btn btn-full" href="https://github.com/Noddy26/RemoteGamingConsole.git">Link to Youtube video</a><br><br><br>
 
       </div>
     </div>
-  </div>
-
-  <div class="column">
-    <div class="card">
-      <video width="400" height="190" controls>
-        <source src="../static/images/Episode1.mp4" type="video/mp4">
-        <source src="../static/images/Episode1.mp4" type="video/ogg">
-        Your browser does not support the video tag.
-      </video><br>
-        <br><h2>Video of Project</h2>
-        <a class="btn btn-full" href="https://github.com/Noddy26/RemoteGamingConsole.git">Link to Youtube video</a><br><br><br>
-
     </div>
+   <div class="footer">
+          <br><br><h2 style="text-align:center">2020 Neil Morrison Gaming Server</h2>
+      </div>
   </div>
-  </div>
- <div class="footer">
-        <h2 style="text-align:center">2020 Neil Morrison Gaming Server</h2>
-    </div>
-</div> 
+ </body>

@@ -10,10 +10,48 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+/* ------------- Nav bar ----------------------*/
+row {
+    max-width: 1140px;
+    margin: auto auto;
+}
+main-nav {
 
+    float: left;
+    list-style: none;
+
+}
+
+.main-nav li {
+    margin-top: 55px;
+    display: inline-block;
+    margin-left: 100px;
+
+}
+
+.main-nav li a:link,
+.main-nav li a:visited {
+    padding: 8px, 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 105%;
+    font-weight: 300;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+    border-bottom: 2px solid rgba(81, 214, 225, 0.63);
+    font-weight: 400;
+    font-size: 115%;
+}
+/* ------------- Nav bar ----------------------*/
 .column {
   float: left;
   width: 33.3%;
+  max-height: 50%;
   margin-bottom: 16px;
   padding: 0 8px;
 }
@@ -22,14 +60,28 @@ html {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 8px;
 }
-
-.about-section {
-  padding: 50px;
-  text-align: center;
+.whole-section{
   background-color: #474e5d;
+}
+.title-section {
+  padding: 1px;
+  text-align: center;
+
   color: white;
 }
+.about-section {
+  padding: 1px;
+  text-align: left;
+  margin-left: 10%;
+  margin-right: 10%;
 
+  color: white;
+}
+.top-section {
+  padding-top: 0;
+  text-align: left;
+  color: white;
+}
 .container {
   padding: 0 16px;
 }
