@@ -1,7 +1,7 @@
 import socket
 from threading import Thread
 import picamera
-from GamingStreaming.ControllerControl import ControllerControl
+from GamingStreaming.ControllerOneControl import ControllerOneControl
 from GamingStreaming.GpioControl import GpioControl
 from GamingStreaming.Streamer import Streamer
 from variables.Configuration import Configuration
@@ -109,6 +109,9 @@ class ClientThread(Thread):
             self.connection.send("Logged out".encode())
             logfile = Configuration.logDir + "debug_" + self.User + ".log"
             if os.path.exists(logfile):
+                with open(logfile, 'a') as f:
+                    f.write("\n")
+                f.close()
                 with open(logfile, 'ab') as f:
                     file = self.connection.recv(4024)
                     if not file:
@@ -116,6 +119,7 @@ class ClientThread(Thread):
                     else:
                         print("Writing to file")
                         f.write(file)
+                f.close()
             else:
                 with open(logfile, 'wb') as f:
                     file = self.connection.recv(4024)
@@ -124,12 +128,16 @@ class ClientThread(Thread):
                     else:
                         print("Writing to file")
                         f.write(file)
+            f.close()
         else:
             user_loggedin = "UPDATE userdetails set login = 'False' WHERE ipAddress='" + self.ip + "';"
             Database.addIptoUser(user_loggedin)
             self.connection.send("Logged out".encode())
             logfile = Configuration.logDir + "debug_" + self.User + ".log"
             if os.path.exists(logfile):
+                with open(logfile, 'a') as f:
+                    f.write("\n")
+                f.close()
                 with open(logfile, 'ab') as f:
                     file = self.connection.recv(4024)
                     if not file:
@@ -137,6 +145,7 @@ class ClientThread(Thread):
                     else:
                         print("Writing to file")
                         f.write(file)
+                f.close()
             else:
                 with open(logfile, 'wb') as f:
                     file = self.connection.recv(4024)
@@ -145,6 +154,7 @@ class ClientThread(Thread):
                     else:
                         print("Writing to file")
                         f.write(file)
+                f.close()
 
     def kill_handler(self):
         Configuration.streaming_has_started = False

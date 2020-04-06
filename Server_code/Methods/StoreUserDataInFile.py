@@ -21,7 +21,7 @@ class StoreDataInFile:
         with open(filename, 'w') as f:
             f.write(SQLcommand)
         with open(Configuration.userfilepath, 'a') as f:
-            f.write("\rUser:" + self.username)
+            f.write("\nUser:" + self.username)
             f.write("-Email:" + self.email)
         os.system('sudo sed -e "s/\\r//g" -i ' + Configuration.userfilepath)
         os.system("sudo sed -i '/^$/d' " + Configuration.userfilepath)

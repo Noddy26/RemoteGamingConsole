@@ -137,6 +137,13 @@ def Logout():
     session['logged_in'] = False
     return home()
 
+@app.route("/Cpu", methods=['GET', 'POST'])
+def CpuUsage():
+    if session['logged_in'] == True:
+        FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+        FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
+        return render_template('Cpu.html')
+
 @app.route("/deleteUser", methods=['GET', 'POST'])
 def deleteUser():
     if session['logged_in'] == True:
