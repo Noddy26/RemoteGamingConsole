@@ -33,6 +33,14 @@ def registerpage():
 
     return render_template('registerPage.html')
 
+@app.route('/index4', methods=['GET', 'POST'])
+def aboutpage():
+    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
+    if request.method == 'POST':
+        return redirect(url_for('index'))
+
+    return render_template('about.html')
+
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
