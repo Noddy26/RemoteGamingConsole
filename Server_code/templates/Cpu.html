@@ -73,3 +73,14 @@
         <p style="font-size:20px; color: #fff; font-family:'Audiowide-Regular'; letter-spacing:3px; margin:1px; text-align: center;"> 2020 Neil Morrison Gaming Server</p>
     </div>
 </body>
+<script>
+    function click(obj) {
+    $.ajax({
+        ...
+        success: function() {
+            var new_things = ''; // Here is where you fetch new data from the response.
+            $('#123456').html("Things: " + new_things);
+        }
+    });
+}
+</script>
