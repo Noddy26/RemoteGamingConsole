@@ -25,6 +25,7 @@ class ControllerControl(Thread):
                         self.check(data)
 
         except:
+            print("hello")
             Logger.error("Controller disconnected by user")
 
     def stop(self):
@@ -58,4 +59,17 @@ class ControllerControl(Thread):
             data = dictionary[data]
             SendReceive(self.socket, data).send()
         else:
-            SendReceive(self.socket, data).send()
+            other_data = str(data).split("_")
+            changed_data = other_data[0] + other_data[1]
+            if changed_data == "ABSZ":
+                SendReceive(self.socket, "ABSZ_16").send()
+            elif changed_data == "ABSRZ":
+                SendReceive(self.socket, "ABSRZ_17").send()
+            elif changed_data == "ABSX":
+                SendReceive(self.socket, "ABSX_18_" + other_data[2]).send()
+            elif changed_data == "ABSY":
+                SendReceive(self.socket, "ABSY_19_" + other_data[2]).send()
+            elif changed_data == "ABSRX":
+                SendReceive(self.socket, "ABSRX20_" + other_data[2]).send()
+            elif changed_data == "ABSRY":
+                SendReceive(self.socket, "ABSRY20_" + other_data[2]).send()
