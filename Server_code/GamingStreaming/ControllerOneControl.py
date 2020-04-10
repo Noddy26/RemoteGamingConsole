@@ -2,7 +2,7 @@ import smbus
 import time
 
 
-class ControllerOneControl():
+class ControllerOneControl:
 
     def __init__(self, data):
         self.check(data)

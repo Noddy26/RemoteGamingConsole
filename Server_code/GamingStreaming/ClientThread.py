@@ -28,7 +28,7 @@ class ClientThread(Thread):
             try:
                 data = self.connection.recv(2048).decode()
                 if str(data).__contains__("_") is True:
-                    ControllerControl(data)
+                    ControllerOneControl(data)
                 elif str(data).__contains__("StartStreamingServer"):
                     print(data)
                     video = str(data).split(',')

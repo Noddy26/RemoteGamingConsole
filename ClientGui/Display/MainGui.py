@@ -11,7 +11,7 @@ from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
 from PIL import Image, ImageTk
 import ctypes
 import os, time
-from time import sleep
+import webbrowser
 
 class MainGui:
 
@@ -129,7 +129,8 @@ class MainGui:
 
     def about(self):
         Logger.info("About")
-        #TODO: Make a class to open a file in this executable
+        url = 'http://' + Configuration.ipAddress + ':' + str(Configuration.port_for_website) + '/index4'
+        webbrowser.open_new(url)
 
     def _screen_size(self):
         user32 = ctypes.windll.user32
