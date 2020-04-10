@@ -76,7 +76,6 @@ class MainGui:
             Configuration.stream_started = True
             thread = ExpectStream(self.window)
             thread.start()
-            # TODO: GET STREAM
         else:
             if messagebox.askokcancel("Server Error", "Do you want to quit?"):
                 message = "Connection Terminate"
@@ -96,7 +95,7 @@ class MainGui:
                 print(e)
             self.p1.join()
             self.p1.kill()
-            #GifPlayer(None, None).stop()
+            GifPlayer(None, None).stop()
             Logger.info("stopping stream")
 
         else:
@@ -118,7 +117,9 @@ class MainGui:
         Logger.info("Audio")
 
     def two_player(self):
-        print("welcome")
+        print("Two Player enabled")
+        SendReceive(self.socket, "Enable_twoPlayer").send()
+        messagebox.askokcancel("Stream", "Two Player enabled")
 
     def video(self):
         if Configuration.stream_started is False:
