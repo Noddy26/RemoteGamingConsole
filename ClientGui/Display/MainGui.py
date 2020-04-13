@@ -117,7 +117,7 @@ class MainGui:
         Logger.info("Audio")
 
     def two_player(self):
-        print("Two Player enabled")
+        Logger.info("Two Player enabled")
         SendReceive(self.socket, "Enable_twoPlayer").send()
         messagebox.askokcancel("Stream", "Two Player enabled")
 

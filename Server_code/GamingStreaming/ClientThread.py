@@ -101,6 +101,7 @@ class ClientThread(Thread):
             except picamera.PiCameraError as p:
                 print(p)
             except Exception as e:
+                print(e)
                 self.kill_handler()
 
         if self.ip is None:

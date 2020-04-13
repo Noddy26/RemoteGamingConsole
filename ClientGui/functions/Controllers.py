@@ -4,6 +4,7 @@ from inputs import devices, get_gamepad
 
 from ClientGui.Logging.logger import Logger
 from ClientGui.functions.Sendmessages import SendReceive
+from time import sleep
 
 
 class ControllerControl(Thread):
@@ -24,9 +25,10 @@ class ControllerControl(Thread):
                         data = event.code + "_" + str(event.state)
                         self.check(data)
 
-        except:
-            print("hello")
-            Logger.error("Controller disconnected by user")
+
+        except Exception as e:
+            print(e)
+            Logger.error("Controller disconnected by user Exception: " + str(e))
 
     def stop(self):
         Logger.info("Stopping Controller sent to ")
@@ -50,10 +52,10 @@ class ControllerControl(Thread):
 
     def check(self, data):
         dictionary = {"ABS_HAT0Y_-1": "ABS_HAT0Y_1", "ABS_HAT0Y_1": "ABS_HAT0Y_2", "ABS_HAT0X_-1": "ABS_HAT0X_3",
-                      "ABS_HAT0X_1": "ABS_HAT0X_4", "BTN_THUMBL_1": "BTN_THUMBL_5", "BTN_TL_1": "BTN_TL_6",
-                      "BTN_START_1": "BTN_START_7", "home_button_1": "home_button_8", "BTN_SELECT_1": "BTN_SELECT_9",
-                      "BTN_TR_1": "BTN_TR_10", "BTN_THUMBR_1": "BTN_THUMBR_11", "BTN_WEST_1": "BTN_WEST_12",
-                      "BTN_NORTH_1": "BTN_NORTH_13", "BTN_EAST_1": "BTN_EAST_14", "BTN_SOUTH_1": "BTN_SOUTH_15"}
+                      "ABS_HAT0X_1": "ABS_HAT0X_4", "BTN_THUMBL_1": "BTN_THUMBL_5", "BTN_START_1": "BTN_START_7",
+                      "home_button_1": "home_button_8", "BTN_SELECT_1": "BTN_SELECT_9", "BTN_THUMBR_1": "BTN_THUMBR_11",
+                      "BTN_WEST_1": "BTN_WEST_12", "BTN_NORTH_1": "BTN_NORTH_13", "BTN_EAST_1": "BTN_EAST_14",
+                      "BTN_SOUTH_1": "BTN_SOUTH_15"}
 
         if data in dictionary:
             data = dictionary[data]
@@ -62,14 +64,31 @@ class ControllerControl(Thread):
             other_data = str(data).split("_")
             changed_data = other_data[0] + other_data[1]
             if changed_data == "ABSZ":
-                SendReceive(self.socket, "ABSZ_16").send()
+                if int(other_data[2]) > 200:
+                    SendReceive(self.socket, "ABS_Z_16_1_").send()
+                elif int(other_data[2]) < 150:
+                    SendReceive(self.socket, "ABS_Z_16_0_").send()
             elif changed_data == "ABSRZ":
-                SendReceive(self.socket, "ABSRZ_17").send()
+                 if int(other_data[2]) > 200:
+                     SendReceive(self.socket, "ABS_RZ_17_1_").send()
+                 elif int(other_data[2]) < 150:
+                     SendReceive(self.socket, "ABS_RZ_17_0_").send()
+
+
             elif changed_data == "ABSX":
-                SendReceive(self.socket, "ABSX_18_" + other_data[2]).send()
+                 SendReceive(self.socket, "ABS_X_18_" + other_data[2] + "_").send()
             elif changed_data == "ABSY":
-                SendReceive(self.socket, "ABSY_19_" + other_data[2]).send()
+                 if int(other_data[2]) > 0:
+                    SendReceive(self.socket, "ABS_Y_19_-" + other_data[2] + "_").send()
+                 else:
+                    SendReceive(self.socket, "ABS_Y_19_" + other_data[2].replace("-", "") + "_").send()
             elif changed_data == "ABSRX":
-                SendReceive(self.socket, "ABSRX20_" + other_data[2]).send()
+                SendReceive(self.socket, "ABS_RX_20_" + other_data[2] + "_").send()
             elif changed_data == "ABSRY":
-                SendReceive(self.socket, "ABSRY20_" + other_data[2]).send()
+                SendReceive(self.socket, "ABS_RY_21_" + other_data[2] + "_").send()
+
+
+            elif changed_data == "BTNTL":
+                SendReceive(self.socket, "BTN_TL_6_" + other_data[2] + "_").send()
+            elif changed_data == "BTNTR":
+                SendReceive(self.socket, "BTN_TR_10_" + other_data[2] + "_").send()
