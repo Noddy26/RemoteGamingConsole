@@ -18,6 +18,7 @@ class SendReceive:
 
     def receive(self):
         mess = self.socket.recv(1024).decode()
+        print("received: " + mess)
         return mess
 
     def sendfile(self):

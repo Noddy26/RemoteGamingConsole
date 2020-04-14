@@ -12,6 +12,7 @@ class DatabaseCheck:
 
     def check_user(self):
         message = self.user + "+" + self.password
+        print(message)
         SendReceive(self.sock, message).send()
         mess = SendReceive(self.sock, None).receive()
         if mess == "Access Granted":
