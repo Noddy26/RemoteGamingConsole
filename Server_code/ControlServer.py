@@ -1,12 +1,12 @@
 from flask import Flask, redirect, render_template, request, session, url_for
-from variables.Configuration import Configuration
-from Methods.FileMethods import FileMethods
-from Methods.AddUser import AddUser
-from Methods.DeleteUser import DeleteUser
-from Methods.ConfirmationEmail import ConfirmationEmail
-from Methods.ServerControl import ServerControl
+from libs.variables.Configuration import Configuration
+from libs.Methods.FileMethods import FileMethods
+from libs.Methods.AddUser import AddUser
+from libs.Methods.DeleteUser import DeleteUser
+from libs.Methods.ConfirmationEmail import ConfirmationEmail
+from libs.Methods.ServerControl import ServerControl
 import os
-from Database_functions.Database import Database
+from libs.Database_functions.Database import Database
 
 app = Flask(__name__)
 
@@ -158,8 +158,3 @@ def deleteUser():
             FileMethods.addUserDataToHtml(userdata)
             #elif request.form['submit'] == 'Delete User':
             return render_template('Users.html')
-
-if __name__ == '__main__':
-    FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-    app.secret_key = os.urandom(12)
-    app.run(debug=True, host=Configuration.ipAddress, port=Configuration.portNumber)
