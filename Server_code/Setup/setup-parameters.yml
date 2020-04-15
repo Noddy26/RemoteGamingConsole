@@ -3,61 +3,61 @@ last_message: 'Finished Gaming Server setup.'
 
 parameters:
 
-  - name: Host_Ip
+  - name: ipAddress
     displaying_name: Host Ip Address
     stored_in_db: True
     prompt: Enter An ip address associated with your machine
 
-  - name: Admin_username
+  - name: adminusername
     displaying_name: Admin User Name
     stored_in_db: True
     prompt: Enter a Username for accessing the Administration page on the website
 
-  - name: Admin_password
+  - name: adminpassword
     displaying_name: Admin password
     stored_in_db: True
     prompt: Enter a password for accessing the Administration page on the website
     confidential: True
 
-  - name: Admin_Email
+  - name: AdminemailAddress
     displaying_name: Admin Email Address
     stored_in_db: True
     prompt: Enter an email Address you wish to use to receive email on users being registered
 
-  - name: Server_Email_Address
+  - name: GamingEmailAddress
     displaying_name: Server Email Address
     stored_in_db: True
     prompt: Enter an email Address you wish to use for all mail to and from Server
 
-  - name: Server_Email_Password
+  - name: GamingEmailPassword
     displaying_name: Server Email password
     physical_server_only: True
     stored_in_db: True
     prompt: Enter password of email the Address you wish to use for all mail to and from Server
     confidential: True
 
-  - name: Database
+  - name: sqldatabase
     displaying_name: Database Name
     stored_in_db: True
     prompt: Enter The name of the Database you wish to use
 
-  - name: Database_Table_name
+  - name: sqlusertable
     displaying_name: Database Table name
     stored_in_db: True
     prompt: Enter the name of the Database Table you wish to use
 
-  - name: Sql_Host_Name
+  - name: sqlhost
     displaying_name: Sql Database Host Name
     stored_in_db: True
     prompt: Enter Sql Database Host Name
 
-  - name: Sql_User_Name
+  - name: sqluser
     displaying_name: Sql User Name
     stored_in_db: True
     prompt: Enter Sql Database Host Name
     default: "root"
 
-  - name: Sql_Password
+  - name: sqlpassword
     displaying_name: Sql password
     stored_in_db: True
     prompt: Enter Sql Database password

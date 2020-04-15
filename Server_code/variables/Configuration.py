@@ -57,6 +57,6 @@ class Configuration(object):
     Stream_Socket = None
 
     # database file
-    database_file = "ServerDetails.db"
+    database_file = r"C:\Users\neilm\PycharmProjects\GamingGui\Server_code\Setup\ServerDetails.db"
     setup_detail_file = r"C:\Users\neilm\PycharmProjects\GamingGui\Server_code\Setup\setup-parameters.yml"#"/home/pi/GamingServer/Server_code/Setup/setup-parameters.yml"
     database_table = 'CREDENTIALS'

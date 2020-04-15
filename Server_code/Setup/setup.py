@@ -26,5 +26,3 @@ class Setup():
 
         # setup complete
         Output.green(Dictionary.get_value(setup_detail, 'last_message', '', type=str))
-
-Setup.setup()

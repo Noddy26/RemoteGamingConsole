@@ -31,8 +31,8 @@ class GetSetupInputs:
         for each in parameters:
             if type(each.input_user) != str:
                 each.input_user = ''
-            if str(each.name).__contains__("password"):
-                value = '*' * 8
+            if each.confidential is True:
+                value = '*' * 15
             else:
                 value = each.input_user
 
