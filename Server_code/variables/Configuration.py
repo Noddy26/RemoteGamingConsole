@@ -5,16 +5,16 @@ class Configuration(object):
     CannotConnect = None
 
     #ip Address of Server
-    ipAddress = "192.168.1.13"
+    ipAddress = None
     portNumber = 2000
     server_running = False
 
     # paths
-    adduserdir = "/home/pi/Server/Server_code/UserToBeAdded/"
-    logDir = "/home/pi/Server/Server_code/GamingStreaming/User_logs/"
+    adduserdir = "/home/pi/GamingServer/Server_code/UserToBeAdded/"
+    logDir = "/home/pi/GamingServer/Server_code/GamingStreaming/User_logs/"
     userfilepath = adduserdir + "users.txt"
 
-    templates = r"/home/pi/Server/Server_code/templates/"
+    templates = r"/home/pi/GamingServer/Server_code/templates/"
 
     adminhtml = templates + "admin.html"
     adminhtmlbcakup = templates + "admin.html.bck"
@@ -23,20 +23,20 @@ class Configuration(object):
     userhtmlbackup = templates + "Users.html.bck"
 
     # admin details
-    adminusername = "Administrator"
-    adminpassword = "12shroot"
+    adminusername = None
+    adminpassword = None
 
     # Sql Login details
-    sqldatabase = "users"
-    sqlusertable = "userdetails"
-    sqlhost = "localhost"
-    sqluser = "root"
-    sqlpassword = "12shroot"
+    sqldatabase = None
+    sqlusertable = None
+    sqlhost = None
+    sqluser = None
+    sqlpassword = None
 
     # Email of Admin
-    AdminemailAddress = "neil.morrison89@gmail.com"
-    GamingEmailAddress = "gamingserver.project@gmail.com"
-    GamingEmailPassword = "GamingServer2019"
+    AdminemailAddress = None
+    GamingEmailAddress = None
+    GamingEmailPassword = None
 
     # Gui Server Control
     #serverPath = "/root/IdeaProjects/GamingServer/out/production/GamingServer"
@@ -56,5 +56,7 @@ class Configuration(object):
     Gui_Socket = None
     Stream_Socket = None
 
-    # gpio
-    pins_high = False
+    # database file
+    database_file = "ServerDetails.db"
+    setup_detail_file = "/home/pi/GamingServer/Server_code/Setup/setup-parameters.yml"
+    database_table = 'CREDENTIALS'

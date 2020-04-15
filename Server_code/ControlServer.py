@@ -1,12 +1,12 @@
 from flask import Flask, redirect, render_template, request, session, url_for
 from variables.Configuration import Configuration
-from variables.Database import Database
 from Methods.FileMethods import FileMethods
 from Methods.AddUser import AddUser
 from Methods.DeleteUser import DeleteUser
 from Methods.ConfirmationEmail import ConfirmationEmail
 from Methods.ServerControl import ServerControl
 import os
+from Database_functions.Database import Database
 
 app = Flask(__name__)
 
