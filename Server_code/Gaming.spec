@@ -1,16 +1,16 @@
 #####
-# Spec file for lcs
+# Spec file for GamingServer
 #####
 
-%define name lcs
+%define name GamingGui
 %define pwd %(pwd)
 %define src /home/pi/GamingGui
 %define version 1.0
 %define release PA1
 %define arch noarch
-%define dependency bash, pexpect, python >= 2.6, python < 3, python-yaml >= 3.10, wget >= 1.12
+%define dependency bash, python > 3, python-yaml >= 3.10, termcolor, MySQLdb, mysql.connector, picamera, flask
 
-# To where the files should be saved
+# where the files should be saved
 %define prefix /home/pi/GamingServer
 
 # The (base) name of the package, which should match the SPEC file name
@@ -77,7 +77,7 @@ fi
 #####
 %post
 #!/bin/sh
-echo -e 'Gaming Server tool was installed successfully.\nPlease set up the tool by running the command:\npython3 /home/pi/GamingServer --setup' > /dev/stdout
+echo -e 'GamingServer tool was installed successfully.\nPlease set up the tool by running the command:\npython3 /home/pi/GamingServer --setup' > /dev/stdout
 
 #####
 # Pre-uninstallation phase
@@ -91,9 +91,9 @@ echo -e 'Gaming Server tool was installed successfully.\nPlease set up the tool 
 if [ "$1" == "0" ];then
     sudo rm -rf %{prefix}
     # Prompt message telling the user that the tool has been uninstalled
-    echo 'Gaming Server tool was uninstalled successfully.' > /dev/stdout
+    echo 'GamingServer tool was uninstalled successfully.' > /dev/stdout
 elif [ "$1" == "1" ];then
-    echo 'Gaming Server tool is being upgraded' > /dev/stdout
+    echo 'GamingServer tool is being upgraded' > /dev/stdout
     if [ echo $? == "0" ];then
         echo "upgrading"
     fi
