@@ -58,5 +58,5 @@ class Configuration(object):
 
     # database file
     database_file = "ServerDetails.db"
-    setup_detail_file = "/home/pi/GamingServer/Server_code/Setup/setup-parameters.yml"
+    setup_detail_file = r"C:\Users\neilm\PycharmProjects\GamingGui\Server_code\Setup\setup-parameters.yml"#"/home/pi/GamingServer/Server_code/Setup/setup-parameters.yml"
     database_table = 'CREDENTIALS'

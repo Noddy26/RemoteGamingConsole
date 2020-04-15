@@ -10,7 +10,6 @@ class GetInput():
         self.parameter = parameter
 
     def get(self):
-        global input
         parameter = self.parameter
         # construct the prompting message
         prompt_message = parameter.prompt
@@ -18,30 +17,27 @@ class GetInput():
             prompt_message += ' [%s]: ' % (parameter.default)
 
         displaying = (parameter.displaying_name + ": ")
-        Output.white(displaying)
+
 
         while True:
-            # check for Ctrl-c press
-            signal.signal(signal.SIGINT, self._dynamic_menu_ctrlC_handler)
-            # check for Ctrl-Z press
-            signal.signal(signal.SIGTSTP, self._dynamic_menu_ctrlC_handler)
+            Output.yellow("\n" + prompt_message)
+            input_user = input(displaying)
+            if (input_user == ''):
+                input_user = parameter.default
+                Output.green("Defaulted to %s" + parameter.default)
 
-            if (input == ''):
-                input = parameter.default
-
-            if (GetInput.check_input_validity(self, input, parameter)):
+            if (GetInput.check_input_validity(self, input_user, parameter)):
                 # process of valid input
                 if (parameter.confidential):
-                    input = Encryption.encrypt(input)
-                parameter.input = input
+                    input_user = Encryption.encrypt(input_user)
+                parameter.input_user = input_user
                 break
             else:
-                Output.yellow("Please provide a value.")
-        print('')
+                Output.red("Please provide a value.")
         return parameter
 
-    def check_input_validity(self, input, parameter):
-        if (input == None):
+    def check_input_validity(self, input_user, parameter):
+        if (input_user == None):
             return False
         return True
 

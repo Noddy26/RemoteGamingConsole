@@ -1,3 +1,7 @@
+from Server_code.Console.Terminal import Output
+from Server_code.FileFuctions.FilePaths import FilePaths
+from Server_code.FileFuctions.YamlReader import YamlReader
+
 
 class FileReader(object):
     def __init__(self, file_path, second_peek=None):
@@ -5,8 +9,8 @@ class FileReader(object):
 
         self.file_types = list()
         self.file_types.append(YamlReader)
-        self.file_types.append(JsonReader)
-        self.file_types.append(ConfReader)
+        #self.file_types.append(JsonReader)
+        #self.file_types.append(ConfReader)
 
         self.file_path = file_path
         self.second_peek = second_peek
@@ -24,23 +28,11 @@ class FileReader(object):
                 break
 
         if (reader == None):
-            Terminal.exception("Cannot recognize the file type of the file: %s" % (self.file_path))
+            Output.red("Cannot recognize the file type of the file: %s" % (self.file_path))
 
         if FilePaths.path_exists(self.file_path):
             with open(self.file_path, "r") as f:
                 data = reader.load(f)
-            try:
-                # Add the value telling where the data comes from
-                data[BasicKeys.current_file_path] = self.file_path
-
-                # Add the value telling the type of the file
-                data[BasicKeys.file_type] = reader.file_type()
-            except:
-                Print.red('The file you tried to execute is not the correct syntax to run with the LCS Tool')
-                Logger.error('The yaml file the user ran was incorrect, it was missing [config_name: or config_type] in yaml file')
-                sys.exit(0)
-
-
             return data
         else:
-            Terminal.exception("File path invalid: %s" % (self.file_path))
+            Output.red("File path invalid: %s" % (self.file_path))

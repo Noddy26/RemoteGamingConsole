@@ -1,13 +1,13 @@
 import yaml
 
+from Server_code.FileFuctions.FileType import FileType
 
 class YamlReader(FileType):
 
     @staticmethod
     def load(file):
         FileType.check(file, YamlReader.extension())
-
-        return yaml.load(file)
+        return yaml.safe_load(file)
 
     @staticmethod
     def extension():

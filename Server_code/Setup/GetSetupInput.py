@@ -1,8 +1,9 @@
+import sys
+
 from Server_code.Setup.Confirm import Confirm
 from Server_code.Setup.Get_input import GetInput
 from Server_code.parameters.Parameters import Parameter
 from Server_code.Console.Terminal import Output
-from Server_code.Setup.setup import Setup
 
 
 class GetSetupInputs:
@@ -11,15 +12,14 @@ class GetSetupInputs:
         for each in parameters_dictionary:
             parameter = Parameter(each)
             self.parameter_list.append(parameter)
-
     def get(self):
         try:
             for parameter in self.parameter_list:
                 if GetInput(parameter).get() is False:
                     break
             if (not GetSetupInputs.confirm(self.parameter_list)):
-                del self.parameter_list[:]
-                Setup.setup()
+                Output.red("Run --setup again")
+                sys.exit(0)
         except:
             pass
 
@@ -29,14 +29,12 @@ class GetSetupInputs:
     def confirm(parameters):
         Output.green("You have just provided the following information.")
         for each in parameters:
-            if type(each.input) != str:
-                each.input = ''
-            value = each.input
-            if len(value) == 0:
-                # print out eight stars to represent the password
-                value = ''
-            elif each.confidential:
+            if type(each.input_user) != str:
+                each.input_user = ''
+            if str(each.name).__contains__("password"):
                 value = '*' * 8
+            else:
+                value = each.input_user
 
             Output.white("\t%s: %s" % (each.displaying_name, value))
         return Confirm.confirm('Verify the information shown above')

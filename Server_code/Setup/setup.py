@@ -12,21 +12,19 @@ class Setup():
     def setup():
         file_path = Configuration.setup_detail_file
         setup_detail = FileReader(file_path).get()
-        Output.yellow("WARNING All Data in database file will get overridden if you have already run setup.")
-        Output.white(Dictionary.get_value(setup_detail, 'introduction', '', type=str))
+        Output.red("WARNING All Data in database file will get overridden if you have already run setup.")
         parameter_dict = Dictionary.get_value(setup_detail, 'parameters', type=list, file_path=file_path)
         parameters = GetSetupInputs(parameter_dict).get()
 
         db_parameters = list()
-        conf_file_parameters = list()
         for each in parameters:
             if each.stored_in_db:
                 db_parameters.append(each)
-            else:
-                conf_file_parameters.append(each)
 
         # store inputs database
         StoreDBParameters.store(db_parameters, Configuration.database_file)
 
         # setup complete
         Output.green(Dictionary.get_value(setup_detail, 'last_message', '', type=str))
+
+Setup.setup()
