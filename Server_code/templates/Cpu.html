@@ -25,10 +25,10 @@
             <div class="sc-background1" style="position:relative; height:100px; margin-bottom:10px; background-color:#fff; border-radius:150px 150px 0 0; overflow:hidden; text-align:center;">
               <div class="sc-percentage1" id='core1' ></div>
               <div class="sc-mask1" style="position:absolute; top:20px; right:20px; left:20px; height:80px; background-color:#555888; border-radius:150px 150px 0 0 "></div>
-              <span class="sc-value1" id='core_per1' style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">20%</span>
+              <span class="sc-value1" id='core_per1' style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">100</span>
             </div>
             <span class="sc-min1"  style="float:left; color:#fff">0</span>
-            <span class="sc-max1"  style="float:right; color:#fff">100%</span>
+            <span class="sc-max1"  style="float:right; color:#fff">0%</span>
         </div>
        </div>
         <div class="grid-item">
@@ -91,10 +91,47 @@
             document.getElementById('core_per2').innerHTML = parseInt(core2) + '%';
             document.getElementById('core_per3').innerHTML = parseInt(core3) + '%';
             document.getElementById('core_per4').innerHTML = parseInt(core4) + '%';
-            document.getElementById("core1").style.transform = "rotate(" + 180/100 * parseInt(core1) + "deg)";
-            document.getElementById("core2").style.transform = "rotate(" + 180/100 * parseInt(core2) + "deg)";
-            document.getElementById("core3").style.transform = "rotate(" + 180/100 * parseInt(core3) + "deg)";
-            document.getElementById("core4").style.transform = "rotate(" + 180/100 * parseInt(core4) + "deg)";
+            if (parseInt(core1) >= 60 && parseInt(core1) <= 80){
+                document.getElementById("core1").style.backgroundColor = "yellow";
+            }
+            else if (parseInt(core1) >= 80 ){
+                document.getElementById("core1").style.backgroundColor = "red";
+            }
+            else if (parseInt(core1) <= 59 ){
+                document.getElementById("core1").style.backgroundColor = "blue";
+            }
+            if (parseInt(core2) >= 60 && parseInt(core2) <= 80){
+                document.getElementById("core2").style.backgroundColor = "yellow";
+            }
+            else if (parseInt(core2) >= 80 ){
+                document.getElementById("core2").style.backgroundColor = "red";
+            }
+            else if (parseInt(core2) <= 59 ){
+                document.getElementById("core2").style.backgroundColor = "blue";
+            }
+            if (parseInt(core3) >= 60 && parseInt(core3) <= 80){
+                document.getElementById("core3").style.backgroundColor = "yellow";
+            }
+            else if (parseInt(core3) >= 80 ){
+                document.getElementById("core3").style.backgroundColor = "red";
+            }
+            else if (parseInt(core3) <= 59 ){
+                document.getElementById("core3").style.backgroundColor = "blue";
+            }
+            if (parseInt(core4) >= 60 && parseInt(core4) <= 80){
+                document.getElementById("core4").style.backgroundColor = "yellow";
+            }
+            else if (parseInt(core4) >= 80 ){
+                document.getElementById("core4").style.backgroundColor = "red";
+            }
+            else if (parseInt(core4) <= 59 ){
+                document.getElementById("core4").style.backgroundColor = "blue";
+            }
+
+            document.getElementById("core1").style.transform = "rotate(" + parseInt(180/100 * parseInt(core1)) + "deg)";
+            document.getElementById("core2").style.transform = "rotate(" + parseInt(180/100 * parseInt(core2)) + "deg)";
+            document.getElementById("core3").style.transform = "rotate(" + parseInt(180/100 * parseInt(core3)) + "deg)";
+            document.getElementById("core4").style.transform = "rotate(" + parseInt(180/100 * parseInt(core4)) + "deg)";
 
          })
      }, 1000);
