@@ -10,11 +10,11 @@ min-height: 900px;
 tr:nth-child(even) {background-color: #000000;}
 @font-face{
 font-family: "Audiowide-Regular";
-src:url(/static/fonts/Audiowide-Regular.ttf);
+src:url(../fonts/Audiowide-Regular.ttf);
 }
 @font-face{
 font-family: "Asap-Regular";
-src:url(/static/fonts/Asap-Regular.ttf);
+src:url(../fonts/Asap-Regular.ttf);
 }
 .padding-all{
 padding:10px;
@@ -354,11 +354,11 @@ width:8%;
   margin-top: 150px;
 }
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 50px;
-  color: white;
-
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 50px;
+    color: white;
+}
 th, td {
   text-align: left;
   padding: 8px;

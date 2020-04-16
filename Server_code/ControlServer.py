@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session, url_for, Response
+from flask import Flask, redirect, render_template, request, session, url_for, after_this_request, jsonify
 from flask_cors import CORS
 from libs.variables.Configuration import Configuration
 from libs.Methods.FileMethods import FileMethods
@@ -122,7 +122,7 @@ def serverpage():
 def returnuser():
     if session['logged_in'] == True:
         FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
-        if request.method == 'POST':
+        if request.method == 'POST' or request.method == 'GET':
             FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
             data = FileMethods.readfile(Configuration.userfilepath)
             newdata = FileMethods.replaceHTML(Configuration.adminhtml, data, " ")
@@ -147,9 +147,15 @@ def CpuUsage():
         FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
         return render_template('Cpu.html')
 
-@app.route("/usage", methods=['GET'])
-def usage():
-    return psutil.cpu_percent(interval=1, percpu=True)
+@app.route("/usage", methods=['GET', 'POST'])
+def Usage():
+    @after_this_request
+    def add_header(response):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
+    data = str(psutil.cpu_percent(interval=1, percpu=True))
+    return jsonify(data)
 
 @app.route("/deleteUser", methods=['GET', 'POST'])
 def deleteUser():
