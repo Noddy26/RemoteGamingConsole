@@ -76,3 +76,35 @@ padding-top:20px;
 letter-spacing:1.6px;
 line-height:22px;
 }
+#core1{
+    position:absolute;
+    top:100px; left:-200%;
+    width:400%; height:400%;
+    margin-left:100px;
+    background-color:#00aeef;
+    transform-origin:top center;
+}
+#core2{
+    position:absolute;
+    top:100px; left:-200%;
+    width:400%; height:400%;
+    margin-left:100px;
+    background-color:#00aeef;
+    transform-origin:top center;
+}
+#core3{
+    position:absolute;
+    top:100px; left:-200%;
+    width:400%; height:400%;
+    margin-left:100px;
+    background-color:#00aeef;
+    transform-origin:top center;
+}
+#core4{
+    position:absolute;
+    top:100px; left:-200%;
+    width:400%; height:400%;
+    margin-left:100px;
+    background-color:#00aeef;
+    transform-origin:top center;
+}

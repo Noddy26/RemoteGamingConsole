@@ -1,4 +1,5 @@
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, session, url_for, Response
+from flask_cors import CORS
 from libs.variables.Configuration import Configuration
 from libs.Methods.FileMethods import FileMethods
 from libs.Methods.AddUser import AddUser
@@ -6,9 +7,11 @@ from libs.Methods.DeleteUser import DeleteUser
 from libs.Methods.ConfirmationEmail import ConfirmationEmail
 from libs.Methods.ServerControl import ServerControl
 import os
+import psutil
 from libs.Database_functions.Database import Database
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.route('/')
 def home():
@@ -143,6 +146,10 @@ def CpuUsage():
         FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
         FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
         return render_template('Cpu.html')
+
+@app.route("/usage", methods=['GET'])
+def usage():
+    return psutil.cpu_percent(interval=1, percpu=True)
 
 @app.route("/deleteUser", methods=['GET', 'POST'])
 def deleteUser():

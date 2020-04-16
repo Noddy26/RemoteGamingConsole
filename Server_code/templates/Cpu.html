@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <link href="../static/css/cpu.css" rel="stylesheet" type="text/css" media="all" />
     <title>Remote Gaming Server Cpu page</title>
 </head>
@@ -24,63 +23,79 @@
         <div class="sc-gauge1" style="width:200px; height:200px; margin:200px auto; ">
             <span class="title1" style=" color:#fff">Core1 Usage</span>
             <div class="sc-background1" style="position:relative; height:100px; margin-bottom:10px; background-color:#fff; border-radius:150px 150px 0 0; overflow:hidden; text-align:center;">
-              <div class="sc-percentage1" style=" position:absolute; top:100px; left:-200%; width:400%; height:400%; margin-left:100px; background-color:#00aeef; transform:rotate(36deg); transform-origin:top center;"></div>
+              <div class="sc-percentage1" id='core1' ></div>
               <div class="sc-mask1" style="position:absolute; top:20px; right:20px; left:20px; height:80px; background-color:#555888; border-radius:150px 150px 0 0 "></div>
-              <span class="sc-value1" style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">20%</span>
+              <span class="sc-value1" id='core_per1' style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">20%</span>
             </div>
-            <span class="sc-min1" style="float:left; color:#fff">0</span>
-            <span class="sc-max1" style="float:right; color:#fff">100%</span>
+            <span class="sc-min1"  style="float:left; color:#fff">0</span>
+            <span class="sc-max1"  style="float:right; color:#fff">100%</span>
         </div>
        </div>
         <div class="grid-item">
             <div class="sc-gauge2" style="width:200px; height:200px; margin:200px auto; ">
                 <span class="title2" style=" color:#fff">Core2 Usage </span>
                 <div class="sc-background2" style="position:relative; height:100px; margin-bottom:10px; background-color:#fff; border-radius:150px 150px 0 0; overflow:hidden; text-align:center;">
-                  <div class="sc-percentage2" style=" position:absolute; top:100px; left:-200%; width:400%; height:400%; margin-left:100px; background-color:#00aeef; transform:rotate(36deg); transform-origin:top center;"></div>
+                  <div class="sc-percentage2" id='core2' ></div>
                   <div class="sc-mask2" style="position:absolute; top:20px; right:20px; left:20px; height:80px; background-color:#555888; border-radius:150px 150px 0 0 "></div>
-                  <span class="sc-value2" style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">20%</span>
+                  <span class="sc-value2" id='core_per2' style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">0%</span>
                 </div>
                 <span class="sc-min2" style="float:left; color:#fff">0</span>
-                <span class="sc-max2" style="float:right; color:#fff">100%</span>
+                <span class="sc-max2" style="float:right; color:#fff">100</span>
             </div>
         </div>
         <div class="grid-item">
             <div class="sc-gauge3" style="width:200px; height:200px; margin:200px auto; ">
                 <span class="title3" style=" color:#fff">Core3 Usage</span>
                 <div class="sc-background3" style="position:relative; height:100px; margin-bottom:10px; background-color:#fff; border-radius:150px 150px 0 0; overflow:hidden; text-align:center;">
-                  <div class="sc-percentage3" style=" position:absolute; top:100px; left:-200%; width:400%; height:400%; margin-left:100px; background-color:#00aeef; transform:rotate(36deg); transform-origin:top center;"></div>
+                  <div class="sc-percentage3" id='core3' ></div>
                   <div class="sc-mask3" style="position:absolute; top:20px; right:20px; left:20px; height:80px; background-color:#555888; border-radius:150px 150px 0 0 "></div>
-                  <span class="sc-value3" style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">20%</span>
+                  <span class="sc-value3" id='core_per3' style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">0%</span>
                 </div>
                 <span class="sc-min3" style="float:left; color:#fff">0</span>
-                <span class="sc-max3" style="float:right; color:#fff">100%</span>
+                <span class="sc-max3" style="float:right; color:#fff">100</span>
             </div>
         </div>
         <div class="grid-item">
             <div class="sc-gauge4" style="width:200px; height:200px; margin:200px auto; ">
                 <span class="title4" style=" color:#fff">Core4 Usage </span>
                 <div class="sc-background4" style="position:relative; height:100px; margin-bottom:10px; background-color:#fff; border-radius:150px 150px 0 0; overflow:hidden; text-align:center;">
-                  <div class="sc-percentage4" style=" position:absolute; top:100px; left:-200%; width:400%; height:400%; margin-left:100px; background-color:#00aeef; transform:rotate(36deg); transform-origin:top center;"></div>
+                  <div class="sc-percentage4" id='core4' ></div>
                   <div class="sc-mask4" style="position:absolute; top:20px; right:20px; left:20px; height:80px; background-color:#555888; border-radius:150px 150px 0 0 "></div>
-                  <span class="sc-value4" style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">20%</span>
+                  <span class="sc-value4" id='core_per4' style="position:absolute; top:50%; left:0; width:100%; color:#fff; font-size:48px; font-weight:700">0%</span>
                 </div>
                 <span class="sc-min4" style="float:left; color:#fff">0</span>
-                <span class="sc-max4" style="float:right; color:#fff">100%</span>
+                <span class="sc-max4" style="float:right; color:#fff">100</span>
             </div>
         </div>
     </div>
     <div class="footer">
+        <label id="demo"></label>
         <p style="font-size:20px; color: #fff; font-family:'Audiowide-Regular'; letter-spacing:3px; margin:1px; text-align: center;"> 2020 Neil Morrison Gaming Server</p>
     </div>
 </body>
 <script>
-    function click(obj) {
-    $.ajax({
-        ...
-        success: function() {
-            var new_things = ''; // Here is where you fetch new data from the response.
-            $('#123456').html("Things: " + new_things);
-        }
-    });
-}
+     window.setInterval(function(){
+         const url = 'http://192.168.1.13:2000/usage'
+         fetch(url)
+         .then(response => response.json())
+         .then(json => {
+            console.log(json);
+            var string = JSON.stringify(json);
+            string.replace('"', "");
+            var res = string.split(",");
+            var core1 = res[0].replace("[", "").replace('"', "");
+            var core2 = res[1];
+            var core3 = res[2];
+            var core4 = res[3].replace("]", "").replace('"', "");
+            document.getElementById('core_per1').innerHTML = parseInt(core1) + '%';
+            document.getElementById('core_per2').innerHTML = parseInt(core2) + '%';
+            document.getElementById('core_per3').innerHTML = parseInt(core3) + '%';
+            document.getElementById('core_per4').innerHTML = parseInt(core4) + '%';
+            document.getElementById("core1").style.transform = "rotate(" + 180/100 * parseInt(core1) + "deg)";
+            document.getElementById("core2").style.transform = "rotate(" + 180/100 * parseInt(core2) + "deg)";
+            document.getElementById("core3").style.transform = "rotate(" + 180/100 * parseInt(core3) + "deg)";
+            document.getElementById("core4").style.transform = "rotate(" + 180/100 * parseInt(core4) + "deg)";
+
+         })
+     }, 1000);
 </script>

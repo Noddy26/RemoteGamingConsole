@@ -8,7 +8,7 @@
 %define version 1.0
 %define release PA1
 %define arch noarch
-%define dependency bash, python > 3, python-yaml >= 3.10, termcolor, MySQLdb, mysql.connector, picamera, flask
+%define dependency bash, python > 3, python-yaml >= 3.10, termcolor, MySQLdb, mysql.connector, picamera, flask, flask-cors
 
 # where the files should be saved
 %define prefix /home/pi/GamingServer
