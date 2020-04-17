@@ -18,13 +18,18 @@ class SendEmail:
             sender_email = Configuration.GamingEmailAddress
             password = Configuration.GamingEmailPassword
             receiver = Configuration.AdminemailAddress
-            message = """\
-            Subject: Confirmation of user """ + self.user + """
-            User """ + self.user + """  """ + self.email + """ Wants to register for Gaming Server tap link to grant access\n
-            \r\nLink -> http://""" + Configuration.ipAddress + """:""" + str(Configuration.portNumber) + """/"""
+            message = "\r\n".join([
+                "From: " + Configuration.GamingEmailAddress,
+                "\r\nTo: " + receiver,
+                "\r\nSubject: Confirmation",
+                "",
+                "\r\nUser %s: %s  Wants to register for Gaming Server" % (self.user, self.email)
+            ])
 
             self.context = ssl.create_default_context()
             with smtplib.SMTP_SSL(smtp_server, port, context=self.context) as server:
+                print(sender_email)
+                print(password)
                 server.login(sender_email, password)
                 server.sendmail(sender_email, receiver, message)
                 return True

@@ -19,10 +19,13 @@ class ConfirmationEmail:
             sender_email = Configuration.GamingEmailAddress
             password = Configuration.GamingEmailPassword
             receiver = self.email
-            message = """\
-            Subject: Confirmation of user """ + self.user + """
-            Hi """ + self.user + """\r\nYou have not been Granted access to Gaming Server for Further details email %s""" \
-                      % Configuration.GamingEmailAddress
+            message = "\r\n".join([
+                "From: " + Configuration.GamingEmailAddress,
+                "\r\nTo: " + receiver,
+                "\r\nSubject: Confirmation",
+                "",
+                "\r\nHi " + self.user + "\r\nYou have not been Granted access to Gaming Server for Further details email %s" % Configuration.GamingEmailAddress
+            ])
 
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL(smtp_server, self.port, context=context) as server:
