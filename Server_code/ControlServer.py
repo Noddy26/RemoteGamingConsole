@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session, url_for, after_this_request, jsonify
+from flask import Flask, redirect, render_template, request, session, url_for, after_this_request, jsonify, Response
 from flask_cors import CORS
 from libs.variables.Configuration import Configuration
 from libs.Methods.FileMethods import FileMethods
@@ -157,17 +157,41 @@ def Usage():
     data = str(psutil.cpu_percent(interval=1, percpu=True))
     return jsonify(data)
 
+@app.route("/userpage", methods=['GET', 'POST'])
+def userpage():
+    userdata = Database.getAllUsers(None)
+    FileMethods.addUserDataToHtml(userdata)
+    return render_template('Users.html')
+
 @app.route("/deleteUser", methods=['GET', 'POST'])
 def deleteUser():
+    user = None
     if session['logged_in'] == True:
         if request.method == "POST":
             selected = request.form.getlist('check')
-            #if request.form['submit'] == 'Delete User' and selected is not None:
-            selected = request.form.getlist('check')
-            for each in selected:
-                Database.deleteUser(each)
-            FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
-            userdata = Database.getAllUsers(None)
-            FileMethods.addUserDataToHtml(userdata)
-            #elif request.form['submit'] == 'Delete User':
-            return render_template('Users.html')
+            if request.form['button'] == 'Delete User':
+                selected = request.form.getlist('check')
+                for each in selected:
+                    Database.deleteUser(each)
+                FileMethods.returnHTMLpageBack(Configuration.userhtml, Configuration.userhtmlbackup)
+                userdata = Database.getAllUsers(None)
+                FileMethods.addUserDataToHtml(userdata)
+                return render_template('Users.html')
+            elif request.form['button'] == 'View User Log':
+                selected = request.form.getlist('check')
+                print(len(selected))
+                if len(selected) < 2:
+                    for each in selected:
+                        userdetails = Database.getUsername(each)
+                        for each in userdetails:
+                            user = each[1]
+                    file = Configuration.logDir + "/debug_" + user + ".log"
+                    if os.path.exists(file):
+                        with open(file, "r") as f:
+                            content = f.read()
+                            results = content
+                        return render_template('Logs.html', results=results)
+                    else:
+                        return render_template('Users.html')
+                else:
+                    return render_template('Users.html')
