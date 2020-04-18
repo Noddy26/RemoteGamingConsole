@@ -26,9 +26,10 @@ class SendReceive:
         file_name = "/debug_" + Configuration.Username + ".log"
         Configuration.end_time = time.time()
         Total_time = Configuration.start_time - Configuration.end_time
+        total = str(Total_time).replace("-", "")
         Logger.info("Sending debug file to server")
         with open("Logging/logs/" + file_name, "a") as f:
-            f.write("Total Time online: %s" % Total_time)
+            f.write("Total Time online: %s" % total)
             f.write("\n*****************End of Log**********************")
         f.close()
         with open(debug_file + file_name, 'rb') as f:
