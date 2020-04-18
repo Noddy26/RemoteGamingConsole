@@ -1,6 +1,7 @@
 
 class Configuration(object):
 
+    aboslute_path = None
     emailUserCount = None
     CannotConnect = None
 
@@ -10,17 +11,17 @@ class Configuration(object):
     server_running = False
 
     # paths
-    adduserdir = "/home/pi/GamingServer/Server_code/UserToBeAdded/"
-    logDir = "/home/pi/GamingServer/Server_code/GamingStreaming/User_logs/"
-    userfilepath = adduserdir + "users.txt"
+    adduserdir = None
+    logDir = None
+    userfilepath = None
 
-    templates = r"/home/pi/GamingServer/Server_code/templates/"
+    templates = None
 
-    adminhtml = templates + "admin.html"
-    adminhtmlbcakup = templates + "admin.html.bck"
+    adminhtml = None
+    adminhtmlbcakup = None
 
-    userhtml = templates + "Users.html"
-    userhtmlbackup = templates + "Users.html.bck"
+    userhtml = None
+    userhtmlbackup = None
 
     # admin details
     adminusername = None
@@ -39,8 +40,6 @@ class Configuration(object):
     GamingEmailPassword = None
 
     # Gui Server Control
-    #serverPath = "/root/IdeaProjects/GamingServer/out/production/GamingServer"
-    #serverFile = "ServerForGui.Main"
     running = False
 
     CheckforemptyString = False
@@ -57,6 +56,6 @@ class Configuration(object):
     Stream_Socket = None
 
     # database file
-    database_file = r"/Server_code/libs/Setup\ServerDetails.db"
-    setup_detail_file = r"/Server_code/libs/Setup\setup-parameters.yml"  #"/home/pi/GamingServer/Server_code/Setup/setup-parameters.yml"
+    database_file = None
+    setup_detail_file = None
     database_table = 'CREDENTIALS'

@@ -180,7 +180,7 @@ def deleteUser():
             elif request.form['button'] == 'View User Log':
                 selected = request.form.getlist('check')
                 print(len(selected))
-                if len(selected) < 2:
+                if len(selected) < 2 or len(selected) > 0:
                     for each in selected:
                         userdetails = Database.getUsername(each)
                         for each in userdetails:

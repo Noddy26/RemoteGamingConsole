@@ -1,5 +1,4 @@
 import os
-
 from libs.Console.Terminal import Output
 from ControlServer import app
 from libs.Methods.FileMethods import FileMethods
@@ -8,6 +7,7 @@ from libs.variables.Configuration import Configuration
 
 
 def main():
+    Configuration.aboslute_path = os.getcwd()
     StartUp()
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     app.secret_key = os.urandom(12)
@@ -16,7 +16,6 @@ def main():
 
 if __name__ == '__main__':
     try:
-
         main()
     except KeyboardInterrupt:
         Output.red("Keyboard Error Occurred")
