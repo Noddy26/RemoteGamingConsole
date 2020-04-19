@@ -1,6 +1,8 @@
+import os
 from tkinter import Tk, Label, Entry, Button, StringVar, messagebox
 from PIL import Image, ImageDraw, ImageTk, ImageFont
 
+from ClientGui.functions.Sendmessages import SendReceive
 from ClientGui.variables.Configuration import Configuration
 from ClientGui.functions.DatbaseCheck import DatabaseCheck
 from ClientGui.Logging.logger import Logger
@@ -54,6 +56,7 @@ class Login:
         Button(self.window, text="Login", background="purple", command=self.buttonPressed)\
             .place(x=text_x + 230, y=text_y + 200, width=100, height=25)
 
+        self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.window.mainloop()
 
     def buttonPressed(self):
@@ -67,3 +70,9 @@ class Login:
                 messagebox.showerror("Incorrect Details", "The Details are incorrect")
                 self.username.set("")
                 self.password.set("")
+
+    def on_closing(self):
+        Logger.info("Exiting gui")
+        message = "Connection Terminate"
+        DatabaseCheck(None, None, message, self.socket).disconnect()
+        os._exit(0)
