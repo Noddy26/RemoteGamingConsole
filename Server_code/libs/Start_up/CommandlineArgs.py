@@ -18,8 +18,6 @@ class VariableOption():
                                 help="display version information")
         main_group.add_argument("-s", "--setup", action="store_true", default=False,
                                 help="sets up the tool")
-        main_group.add_argument("-h", "--help", action="store_true", default=True,
-                                help="Displays command line options")
 
         newList = sys.argv[2:]
         args = parser.parse_args()
@@ -37,8 +35,4 @@ class VariableOption():
 
         if (args.setup):
             Setup.setup()
-            sys.exit()
-
-        if (args.help):
-            Help()
             sys.exit()

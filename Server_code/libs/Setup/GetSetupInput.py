@@ -1,7 +1,7 @@
 import sys
 
 from libs.Setup.Confirm import Confirm
-from libs.Setup.Get_Input import GetInput
+from libs.Setup.Get_input import GetInput
 from libs.parameters.Parameters import Parameter
 from libs.Console.Terminal import Output
 

@@ -1,6 +1,6 @@
 from libs.FileFuctions.FileReader import FileReader
 from libs.parameters.Dictionary import Dictionary
-from libs.Setup.GetSetupInputs import GetSetupInputs
+from libs.Setup.GetSetupInput import GetSetupInputs
 from libs.parameters.StoreDBParameters import StoreDBParameters
 from libs.Console.Terminal import Output
 from libs.variables.Configuration import Configuration

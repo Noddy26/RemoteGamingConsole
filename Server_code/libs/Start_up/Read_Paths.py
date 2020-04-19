@@ -1,5 +1,5 @@
-from Server_code.libs.FileFuctions.FilePaths import FilePaths
-from Server_code.libs.variables.Configuration import Configuration
+from libs.FileFuctions.FilePaths import FilePaths
+from libs.variables.Configuration import Configuration
 
 
 class ReadPaths():

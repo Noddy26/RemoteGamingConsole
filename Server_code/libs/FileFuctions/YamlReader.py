@@ -1,6 +1,6 @@
 import yaml
 
-from Server_code.libs.FileFuctions.FileType import FileType
+from libs.FileFuctions.FileType import FileType
 
 class YamlReader(FileType):
 
