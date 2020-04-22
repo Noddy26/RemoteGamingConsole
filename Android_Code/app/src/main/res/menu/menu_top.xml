@@ -2,52 +2,43 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-        <item android:id="@+id/item2"
-            android:icon="@drawable/ic_cast_black_24dp"
-            android:title="@string/string_string_item_1"
-            app:showAsAction="ifRoom"/>
-        <item android:id="@+id/item1"
-            android:icon="@drawable/ic_menu_black_24dp"
-            android:title="@string/string_string_item_1"
-            app:showAsAction="ifRoom">
-                <menu>
-                    <item android:title="@string/menu" />
-                    <item
-                        android:id="@+id/Stream"
-                        android:checkable="true"
-                        android:icon="@drawable/ic_media_play_light"
-                        android:onClick="Start_stream"
-                        android:title="@string/start_stream"
-                        android:visible="true" />
-                    <item
-                        android:id="@+id/stop"
-                        android:checkable="true"
-                        android:enabled="false"
-                        android:icon="@drawable/ic_media_stop_light"
-                        android:onClick="stop_stream"
-                        android:title="@string/stop_stream"
-                        android:visible="true" />
-                    <item
-                        android:id="@+id/Bluetooth"
-                        android:checkable="true"
-                        android:icon="@drawable/ic_bluetooth_black_24dp"
-                        android:onClick="controller"
-                        android:title="@string/detect_controller"
-                        android:visible="true" />
-                    <item
-                        android:id="@+id/quaility"
-                        android:checkable="true"
-                        android:icon="@drawable/ic_tap_and_play_black_24dp"
-                        android:onClick="Video_Quality"
-                        android:title="@string/video"
-                        android:visible="true" />
-                    <item
-                        android:id="@+id/logout"
-                        android:checkable="true"
-                        android:onClick="logout"
-                        android:title="@string/logout"
-                        android:visible="true" />
-                </menu>
-        </item>
-
+    <item
+        android:id="@+id/settings"
+        android:onClick="Settings"
+        android:title="@string/settings" >
+        <menu >
+            <item
+                android:id="@+id/video"
+                android:title="@string/video_quality" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/controller"
+        android:onClick="Add_User"
+        android:title="@string/bluetooth" >
+        <menu >
+            <item
+                android:id="@+id/connect"
+                android:title="@string/connect" />
+            <item
+                android:id="@+id/Scan"
+                android:title="@string/item" />
+        </menu>
+    </item>
+    <item
+        android:onClick="streamVideo"
+        android:title="@string/stream">
+        <menu>
+            <item
+                android:id="@+id/stream"
+                android:title="@string/stop_stream" />
+            <item
+                android:id="@+id/stop"
+                android:title="@string/start_stream" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/log"
+        android:onClick="Logout"
+        android:title="@string/logout" ></item>
 </menu>

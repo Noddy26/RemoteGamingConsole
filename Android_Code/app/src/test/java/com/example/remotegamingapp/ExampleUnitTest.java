@@ -1,4 +1,4 @@
-package com.example.gamingserver;
+package com.example.remotegamingapp;
 
 import org.junit.Test;
 
