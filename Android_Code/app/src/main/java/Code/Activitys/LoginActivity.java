@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void forgot_pass(View item){
-        System.out.println("fuck yes");
+        System.out.println("");
     }
     public static LoginActivity getInstace() {
         return ins;
