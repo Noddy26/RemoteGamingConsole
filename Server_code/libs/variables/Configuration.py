@@ -59,3 +59,6 @@ class Configuration(object):
     database_file = None
     setup_detail_file = None
     database_table = 'CREDENTIALS'
+
+    # two player
+    secondplayer = False
