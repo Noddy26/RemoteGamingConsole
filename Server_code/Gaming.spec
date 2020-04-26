@@ -2,9 +2,9 @@
 # Spec file for GamingServer
 #####
 
-%define name GamingGui
+%define name GamingServer
 %define pwd %(pwd)
-%define src /home/pi/GamingGui
+%define src /root/Server_code
 %define version 1.0
 %define release PA1
 %define arch noarch
@@ -19,11 +19,14 @@ Name: %{name}
 # The upstream version number of the software.
 Version: %{version}
 
-# The initial value should normally be 1%{?dist}, this value should be incremented each new release of the package and reset to 1 when a new Version of the software is built.
+# The initial value should normally be 1%, this value should be incremented each new release of the package and reset to 1 when a new Version of the software is built.
 Release: %{release}
 
 # A brief, one-line summary of the package.
-Summary: GamingServer
+Summary: The GamingServer is a package that can let you play your console anywhere
+
+# The license of the software being packaged. For packages that are destined for community distributions such as Fedora this must be an Open Source License abiding by the specific distribution’s Licensing Guidelines.
+License: (c) Neil Morrison
 
 # The full URL for more information about the program (most often this is the upstream project website for the software being packaged).
 URL: http//:193.168.1.13:2000
@@ -37,7 +40,6 @@ Requires: %{dependency}
 AutoReqProv: no
 
 %description
-GamingServer
 
 #####
 # Preparation phase
@@ -52,7 +54,7 @@ if [ ! -z ${RPM_BUILD_ROOT} ]; then
 fi
 mkdir -p ${RPM_BUILD_ROOT}/%{prefix}
 cd %{src}
-sudo tar --exclude='*.pyo' --exclude='*.pyc' --exclude='*/.git*' --exclude='*/.idea*' --exclude='Gaming.spec' --exclude='*delete_me*' -cpf - . | tar -C ${RPM_BUILD_ROOT}/%{prefix} -xvf -
+sudo tar --exclude='*.pyo' --exclude='*.db' --exclude='*.pyc' --exclude='*/.git*' --exclude='*/.idea*' --exclude='Gaming.spec' --exclude='*delete_me*' -cpf - . | tar -C ${RPM_BUILD_ROOT}/%{prefix} -xvf -
 cd ${RPM_BUILD_ROOT}
 find -L .%{prefix} -depth -print | sed -e 's/^\.//' -e 's/.*/"\0"/' > ${RPM_BUILD_DIR}/GamingServer_files
 

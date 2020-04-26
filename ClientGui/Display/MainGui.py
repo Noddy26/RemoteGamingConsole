@@ -40,7 +40,7 @@ class MainGui:
         self.window.config(menu=menu)
 
         self.system = Menu(menu, tearoff=False)
-        configure = Menu(menu, tearoff=False)
+        self.configure = Menu(menu, tearoff=False)
         help = Menu(menu, tearoff=False)
 
         self.system.add_command(label="Start Stream", command=self.start_stream)
@@ -48,11 +48,11 @@ class MainGui:
         self.system.add_command(label="Exit", command=self.exit)
         menu.add_cascade(label="System", menu=self.system)
 
-        configure.add_command(label="Detect Controller", command=self.controller)
-        configure.add_command(label="Enable Two Player", command=self.two_player)
-        configure.add_command(label="Audio", command=self.audio)
-        configure.add_command(label="Video", command=self.video)
-        menu.add_cascade(label="Configure", menu=configure)
+        self.configure.add_command(label="Detect Controller", command=self.controller)
+        self.configure.add_command(label="Enable Two Player", command=self.two_player)
+        self.configure.add_command(label="Audio", command=self.audio)
+        self.configure.add_command(label="Video", command=self.video)
+        menu.add_cascade(label="Configure", menu=self.configure)
 
         help.add_command(label="about", command=self.about)
         menu.add_cascade(label="Help", menu=help)
@@ -118,8 +118,17 @@ class MainGui:
 
     def two_player(self):
         Logger.info("Two Player enabled")
-        SendReceive(self.socket, "Enable_twoPlayer").send()
+        self.configure.delete(1, 1)
+        self.configure.add_command(label="Disable Two Player", command=self.disable_two_player)
+        SendReceive(self.socket, "Enable/twoPlayer").send()
         messagebox.askokcancel("Stream", "Two Player enabled")
+
+    def disable_two_player(self):
+        Logger.info("Two Player disabled")
+        self.configure.delete(1, 3)
+        self.configure.add_command(label="Enable Two Player", command=self.two_player)
+        SendReceive(self.socket, "disable/twoPlayer").send()
+        messagebox.askokcancel("Stream", "Two Player disabled")
 
     def video(self):
         if Configuration.stream_started is False:

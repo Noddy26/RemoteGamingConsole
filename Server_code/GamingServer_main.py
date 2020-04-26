@@ -7,7 +7,10 @@ from libs.variables.Configuration import Configuration
 
 
 def main():
-    Configuration.aboslute_path = os.getcwd()
+    if str(os.getcwd()).__contains__("GamingServer"):
+        Configuration.aboslute_path = os.getcwd()
+    else:
+        Configuration.aboslute_path = str(os.getcwd()) + "/GamingServer"
     StartUp()
     FileMethods.returnHTMLpageBack(Configuration.adminhtml, Configuration.adminhtmlbcakup)
     app.secret_key = os.urandom(12)
@@ -21,5 +24,3 @@ if __name__ == '__main__':
         Output.red("Keyboard Error Occurred")
     except SystemExit:
         Output.red("SystemExit")
-    except:
-        Output.red("Unknown Error Caused Crash")
