@@ -1,7 +1,7 @@
 import socket
 from threading import Thread
-from GamingStreaming.ClientThread import ClientThread
-from variables.Configuration import Configuration
+from libs.GamingStreaming.ClientThread import ClientThread
+from libs.variables.Configuration import Configuration
 
 
 class Server(Thread):

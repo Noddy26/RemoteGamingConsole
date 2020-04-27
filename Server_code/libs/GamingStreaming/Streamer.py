@@ -1,33 +1,29 @@
 import socket
+from libs.GamingStreaming.videoFeed import VideoFeed
 from threading import Thread
-from variables.Configuration import Configuration
-from GamingStreaming.videoFeed import VideoFeed
 
 
-class Streamer(Thread):
+class Streamer():
 
     def __init__(self, quality, frames):
-        print("coming")
-        Thread.__init__(self)
         self.quality = quality
         self.frames = frames
         self.sock = socket.socket()
-        self.host = Configuration.ipAddress
+        self.host = "192.168.1.13"
         self.port = 2005
         self.buffer = 1024
-        Configuration.server_running = True
+        self.server_running = True
 
     def run(self):
         global threads, newthread
         try:
-            Configuration.Gui_Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.streamServer = Configuration.Gui_Socket
+            self.streamServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.streamServer.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             self.streamServer.bind((self.host, self.port))
             threads = []
             print('Stream Server started!')
             print('Waiting for the client...')
-            while Configuration.server_running is True:
+            while self.server_running is True:
                 self.streamServer.listen(4)
                 try:
                     (connection, (ip, port)) = self.streamServer.accept()
@@ -43,6 +39,6 @@ class Streamer(Thread):
 
     def kill(self):
         print("Stopping Stream Server")
-        Configuration.server_running = False
-        Configuration.Gui_Socket.shutdown(socket.SHUT_RDWR)
-        Configuration.Gui_Socket.close()
+        self.server_running = False
+        self.streamServer.shutdown(socket.SHUT_RDWR)
+        self.streamServer.close()

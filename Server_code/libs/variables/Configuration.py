@@ -62,3 +62,5 @@ class Configuration(object):
 
     # two player
     secondplayer = False
+    versionGui = 1.1
+    versionApp = 1.1

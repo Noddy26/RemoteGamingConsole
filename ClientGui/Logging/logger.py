@@ -19,6 +19,7 @@ class Logger(object):
         fh.setFormatter(formatter)
         logger.addHandler(fh)
         Logger._static_logger = logger
+        Configuration.Logstarted = True
 
     def shutdownLogger(self):
         print("Log is being stopped")
