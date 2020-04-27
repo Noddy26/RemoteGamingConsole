@@ -1,5 +1,6 @@
 import smbus
 import time
+from libs.Console.Terminal import Output
 
 
 class ControllerOneControl:
@@ -25,7 +26,10 @@ class ControllerOneControl:
 
         if buttonpressed in buttons:
             function = buttons[buttonpressed]
-            function()
+            try:
+                function()
+            except IOError as e:
+                Output.red(e)
 
     def DpadUp(self):
         self.writeData("U1")
