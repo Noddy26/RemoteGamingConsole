@@ -14,10 +14,7 @@ class VideoFeed(Thread):
         self.new = quality.split("x")
         self.frames = str(frames).replace("fps", "")
         self.running = True
-
         print("New Streaming Thread started for " + ip + ":" + str(port))
-
-    def run(self):
         global camera
         try:
             first = self.new[0]
@@ -27,7 +24,6 @@ class VideoFeed(Thread):
                 camera.framerate = int(self.frames)
                 camera.start_preview()
                 time.sleep(2)
-
                 stream = io.BytesIO()
                 for _ in camera.capture_continuous(stream, 'jpeg'):
                     self.connection.write(struct.pack('<L', stream.tell()))
@@ -40,6 +36,7 @@ class VideoFeed(Thread):
                     stream.truncate()
             self.connection.write(struct.pack('<L', 0))
         finally:
+            print("close")
             self.connection.close()
             camera.stop_preview()
 
