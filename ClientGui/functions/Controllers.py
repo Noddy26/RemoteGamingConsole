@@ -27,7 +27,7 @@ class ControllerControl(Thread):
 
 
         except Exception as e:
-            print(e)
+            Logger.error(e)
             Logger.error("Controller disconnected by user Exception: " + str(e))
 
     def stop(self):

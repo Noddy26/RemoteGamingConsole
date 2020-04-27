@@ -1,4 +1,5 @@
-import multiprocessing
+import picamera
+import socket
 import os
 from threading import Thread
 
@@ -24,7 +25,19 @@ class ClientThread(Thread):
         self.Handler_running = True
         Configuration.secondplayer = False
         print("New Thread started for " + ip + ":" + str(port))
-        self.keys(self.connection.recv(2048).decode())
+
+    def run(self):
+        while self.Handler_running:
+            try:
+                data = self.connection.recv(2048).decode()
+                self.keys(data)
+            except socket.error as serr:
+                Output.red(serr)
+            except picamera.PiCameraError as p:
+                Output.red(p)
+            except Exception as e:
+                Output.red(e)
+                self.kill_handler()
 
     def keys(self, incoming):
 
@@ -32,7 +45,7 @@ class ClientThread(Thread):
                       AppKeys.StartStrem_key: self.startstream, AppKeys.ip_key: self.checkip,
                       AppKeys.StopStrem_key: self.stopstream, AppKeys.Terminate_key: self.terminate,
                       AppKeys.Version_key: self.version, AppKeys.LogFile_key: self.getDebugfile,
-                      AppKeys.enable_two_player: self.enable_two_player(), AppKeys.disable_two_player: self.disable_two_player()}
+                      AppKeys.enable_two_player: self.enable_two_player, AppKeys.disable_two_player: self.disable_two_player}
 
         for key in Dictionary:
             if incoming.__contains__(key):
@@ -81,31 +94,27 @@ class ClientThread(Thread):
         quality = video[1]
         frames = video[2]
         if Configuration.streaming_has_started is False:
-            self.pool = multiprocessing.Pool()
             TurnOnConsole().turnOnXbox()
             Configuration.streaming_has_started = True
-            self.pool.map(Streamer(quality, frames), range(0, 1))
-            #self.p1 = Process(target=Streamer(quality, frames), ).start()
+            self.process = Streamer(quality, frames).start()
             Output.yellow("stream started")
             if Configuration.ClientTypeGui == True:
                 self.connection.send(AppKeys.Gui_streamStared.encode())
             else:
                 self.connection.send(AppKeys.streamStared.encode())
 
-    def stopstream(self):
+    def stopstream(self, data):
         print("Stopping stream")
         if Configuration.streaming_has_started is True:
             Configuration.streaming_has_started = False
-            # print("stopping")
-            # streamThread.kill()
-            # streamThread.join()
-            # self.p1.kill()
-            self.pool.close()
+            Output.yellow("stopping")
+            self.process.kill()
+            self.process.join()
         else:
             print("stream has not started")
 
     def checkip(self, data):
-        get = data.split("/")
+        get = data.split("`")
         self.ip = get[0]
         if get[1] == "Gui":
             Configuration.ClientTypeGui = True
@@ -127,37 +136,33 @@ class ClientThread(Thread):
             else:
                 self.connection.send(AppKeys.Ip_Not_Found.encode())
 
-    def enable_two_player(self):
+    def enable_two_player(self, data):
             Configuration.secondplayer = True
 
-    def disable_two_player(self):
+    def disable_two_player(self, data):
             Configuration.secondplayer = False
 
-    def version(self):
+    def version(self, data):
         if Configuration.ClientTypeGui == True:
             self.connection.send(str(Configuration.versionGui).encode())
         else:
             self.connection.send(str(Configuration.versionApp).encode())
 
-    def terminate(self):
+    def terminate(self, data):
         if Configuration.streaming_has_started is True:
             Configuration.streaming_has_started = False
             print("stopping stream")
-            # streamThread.kill()
-            # streamThread.join()
-            # self.p1.kill()
-            self.pool.close()
-            self.getDebugfile()
+            self.process.kill()
+            self.process.join()
+        self.getDebugfile(self, "")
 
-    def getDebugfile(self):
-        if self.ip is None:
-            user_loggedin = AppKeys.Loggedout % self.username.replace("'", "")
-            Database.addIptoUser(user_loggedin)
-            if Configuration.ClientTypeGui == True:
-                self.connection.send(AppKeys.Gui_Logout.encode())
-            else:
-                self.connection.send(AppKeys.Logout.encode())
-            logfile = Configuration.logDir + "debug_" + self.User + ".log"
+    def getDebugfile(self, data):
+        if data.__contains__(AppKeys.LogFile_key):
+            self.connection.send(AppKeys.Gui_send_ip.encode())
+            ip = self.connection.recv(2048).decode()
+            sql = AppKeys.GetUser % ip
+            user = Database.checkIp(sql)
+            logfile = Configuration.logDir + "debug_" + user + ".log"
             if os.path.exists(logfile):
                 files = self.connection.recv(4024)
                 ReadFiles(logfile, files).appendbinary()
@@ -165,19 +170,34 @@ class ClientThread(Thread):
                 files = self.connection.recv(4024)
                 ReadFiles(logfile, files).writebinary()
         else:
-            user_loggedin = AppKeys.Loggedout % self.ip
-            Database.addIptoUser(user_loggedin)
-            if Configuration.ClientTypeGui == True:
-                self.connection.send(AppKeys.Gui_Logout.encode())
+            if self.ip is None:
+                user_loggedin = AppKeys.Loggedout % self.username.replace("'", "")
+                Database.addIptoUser(user_loggedin)
+                if Configuration.ClientTypeGui == True:
+                    self.connection.send(AppKeys.Gui_Logout.encode())
+                else:
+                    self.connection.send(AppKeys.Logout.encode())
+                logfile = Configuration.logDir + "debug_" + self.User + ".log"
+                if os.path.exists(logfile):
+                    files = self.connection.recv(4024)
+                    ReadFiles(logfile, files).appendbinary()
+                else:
+                    files = self.connection.recv(4024)
+                    ReadFiles(logfile, files).writebinary()
             else:
-                self.connection.send(AppKeys.Logout.encode())
-            logfile = Configuration.logDir + "debug_" + self.User.replace("'", "") + ".log"
-            if os.path.exists(logfile):
-                files = self.connection.recv(4024)
-                ReadFiles(logfile, files).appendbinary()
-            else:
-                files = self.connection.recv(4024)
-                ReadFiles(logfile, files).writebinary()
+                user_loggedin = AppKeys.Loggedout % self.ip
+                Database.addIptoUser(user_loggedin)
+                if Configuration.ClientTypeGui == True:
+                    self.connection.send(AppKeys.Gui_Logout.encode())
+                else:
+                    self.connection.send(AppKeys.Logout.encode())
+                logfile = Configuration.logDir + "debug_" + self.User.replace("'", "") + ".log"
+                if os.path.exists(logfile):
+                    files = self.connection.recv(4024)
+                    ReadFiles(logfile, files).appendbinary()
+                else:
+                    files = self.connection.recv(4024)
+                    ReadFiles(logfile, files).writebinary()
 
     def kill_handler(self):
         Configuration.streaming_has_started = False

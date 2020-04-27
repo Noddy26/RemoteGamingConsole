@@ -1,11 +1,13 @@
 import socket
+from multiprocessing.context import Process
 from libs.GamingStreaming.videoFeed import VideoFeed
 from threading import Thread
 
 
-class Streamer():
+class Streamer(Process):
 
     def __init__(self, quality, frames):
+        super().__init__()
         self.quality = quality
         self.frames = frames
         self.sock = socket.socket()

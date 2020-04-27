@@ -4,7 +4,7 @@ class AppKeys(object):
     controller_key = "_"
     Login_key = "+"
     StartStrem_key = "StartStreamingServer"
-    ip_key = "."
+    ip_key = "`"
     StopStrem_key = "Stop"
     Terminate_key = "Connection Terminate"
     Version_key = "version"
@@ -21,6 +21,7 @@ class AppKeys(object):
     Gui_Enable_two_player = "Enable/twoPlayer"
     Gui_Disable_two_player = "disable/twoPlayer"
     Gui_Logout = "Logged out"
+    Gui_send_ip = "send ip"
 
     # keys to send to client Android
     streamStared = "StreamStarted\n"

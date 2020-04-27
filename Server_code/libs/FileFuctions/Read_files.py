@@ -1,4 +1,4 @@
-from Server_code.libs.Console.Terminal import Output
+from libs.Console.Terminal import Output
 
 
 class ReadFiles():

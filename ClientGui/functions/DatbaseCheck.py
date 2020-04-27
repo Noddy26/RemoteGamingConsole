@@ -12,7 +12,6 @@ class DatabaseCheck:
 
     def check_user(self):
         message = self.user + "+" + self.password + "+Gui"
-        print(message)
         SendReceive(self.sock, message).send()
         mess = SendReceive(self.sock, None).receive()
         if mess == "Access Granted":
@@ -32,9 +31,7 @@ class DatabaseCheck:
 
     def disconnect(self):
         SendReceive(self.sock, self.message).send()
-        print(self.message)
         mess = SendReceive(self.sock, None).receive()
-        print(mess)
         if mess == "Logged out":
             Logger.error("Logged out from server")
             return True

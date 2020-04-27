@@ -2,6 +2,8 @@ from tkinter import *
 from PIL import Image, ImageTk
 from threading import Thread
 
+from ClientGui.Logging.logger import Logger
+
 
 class GifPlayer(Label):
 
@@ -42,6 +44,6 @@ class GifPlayer(Label):
         self.cancel = self.after(self.delay, self.run)
 
     def stop(self):
-        print("stopping")
+        Logger.info("stopping loading page")
         self.running = False
         self.pack_forget()

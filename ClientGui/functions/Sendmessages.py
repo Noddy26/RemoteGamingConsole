@@ -13,12 +13,15 @@ class SendReceive:
         self.message = message
 
     def send(self):
-        print("sending: " + self.message)
+        if self.message.__contains__("+"):
+            Logger.info("sending: " + "***************")
+        else:
+            Logger.info("sending: " + self.message)
         self.socket.send(self.message.encode())
 
     def receive(self):
         mess = self.socket.recv(1024).decode()
-        print("received: " + mess)
+        Logger.info("received: " + mess)
         return mess
 
     def sendfile(self):

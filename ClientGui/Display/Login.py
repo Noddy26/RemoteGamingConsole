@@ -63,7 +63,6 @@ class Login:
         if self.username.get() is not None and self.password.get() is not None:
             if DatabaseCheck(self.username.get(), self.password.get(), None, self.socket).check_user() is True:
                 Logger.info("Details were Correct Logged in as user: " + self.username.get())
-                Configuration.Username = self.username.get()
                 MainGui(self.window, self.socket).run()
             else:
                 Logger.info("Incorrect Details")

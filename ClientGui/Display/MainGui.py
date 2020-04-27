@@ -1,4 +1,5 @@
 from ClientGui.functions.Sendmessages import SendReceive
+from ClientGui.functions.Upgrade import Upgrade
 from ClientGui.variables.Configuration import Configuration
 from ClientGui.functions.Controllers import ControllerControl
 from ClientGui.functions.DatbaseCheck import DatabaseCheck
@@ -28,7 +29,7 @@ class MainGui:
         self.window.geometry("%sx%s" % (self.height, self.width))
 
     def run(self):
-        print("Starting Main Gui")
+        Logger.info("Starting Main Gui")
         self.image = Image.open(self.image_file)
         self.img_copy = self.image.copy()
         self.background_image = ImageTk.PhotoImage(self.image)
@@ -59,6 +60,10 @@ class MainGui:
 
         self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.window.mainloop()
+        SendReceive(self.socket, "Guiversion")
+        version = SendReceive(self.socket, None).receive()
+        if float(version) > float(Configuration.version):
+            Upgrade()
 
     def start_stream(self):
         global thread
@@ -83,7 +88,7 @@ class MainGui:
                 os._exit(0)
 
     def stop_stream(self):
-        print("stopping stream")
+        Logger.info("stopping stream")
         if Configuration.stream_started is True:
             Configuration.stream_started = False
             SendReceive(self.socket, "Stop").send()
@@ -92,7 +97,7 @@ class MainGui:
             try:
                 ExpectStream(None).vidLabel.destroy()
             except Exception as e:
-                print(e)
+                Logger.error(e)
             self.p1.join()
             self.p1.kill()
             GifPlayer(None, None).stop()
@@ -159,7 +164,6 @@ class MainGui:
         if messagebox.askokcancel("Exit", "Do you want to quit?"):
             message = "Connection Terminate"
             DatabaseCheck(None, None, message, self.socket).disconnect()
-            print(os.path.exists("Logging/Logs/debug_" + Configuration.Username + ".log"))
             if os.path.exists("Logging/Logs/debug_" + Configuration.Username + ".log"):
                 SendReceive(self.socket, None).sendfile()
             os._exit(0)
