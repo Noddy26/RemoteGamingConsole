@@ -24,3 +24,7 @@ if __name__ == '__main__':
         Output.red("Keyboard Error Occurred")
     except SystemExit:
         Output.red("SystemExit")
+    except OSError as e:
+        Output.red(e)
+    except:
+        Output.red("Unknown Error Caused Crash")

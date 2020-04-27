@@ -26,7 +26,7 @@ class MainGui:
         self.image_file = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\Playstation-Wallpaper-20-1920x1080.jpg"
         self.play_gif = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\Fmh8EMk.gif"
         self.height, self.width = self._screen_size()
-        self.window.geometry("%sx%s" % (self.height, self.width))
+        self.window.geometry("%sx%s" % (self.height - 40, self.width - 70))
 
     def run(self):
         Logger.info("Starting Main Gui")
@@ -67,8 +67,8 @@ class MainGui:
 
     def start_stream(self):
         global thread
-        #self.p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
-        #self.p1.start()
+        self.p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
+        self.p1.start()
 
 
         if Configuration.frames and Configuration.quality is not None:
@@ -98,8 +98,9 @@ class MainGui:
                 ExpectStream(None).vidLabel.destroy()
             except Exception as e:
                 Logger.error(e)
-            self.p1.join()
             self.p1.kill()
+            self.p1.join()
+
             GifPlayer(None, None).stop()
             Logger.info("stopping stream")
 
