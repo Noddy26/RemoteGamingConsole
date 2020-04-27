@@ -11,7 +11,7 @@ class DatabaseCheck:
         self.message = message
 
     def check_user(self):
-        message = self.user + "+" + self.password
+        message = self.user + "+" + self.password + "+Gui"
         print(message)
         SendReceive(self.sock, message).send()
         mess = SendReceive(self.sock, None).receive()

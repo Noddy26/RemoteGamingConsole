@@ -47,6 +47,9 @@ class ClientThread(Thread):
         parts = str(data).split("+")
         self.username = parts[0]
         raw_password = parts[1]
+        clienttype = parts[2]
+        if clienttype == "Gui":
+            Configuration.ClientTypeGui = True
         if self.username is not None and parts[1] is not None:
             if Database(self.username, raw_password, None).checkForUserPassword() is True:
                 Output.green("Client Registered in database")
@@ -55,14 +58,23 @@ class ClientThread(Thread):
                 Database.addIptoUser(add_ip)
                 Database.addIptoUser(user_loggedin)
                 self.User = self.username
-                self.connection.send(AppKeys.Gui_Access.encode())
+                if Configuration.ClientTypeGui == True:
+                    self.connection.send(AppKeys.Gui_Access.encode())
+                else:
+                    self.connection.send(AppKeys.Access.encode())
             else:
                 self.User = self.username
                 Output.yellow("Client is not Registered in Database")
-                self.connection.send(AppKeys.Gui_denied.encode())
+                if Configuration.ClientTypeGui == True:
+                    self.connection.send(AppKeys.Gui_denied.encode())
+                else:
+                    self.connection.send(AppKeys.denied.encode())
         else:
             Output.yellow("Client is not Registered in Database")
-            self.connection.send(AppKeys.Gui_denied.encode())
+            if Configuration.ClientTypeGui == True:
+                self.connection.send(AppKeys.Gui_denied.encode())
+            else:
+                self.connection.send(AppKeys.denied.encode())
 
     def startstream(self, data):
         video = str(data).split(',')
@@ -75,7 +87,10 @@ class ClientThread(Thread):
             self.pool.map(Streamer(quality, frames), range(0, 1))
             #self.p1 = Process(target=Streamer(quality, frames), ).start()
             Output.yellow("stream started")
-            self.connection.send(AppKeys.Gui_streamStared.encode())
+            if Configuration.ClientTypeGui == True:
+                self.connection.send(AppKeys.Gui_streamStared.encode())
+            else:
+                self.connection.send(AppKeys.streamStared.encode())
 
     def stopstream(self):
         print("Stopping stream")
@@ -90,18 +105,27 @@ class ClientThread(Thread):
             print("stream has not started")
 
     def checkip(self, data):
-        self.ip = data
+        get = data.split("/")
+        self.ip = get[0]
+        if get[1] == "Gui":
+            Configuration.ClientTypeGui = True
         sql = AppKeys.GetUser % data
         user_loggedin = AppKeys.Loggedin % data
         user = Database.checkIp(sql)
         if user is not None:
             self.User = user
             Output.yellow("IP Found in database")
-            self.connection.send(AppKeys.Gui_Ip_Found.encode())
+            if Configuration.ClientTypeGui == True:
+                self.connection.send(AppKeys.Gui_Ip_Found.encode())
+            else:
+                self.connection.send(AppKeys.Ip_Found.encode())
             Database.addIptoUser(user_loggedin)
             Output.yellow("User Logged in")
         else:
-            self.connection.send(AppKeys.Gui_Ip_Not_Found.encode())
+            if Configuration.ClientTypeGui == True:
+                self.connection.send(AppKeys.Gui_Ip_Not_Found.encode())
+            else:
+                self.connection.send(AppKeys.Ip_Not_Found.encode())
 
     def enable_two_player(self):
             Configuration.secondplayer = True
@@ -110,7 +134,10 @@ class ClientThread(Thread):
             Configuration.secondplayer = False
 
     def version(self):
-        self.connection.send(str(Configuration.versionGui).encode())
+        if Configuration.ClientTypeGui == True:
+            self.connection.send(str(Configuration.versionGui).encode())
+        else:
+            self.connection.send(str(Configuration.versionApp).encode())
 
     def terminate(self):
         if Configuration.streaming_has_started is True:
@@ -126,7 +153,10 @@ class ClientThread(Thread):
         if self.ip is None:
             user_loggedin = AppKeys.Loggedout % self.username.replace("'", "")
             Database.addIptoUser(user_loggedin)
-            self.connection.send("Logged out".encode())
+            if Configuration.ClientTypeGui == True:
+                self.connection.send(AppKeys.Gui_Logout.encode())
+            else:
+                self.connection.send(AppKeys.Logout.encode())
             logfile = Configuration.logDir + "debug_" + self.User + ".log"
             if os.path.exists(logfile):
                 files = self.connection.recv(4024)
@@ -137,7 +167,10 @@ class ClientThread(Thread):
         else:
             user_loggedin = AppKeys.Loggedout % self.ip
             Database.addIptoUser(user_loggedin)
-            self.connection.send(AppKeys.Gui_Logout.encode())
+            if Configuration.ClientTypeGui == True:
+                self.connection.send(AppKeys.Gui_Logout.encode())
+            else:
+                self.connection.send(AppKeys.Logout.encode())
             logfile = Configuration.logDir + "debug_" + self.User.replace("'", "") + ".log"
             if os.path.exists(logfile):
                 files = self.connection.recv(4024)

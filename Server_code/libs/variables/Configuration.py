@@ -62,5 +62,10 @@ class Configuration(object):
 
     # two player
     secondplayer = False
+
+    # version
     versionGui = 1.1
     versionApp = 1.1
+
+    # Type
+    ClientTypeGui = None

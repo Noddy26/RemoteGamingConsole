@@ -18,3 +18,6 @@ class Configuration(object):
 
     stream_started = False
     connection = None
+    Logstarted = False
+
+    version = 1.1
