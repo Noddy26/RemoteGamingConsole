@@ -15,8 +15,6 @@ class Streamer(Process):
         self.port = 2005
         self.buffer = 1024
         self.server_running = True
-
-    def run(self):
         global threads, newthread
         try:
             self.streamServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

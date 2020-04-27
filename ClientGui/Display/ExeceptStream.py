@@ -23,6 +23,7 @@ class ExpectStream(Thread):
 
     def run(self):
         print("Starting")
+        sleep(5)
         self.client_socket.connect((Configuration.ipAddress, 2005))
         Configuration.connection = self.client_socket.makefile('b')
         connection = Configuration.connection
@@ -31,7 +32,9 @@ class ExpectStream(Thread):
                 main = False
                 image_len = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
                 if not image_len:
+                    print("break")
                     break
+
                 image_stream = io.BytesIO()
                 image_stream.write(connection.read(image_len))
                 image_stream.seek(0)
@@ -40,9 +43,9 @@ class ExpectStream(Thread):
                 image = ImageTk.PhotoImage(frame3)
                 self.vidLabel.configure(image=image)
                 self.vidLabel.image = image
-                if main is False:
-                    main = True
-                    self.vidLabel.bind('<Configure>', self._resize_image)
+                # if main is False:
+                #     main = True
+                #     self.vidLabel.bind('<Configure>', self._resize_image)
                 self.vidLabel.place(x=0, y=0)
         finally:
             connection.close()

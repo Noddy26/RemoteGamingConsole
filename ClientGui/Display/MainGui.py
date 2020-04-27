@@ -67,8 +67,8 @@ class MainGui:
 
     def start_stream(self):
         global thread
-        self.p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
-        self.p1.start()
+        #self.p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
+        #self.p1.start()
 
 
         if Configuration.frames and Configuration.quality is not None:
