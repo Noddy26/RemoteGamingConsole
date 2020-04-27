@@ -20,10 +20,11 @@ def main():
     #CheckLog(sock, host_ip)
     Logger()
     UserLocation().run()
-    time.sleep(3)
     message = host_ip + "`Gui"
+    print(message)
     SendReceive(sock, message).send()
     mess = SendReceive(sock, None).receive()
+    print(mess)
     if mess == "IP Found in database":
         Logger.info("IP Found in database")
         MainGui(None, sock).run()
@@ -35,7 +36,8 @@ if __name__ == '__main__':
     try:
         main()
     except socket.error as serr:
-        Logger.error(serr)
+        if Configuration.Logstarted == True:
+            Logger.error(serr)
         if serr.errno == errno.ECONNREFUSED:
             Tk().withdraw()
             messagebox.showerror("ERROR", "Can not connect to server")
@@ -43,6 +45,7 @@ if __name__ == '__main__':
             Tk().withdraw()
             messagebox.showerror("ERROR", "Something went wrong with the server")
     except Exception as e:
-        Logger.error(e)
+        if Configuration.Logstarted == True:
+            Logger.error(e)
         Tk().withdraw()
         messagebox.showerror("ERROR", "Something went wrong with the server")

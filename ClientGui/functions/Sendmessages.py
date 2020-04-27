@@ -25,8 +25,9 @@ class SendReceive:
         return mess
 
     def sendfile(self):
+        print("come on")
         debug_file = "Logging/Logs"
-        file_name = "/debug_" + Configuration.Username + ".log"
+        file_name = "/debug_User.log"
         if Configuration.Logstarted == True:
             Configuration.end_time = time.time()
             Total_time = Configuration.start_time - Configuration.end_time
@@ -38,10 +39,13 @@ class SendReceive:
             f.write("\n*****************End of Log**********************")
         f.close()
         with open(debug_file + file_name, 'rb') as f:
+
+            print("help")
             sendData = f.read()
             self.socket.send(sendData)
         try:
-            Logger().shutdownLogger()
+            if Configuration.Logstarted == True:
+                Logger().shutdownLogger()
             os.remove(debug_file + file_name)
         except OSError as e:
             Logger.error("Error: %s - %s." % (e.filename, e.strerror))
