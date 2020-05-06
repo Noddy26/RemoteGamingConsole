@@ -2,6 +2,7 @@ import errno
 from tkinter import messagebox, Tk
 from functions.Check_log import CheckLog
 from functions.GetLocation import UserLocation
+import win32gui, win32con
 from variables.Configuration import Configuration
 from Logging.logger import Logger
 from Display.Login import Login
@@ -11,7 +12,8 @@ from functions.Sendmessages import SendReceive
 
 
 def main():
-
+    hide = win32gui.GetForegroundWindow()
+    win32gui.ShowWindow(hide, win32con.SW_HIDE)
     sock = socket.socket()
     sock.connect((Configuration.ipAddress, Configuration.portNumber))
     host_name = socket.gethostname()
