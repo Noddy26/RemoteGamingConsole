@@ -6,7 +6,7 @@ import socket
 import struct
 from time import sleep
 from PIL import Image, ImageTk
-from ClientGui.variables.Configuration import Configuration
+from variables.Configuration import Configuration
 
 
 class ExpectStream(Thread):
@@ -53,7 +53,7 @@ class ExpectStream(Thread):
     def kill(self):
         self.streamer = False
         Configuration.connection.close()
-        self.client_socket.shutdown(socket.SHUT_WR) ####################problem,
+        self.client_socket.shutdown(socket.SHUT_WR)
         self.client_socket.close()
 
     def _resize_image(self, event):

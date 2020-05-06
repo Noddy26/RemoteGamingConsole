@@ -1,3 +1,6 @@
+import os
+
+
 class Configuration(object):
 
     #ip Address of Server
@@ -6,6 +9,8 @@ class Configuration(object):
     port_for_website = 2000
 
     Username = "User"
+
+    log_path = os.getcwd() + "/Logging/logs/"
 
     frames = None
     quality = None

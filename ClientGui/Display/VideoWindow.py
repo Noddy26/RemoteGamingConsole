@@ -1,8 +1,8 @@
 from tkinter import Toplevel, IntVar, Button, Checkbutton, Label, DISABLED, NORMAL
 from tkinter import ttk
 
-from ClientGui.variables.Configuration import Configuration
-from ClientGui.Logging.logger import Logger
+from variables.Configuration import Configuration
+from Logging.logger import Logger
 
 
 class VideoWindow:

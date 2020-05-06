@@ -1,14 +1,13 @@
 import errno
-from tkinter import Tk, messagebox
-import time
-from ClientGui.functions.Check_log import CheckLog
-from ClientGui.functions.GetLocation import UserLocation
-from ClientGui.variables.Configuration import Configuration
-from ClientGui.Logging.logger import Logger
-from ClientGui.Display.Login import Login
-from ClientGui.Display.MainGui import MainGui
+from tkinter import messagebox, Tk
+from functions.Check_log import CheckLog
+from functions.GetLocation import UserLocation
+from variables.Configuration import Configuration
+from Logging.logger import Logger
+from Display.Login import Login
+from Display.MainGui import MainGui
 import socket
-from ClientGui.functions.Sendmessages import SendReceive
+from functions.Sendmessages import SendReceive
 
 
 def main():
@@ -19,12 +18,10 @@ def main():
     host_ip = socket.gethostbyname(host_name)
     #CheckLog(sock, host_ip)
     Logger()
-    UserLocation().run()
+    #UserLocation().run()
     message = host_ip + "`Gui"
-    print(message)
     SendReceive(sock, message).send()
     mess = SendReceive(sock, None).receive()
-    print(mess)
     if mess == "IP Found in database":
         Logger.info("IP Found in database")
         MainGui(None, sock).run()
@@ -34,7 +31,7 @@ def main():
 
 if __name__ == '__main__':
     try:
-        main()
+         main()
     except socket.error as serr:
         if Configuration.Logstarted == True:
             Logger.error(serr)

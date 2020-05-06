@@ -1,5 +1,5 @@
 import requests
-from ClientGui.Logging.logger import Logger
+from Logging.logger import Logger
 
 
 class UserLocation:

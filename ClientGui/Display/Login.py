@@ -2,11 +2,9 @@ import os
 from tkinter import Tk, Label, Entry, Button, StringVar, messagebox
 from PIL import Image, ImageDraw, ImageTk, ImageFont
 
-from ClientGui.functions.Sendmessages import SendReceive
-from ClientGui.variables.Configuration import Configuration
-from ClientGui.functions.DatbaseCheck import DatabaseCheck
-from ClientGui.Logging.logger import Logger
-from ClientGui.Display.MainGui import MainGui
+from functions.DatbaseCheck import DatabaseCheck
+from Logging.logger import Logger
+from Display.MainGui import MainGui
 
 
 class Login:
@@ -17,8 +15,8 @@ class Login:
         self.socket = sock
         self.window.title("Login")
         # root.wm_attributes('-alpha', 0.5)
-        self.image_file = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\WebpNetResizeimage.jpg"
-        self.small_image = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\5.jpg"
+        self.image_file = r"Pictures\WebpNetResizeimage.jpg"
+        self.small_image = r"Pictures\5.jpg"
         self.window.resizable(width=False, height=False)
         self.window.geometry("%sx%s" % (1000, 500))
         self.username = StringVar()
@@ -37,8 +35,8 @@ class Login:
         user = "User Name"
         password = "Password"
 
-        font = ImageFont.truetype(r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\PaladinFLF.ttf", 30)
-        title_font = ImageFont.truetype(r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\PaladinFLF.ttf", 50)
+        font = ImageFont.truetype(r"Pictures\PaladinFLF.ttf", 30)
+        title_font = ImageFont.truetype(r"Pictures\PaladinFLF.ttf", 50)
         draw.text((text_x + 10, text_y - 150), title, fill="yellow", font=title_font)
         draw.text((text_x - 50, text_y - 4), user, fill="yellow", font=font)
         draw.text((text_x - 50, text_y + 96), password, fill="yellow", font=font)

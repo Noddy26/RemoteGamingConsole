@@ -1,13 +1,14 @@
+from multiprocessing import Process
 from tkinter import *
 from PIL import Image, ImageTk
-from threading import Thread
 
-from ClientGui.Logging.logger import Logger
+from Logging.logger import Logger
 
 
-class GifPlayer(Label):
+class GifPlayer(Label, Process):
 
     def __init__(self, frames, filename):
+        super().__init__()
         self.running = True
         gif = Image.open(filename)
         seq = []

@@ -1,5 +1,5 @@
-from ClientGui.Logging.logger import Logger
-from ClientGui.functions.Sendmessages import SendReceive
+from Logging.logger import Logger
+from functions.Sendmessages import SendReceive
 
 
 class DatabaseCheck:

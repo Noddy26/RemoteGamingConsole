@@ -1,7 +1,7 @@
 import time
 
-from ClientGui.Logging.logger import Logger
-from ClientGui.variables.Configuration import Configuration
+from Logging.logger import Logger
+from variables.Configuration import Configuration
 import os
 import shutil
 
@@ -25,22 +25,19 @@ class SendReceive:
         return mess
 
     def sendfile(self):
-        print("come on")
-        debug_file = "Logging/Logs"
+        debug_file = Configuration.log_path
         file_name = "/debug_User.log"
         if Configuration.Logstarted == True:
             Configuration.end_time = time.time()
             Total_time = Configuration.start_time - Configuration.end_time
             total = str(Total_time).replace("-", "")
             Logger.info("Sending debug file to server")
-        with open("Logging/logs/" + file_name, "a") as f:
+        with open(Configuration.log_path + file_name, "a") as f:
             if Configuration.Logstarted == True:
                 f.write("Total Time online: %s" % total)
             f.write("\n*****************End of Log**********************")
         f.close()
         with open(debug_file + file_name, 'rb') as f:
-
-            print("help")
             sendData = f.read()
             self.socket.send(sendData)
         try:

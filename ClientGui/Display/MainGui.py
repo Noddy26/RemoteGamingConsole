@@ -1,12 +1,12 @@
-from ClientGui.functions.Sendmessages import SendReceive
-from ClientGui.functions.Upgrade import Upgrade
-from ClientGui.variables.Configuration import Configuration
-from ClientGui.functions.Controllers import ControllerControl
-from ClientGui.functions.DatbaseCheck import DatabaseCheck
-from ClientGui.Display.ExeceptStream import ExpectStream
-from ClientGui.Logging.logger import Logger
-from ClientGui.Display.VideoWindow import VideoWindow
-from ClientGui.Display.gif_player import GifPlayer
+from functions.Sendmessages import SendReceive
+from functions.Upgrade import Upgrade
+from variables.Configuration import Configuration
+from functions.Controllers import ControllerControl
+from functions.DatbaseCheck import DatabaseCheck
+from Display.ExeceptStream import ExpectStream
+from Logging.logger import Logger
+from Display.VideoWindow import VideoWindow
+from Display.gif_player import GifPlayer
 import multiprocessing
 from tkinter import Tk, Label, messagebox, Menu, YES, BOTH
 from PIL import Image, ImageTk
@@ -23,8 +23,8 @@ class MainGui:
         self.socket = socket
         self.window = Tk()
         self.window.title("Gaming Server")
-        self.image_file = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\Playstation-Wallpaper-20-1920x1080.jpg"
-        self.play_gif = r"C:\Users\neilm\PycharmProjects\GamingGui\ClientGui\Pictures\Fmh8EMk.gif"
+        self.image_file = r"Pictures\Playstation-Wallpaper-20-1920x1080.jpg"
+        self.play_gif = r"Pictures\Fmh8EMk.gif"
         self.height, self.width = self._screen_size()
         self.window.geometry("%sx%s" % (self.height - 40, self.width - 70))
 

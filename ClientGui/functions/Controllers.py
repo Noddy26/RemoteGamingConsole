@@ -2,8 +2,8 @@ from tkinter import messagebox
 from threading import Thread
 from inputs import devices, get_gamepad
 
-from ClientGui.Logging.logger import Logger
-from ClientGui.functions.Sendmessages import SendReceive
+from Logging.logger import Logger
+from functions.Sendmessages import SendReceive
 from time import sleep
 
 

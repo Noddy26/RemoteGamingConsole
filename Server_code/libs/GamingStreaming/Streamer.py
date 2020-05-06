@@ -1,7 +1,6 @@
 import socket
 from multiprocessing.context import Process
 from libs.GamingStreaming.videoFeed import VideoFeed
-from threading import Thread
 
 
 class Streamer(Process):
