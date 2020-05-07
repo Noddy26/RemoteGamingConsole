@@ -31,7 +31,10 @@ class ClientThread(Thread):
         while self.Handler_running:
             try:
                 data = self.connection.recv(2048).decode()
-                self.keys(data)
+                if data == "":
+                    self.kill_handler()
+                else:
+                    self.keys(data)
             except socket.error as serr:
                 Output.red(serr)
             except picamera.PiCameraError as p:
