@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/buttonlogin"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
@@ -67,7 +68,7 @@
             android:autofillHints="" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonlog"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:background="@drawable/rounded_corner_button"

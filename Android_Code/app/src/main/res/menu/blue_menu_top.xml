@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/blue_on"
+        android:onClick="bluetooth_on"
+        android:title="@string/bluetooth_on" />
+    <item
+        android:id="@+id/blue_scan"
+        android:onClick="bluetooth_scan"
+        android:title="@string/scan" />
+    <item
+        android:id="@+id/blue_off"
+        android:onClick="bluetooth_off"
+        android:title="@string/bluetooth_off" />
+</menu>

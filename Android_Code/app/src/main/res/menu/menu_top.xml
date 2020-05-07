@@ -3,37 +3,48 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/item2"
+        android:icon="@drawable/ic_cast_black_24dp"
+        android:onClick="Cast"
+        android:title="@string/mr_cast_button_disconnected"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/settings"
-        android:onClick="Settings"
-        android:title="@string/settings" >
-        <menu >
+        android:title="@string/settings">
+        <menu>
             <item
                 android:id="@+id/video"
+                android:onClick="video_quality"
                 android:title="@string/video_quality" />
+            <item
+                android:id="@+id/enable"
+                android:title="@string/enable_two_player" />
         </menu>
     </item>
     <item
         android:id="@+id/controller"
-        android:onClick="Add_User"
         android:title="@string/bluetooth" >
         <menu >
             <item
                 android:id="@+id/connect"
+                android:onClick="conn"
                 android:title="@string/connect" />
             <item
-                android:id="@+id/Scan"
-                android:title="@string/item" />
+                android:id="@+id/Scanning"
+                android:onClick="Scan"
+                android:title="@string/pair_device" />
         </menu>
     </item>
     <item
-        android:onClick="streamVideo"
         android:title="@string/stream">
         <menu>
             <item
-                android:id="@+id/stream"
+                android:id="@+id/start_stream"
+                android:onClick="Start_stream"
                 android:title="@string/stop_stream" />
             <item
                 android:id="@+id/stop"
+                android:onClick="stop_stream"
                 android:title="@string/start_stream" />
         </menu>
     </item>

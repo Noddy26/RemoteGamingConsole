@@ -1,10 +1,13 @@
 package Code.Services;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -18,11 +21,12 @@ import Code.Activitys.LoginActivity;
 import Code.Activitys.MainActivity;
 
 
-public class SocketService extends Service {
+public class StreamService extends Service {
+
+    private final BlockingDeque<Byte> queue = new LinkedBlockingDeque<Byte>();
     public static final String SERVER_IP = "192.168.1.13";
-    public static final int SERVER_PORT = 2003;
-    private PrintWriter output;
-    private BufferedReader input;
+    public static final int SERVER_PORT = 2005;
+    private DataInputStream input;
     Socket socket;
 
     @Override
@@ -33,8 +37,8 @@ public class SocketService extends Service {
     private final IBinder myBinder = new LocalBinder();
 
     public class LocalBinder extends Binder {
-        public SocketService getService() {
-            return SocketService.this;
+        public StreamService getService() {
+            return StreamService.this;
         }
     }
     @Override
@@ -47,39 +51,17 @@ public class SocketService extends Service {
         registerReceiver(receiver, filter);
 
     }
-    class Thread3 implements Runnable {
-        private String message;
-
-        Thread3(String message) {
-            System.out.println("Thread");
-            this.message = message;
-        }
-        @Override
-        public void run() {
-            try {
-                System.out.println("sending");
-                output.write(message);
-                output.flush();
-                new Thread(new Thread2()).start();
-            }catch(Exception e){
-                LoginActivity.getInstace().getReply("server off");
-            }
-
-        }
-
-    }
     class Thread2 implements Runnable {
         @Override
         public void run() {
-            final String message;
-            try {
-                message = input.readLine();
 
-                System.out.println(message);
-                if (message != null) {
-                    Intent intentGoSocketService = new Intent("ReceiveMessage");
-                    intentGoSocketService.putExtra("receivemessage", message);
-                    sendBroadcast(intentGoSocketService);
+            int count;
+            byte[] buffer = new byte[8192];
+
+            try {
+                while ((count = input.read(buffer)) > 0)
+                {
+                    System.out.println(buffer);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -101,8 +83,7 @@ public class SocketService extends Service {
                 System.out.println("connecting");
                 socket = new Socket(SERVER_IP, SERVER_PORT);
                 System.out.println(socket.isConnected());
-                output = new PrintWriter(socket.getOutputStream());
-                input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -112,7 +93,6 @@ public class SocketService extends Service {
     public void onDestroy() {
         super.onDestroy();
         try {
-            System.out.println("destory");
             socket.close();
             unregisterReceiver(receiver);
         } catch (Exception e) {
@@ -125,12 +105,7 @@ public class SocketService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals("SendMessage")){
-                String send_message = intent.getStringExtra("sendmessage");
-                if (send_message != null)
-                    new Thread(new Thread3(send_message)).start();
-            }
-            else if (action.equals("ReceiveMessage")){
+            if (action.equals("ReceiveMessage")){
                 try {
                     String mess = intent.getStringExtra("receivemessage");
                     if (mess != null)
@@ -139,6 +114,7 @@ public class SocketService extends Service {
                         }else{
                             MainActivity.getInstace().getReply(mess);
                         }
+                    System.out.println("hello");
                 } catch (Exception e) {
                     System.out.println("error");
                     System.out.println(e);

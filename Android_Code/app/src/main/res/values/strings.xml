@@ -14,4 +14,16 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="scan">Scan</string>
+    <string name="bluetooth_on">Bluetooth On</string>
+    <string name="make_discoverable">Make Discoverable</string>
+    <string name="pair_device">Pair Device</string>
+    <string name="enable_two_player">Enable two player</string>
+    <string name="apply">apply</string>
+    <string name="hd">hd</string>
+    <string name="hdready">hdready</string>
+    <string name="standard_def">standard_def</string>
+    <string name="paired_devices">Paired devices</string>
+    <string name="bluetooth_search">Bluetooth Search</string>
+    <string name="bluetooth_off">Bluetooth Off</string>
 </resources>

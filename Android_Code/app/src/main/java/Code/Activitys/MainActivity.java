@@ -1,12 +1,15 @@
 package Code.Activitys;
 
-import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.remotegamingapp.R;
@@ -14,14 +17,9 @@ import com.example.remotegamingapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static boolean Loggedin;
     private static final int SECOND_ACTIVITY_REQUEST_CODE = 0;
     private static MainActivity input;
-    Button start;
-    Button stop;
-    Button video_quaility;
-    Button bluetooth;
-    Button Logout;
+    private boolean stream_started = false;
 
 
     @Override
@@ -32,46 +30,54 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
-        Loggedin = true;
+        if (LoginActivity.Loggedin){
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.main_activity);
+        }
         input = this;
-//        start = findViewById(R.id.);
-//        stop = findViewById(R.id.stop);
-        video_quaility = findViewById(R.id.video);
-//        bluetooth =  findViewById(R.id.Bluetooth);
-//        Logout = findViewById(R.id.logout);
-
     }
 
     public void Start_stream(MenuItem item) {
-        stop = findViewById(R.id.stop);
-        stop.setEnabled(true);
         System.out.println("start");
+        Intent intentGoSocketService = new Intent("StartStreamingServer");
+        intentGoSocketService.putExtra("sendmessage", "Start");
+        sendBroadcast(intentGoSocketService);
+        stream_started = true;
         Intent myIntent = new Intent(this, StreamActivity.class);
         startActivityForResult(myIntent, SECOND_ACTIVITY_REQUEST_CODE);
     }
 
     public void stop_stream(MenuItem item) {
-        stop = findViewById(R.id.stop);
-        stop.setEnabled(false);
-        Intent myIntent = new Intent(this, MainActivity.class);
-        startActivityForResult(myIntent, SECOND_ACTIVITY_REQUEST_CODE);
-        System.out.println("stop");
+        if (stream_started){
+            Intent myIntent = new Intent(this, MainActivity.class);
+            startActivityForResult(myIntent, SECOND_ACTIVITY_REQUEST_CODE);
+            System.out.println("stop");
+            stream_started = false;
+        }
+        Toast.makeText(this, "Stream not started", Toast.LENGTH_SHORT).show();
     }
 
-    public void controller(MenuItem item) {
+    public void Scan(MenuItem item) {
+        Toast.makeText(MainActivity.this, "Bluetooth setup", Toast.LENGTH_SHORT).show();
+        Intent myIntent = new Intent(this, BluetoothActivity.class);
+        startActivityForResult(myIntent, SECOND_ACTIVITY_REQUEST_CODE);
+    }
+    public void conn(MenuItem item) {
         System.out.println("bluetooth");
     }
 
-    public void Video_Quality(MenuItem item) {
+    public void Cast(MenuItem item){
+        System.out.println("casting");
+    }
+
+    public void video_quality(MenuItem item) {
         Toast.makeText(MainActivity.this, "Video Quality", Toast.LENGTH_SHORT).show();
         Intent myIntent = new Intent(this, VideoActivity.class);
         startActivityForResult(myIntent, SECOND_ACTIVITY_REQUEST_CODE);
     }
 
-    public void logout(MenuItem item) {
-        Loggedin = false;
+    public void Logout(MenuItem item) {
+        LoginActivity.Loggedin = false;
         Toast.makeText(MainActivity.this, "LoggedOut", Toast.LENGTH_SHORT).show();
         Intent Intent = new Intent(MainActivity.this, LoginActivity.class);
         MainActivity.this.startActivity(Intent);
@@ -105,4 +111,18 @@ public class MainActivity extends AppCompatActivity {
 //        }
         System.out.println("process");
     }
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Message msg = Message.obtain();
+            String action = intent.getAction();
+            if(BluetoothDevice.ACTION_FOUND.equals(action)){
+                System.out.println("hello");
+                //Found, add to a device list
+            }
+        }
+    };
+
+
 }
