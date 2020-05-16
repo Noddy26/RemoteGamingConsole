@@ -32,14 +32,14 @@ int leftStickX = 128;
 int leftStickY = 128;
 int rightStickX = 128;
 int rightStickY = 128;
-int digit0 = 128;
-int digit1 =  128;
-int digit2 =  128;
+int digit0 = 1;
+int digit1 =  2;
+int digit2 =  8;
 
 
 void setup(){
   setupUnoJoy();
-  Serial.begin();
+  //Serial.begin();
   Wire.begin(SLAVE_ADDRESS);
   Wire.onReceive(receiveData);
 }

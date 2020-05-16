@@ -69,3 +69,7 @@ class Configuration(object):
 
     # Type
     ClientTypeGui = None
+
+    # Encrption
+    key = "GamingServer2019"
+    salt = "gamingserver2019"
