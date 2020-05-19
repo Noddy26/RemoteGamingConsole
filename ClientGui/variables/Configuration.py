@@ -10,7 +10,9 @@ class Configuration(object):
 
     Username = "User"
 
-    log_path = os.getcwd() + "/Logging/logs/"
+    log_path = os.getcwd() + r"\Logging\logs"
+    pictures_path = os.getcwd() + r"\pictures"
+    firstRun_path = os.getcwd() + r"\FirstRun"
 
     frames = None
     quality = None

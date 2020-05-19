@@ -4,7 +4,6 @@ from inputs import devices, get_gamepad
 
 from Logging.logger import Logger
 from functions.Sendmessages import SendReceive
-from time import sleep
 
 
 class ControllerControl(Thread):

@@ -10,7 +10,7 @@ class Logger(object):
     def __init__(self, name='logger', level=logging.DEBUG):
         self.file = 'debug_' + Configuration.Username + '.log'
         if os.path.exists(Configuration.log_path) is False:
-            os.mkdir(Configuration.log_path)
+            os.makedirs(Configuration.log_path)
         logger = logging.getLogger(name)
         logger.setLevel(level)
         formatter = logging.Formatter(Configuration.Username + ': %(asctime)s:%(levelname)s:%(msg)s', )
@@ -45,7 +45,7 @@ class Logger(object):
         Logger._static_logger.critical(msg)
 
     def _logfile(self):
-        fh = logging.FileHandler(Configuration.log_path + self.file)
-        with open(Configuration.log_path + self.file, "w") as f:
+        fh = logging.FileHandler(Configuration.log_path + "\\" + self.file)
+        with open(Configuration.log_path + "\\" + self.file, "w") as f:
             f.write("*****************Start of Log********************\n")
         return fh

@@ -177,6 +177,7 @@ class Database:
                 print("MySQL connection is closed")
                 # return False
         try:
+            print("add")
             cursor = connection.cursor()
             cursor.execute(sql)
             connection.commit()
