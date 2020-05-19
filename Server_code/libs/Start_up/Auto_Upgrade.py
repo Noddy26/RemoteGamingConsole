@@ -85,12 +85,11 @@ class AutoUpgrade():
             sys.stdout.flush()
         sys.stdout.write("]\n")
 
-
     def check_version(self):
         version_check_cmd = "dpkg -l gamingserver | egrep gamingserver"
         version_check = subprocess.Popen(version_check_cmd, shell=True, stdout=subprocess.PIPE).stdout
         check_status = version_check.read()
         version_check.close()
         version = str(check_status).split(" ")
-        final_verson = str(version[5]).replace("-1", "")
-        return float(final_verson)
+        final_version = str(version[5]).replace("-1", "")
+        return float(final_version)
