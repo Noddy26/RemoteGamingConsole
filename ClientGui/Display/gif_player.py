@@ -1,7 +1,6 @@
 from multiprocessing import Process
 from tkinter import *
 from PIL import Image, ImageTk
-
 from Logging.logger import Logger
 
 

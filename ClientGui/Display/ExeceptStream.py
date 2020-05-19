@@ -13,7 +13,6 @@ class ExpectStream(Thread):
 
     def __init__(self, window):
         Thread.__init__(self)
-        sleep(5)
         self.window = window
         self.vidLabel = Label(self.window, anchor=NW)
         self.vidLabel.pack(expand=YES, fill=BOTH)
@@ -43,9 +42,9 @@ class ExpectStream(Thread):
                 image = ImageTk.PhotoImage(frame3)
                 self.vidLabel.configure(image=image)
                 self.vidLabel.image = image
-                # if main is False:
-                #     main = True
-                #     self.vidLabel.bind('<Configure>', self._resize_image)
+                if main is False:
+                     main = True
+                     self.vidLabel.bind('<Configure>', self._resize_image)
                 self.vidLabel.place(x=0, y=0)
         finally:
             connection.close()

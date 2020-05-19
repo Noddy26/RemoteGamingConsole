@@ -23,8 +23,8 @@ class MainGui:
         self.socket = socket
         self.window = Tk()
         self.window.title("Gaming Server")
-        self.image_file = r"Pictures\Playstation-Wallpaper-20-1920x1080.jpg"
-        self.play_gif = r"Pictures\Fmh8EMk.gif"
+        self.image_file = Configuration.pictures_path + "\Playstation-Wallpaper-20-1920x1080.jpg"
+        self.play_gif = Configuration.pictures_path + "\Fmh8EMk.gif"
         self.height, self.width = self._screen_size()
         self.window.geometry("%sx%s" % (self.height - 40, self.width - 70))
 
@@ -69,7 +69,6 @@ class MainGui:
         global thread
         self.p1 = multiprocessing.Process(target=GifPlayer(self.window, self.play_gif).place(x=-250, y=-140))
         self.p1.start()
-
 
         if Configuration.frames and Configuration.quality is not None:
             frames = str(Configuration.frames)
@@ -156,7 +155,7 @@ class MainGui:
         message = "Connection Terminate"
         Logger.info("Exiting gui")
         DatabaseCheck(None, None, message, self.socket).disconnect()
-        if os.path.exists("ClientGui/Logging/debug_" + Configuration.Username + ".log"):
+        if os.path.exists(Configuration.log_path + "\\debug_" + Configuration.Username + ".log"):
             SendReceive(self.socket, None).sendfile()
         os._exit(0)
 
@@ -165,7 +164,7 @@ class MainGui:
         if messagebox.askokcancel("Exit", "Do you want to quit?"):
             message = "Connection Terminate"
             DatabaseCheck(None, None, message, self.socket).disconnect()
-            if os.path.exists("Logging/Logs/debug_" + Configuration.Username + ".log"):
+            if os.path.exists(Configuration.log_path + "\\debug_" + Configuration.Username + ".log"):
                 SendReceive(self.socket, None).sendfile()
             os._exit(0)
 

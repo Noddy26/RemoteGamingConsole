@@ -1,10 +1,11 @@
 import os
-from tkinter import Tk, Label, Entry, Button, StringVar, messagebox
+from tkinter import Tk, Label, Entry, Button, StringVar, messagebox, Toplevel
 from PIL import Image, ImageDraw, ImageTk, ImageFont
 
 from functions.DatbaseCheck import DatabaseCheck
 from Logging.logger import Logger
 from Display.MainGui import MainGui
+from variables.Configuration import Configuration
 
 
 class Login:
@@ -15,15 +16,15 @@ class Login:
         self.socket = sock
         self.window.title("Login")
         # root.wm_attributes('-alpha', 0.5)
-        self.image_file = r"Pictures\WebpNetResizeimage.jpg"
-        self.small_image = r"Pictures\5.jpg"
+        self.image_file = Configuration.pictures_path + "\\WebpNetResizeimage.jpg"
+        self.small_image = Configuration.pictures_path + "\\5.jpg"
+
         self.window.resizable(width=False, height=False)
         self.window.geometry("%sx%s" % (1000, 500))
         self.username = StringVar()
         self.password = StringVar()
 
     def run(self):
-
         image = Image.open(self.image_file)
         images = Image.open(self.small_image)
 
@@ -35,25 +36,24 @@ class Login:
         user = "User Name"
         password = "Password"
 
-        font = ImageFont.truetype(r"Pictures\PaladinFLF.ttf", 30)
-        title_font = ImageFont.truetype(r"Pictures\PaladinFLF.ttf", 50)
+        font = ImageFont.truetype(Configuration.pictures_path + "\\PaladinFLF.ttf", 30)
+        title_font = ImageFont.truetype(Configuration.pictures_path + "\\PaladinFLF.ttf", 50)
         draw.text((text_x + 10, text_y - 150), title, fill="yellow", font=title_font)
         draw.text((text_x - 50, text_y - 4), user, fill="yellow", font=font)
         draw.text((text_x - 50, text_y + 96), password, fill="yellow", font=font)
-
         photoimage = ImageTk.PhotoImage(image)
         photo = ImageTk.PhotoImage(images)
         Label(self.window, image=photoimage).place(x=0, y=0)
         Label(self.window, image=photo, bg='black').place(x=150, y=30)
-        Label(self.window, image=photo, bg='black').place(x=800, y=30)
 
+        Label(self.window, image=photo, bg='black').place(x=800, y=30)
         Entry(self.window, background="white", textvariable=self.username)\
             .place(x=text_x + 110, y=text_y, width=350, height=25)
+
         Entry(self.window, background="white", show='*', textvariable=self.password)\
             .place(x=text_x + 110, y=text_y + 100, width=350, height=25)
         Button(self.window, text="Login", background="purple", command=self.buttonPressed)\
             .place(x=text_x + 230, y=text_y + 200, width=100, height=25)
-
         self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.window.mainloop()
 
